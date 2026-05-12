@@ -4,7 +4,95 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e30b3821-b9e4-4d2e-9336-40b27f721041" name="Changes" comment="" />
+    <list default="true" id="e30b3821-b9e4-4d2e-9336-40b27f721041" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/crag-database.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/eslint.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/App.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/App.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/AppRouter.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/Home.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/Layout.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/LogoButton.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/Nav.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/list-components/FilterOptions.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/list-components/ListTable.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/list-components/ListTableRow.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/list-components/ListView.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/location-components/LocationBio.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/location-components/LocationStatisticsView.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/location-components/LocationView.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/location-components/SubAreasTable.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/location-components/SubAreasTableRow.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/profile-components/UserBio.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/profile-components/UserCreateAccountForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/profile-components/UserLoginForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/profile-components/UserProfileView.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/profile-components/admin-components/AdminSuggestionsView.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/profile-components/admin-components/SuggestionsTable.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/profile-components/admin-components/SuggestionsTableRow.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/profile-components/statistics-components/StatisticsView.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/profile-components/statistics-components/StatsTable.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/profile-components/statistics-components/StatsTableRow.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/route-location-form-components/LogRouteForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/route-location-form-components/PostLocationForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/route-location-form-components/PostRouteForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/components/route-location-form-components/SuggestRouteAttributesForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/main.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/vite.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/http/routeControllerTest.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/http/userLoginControllerTest.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/http/userProfileControllerTest.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schema/prod-schema.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schema/prod-test-environment-schema.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schema/prod-test-initial-data.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schema/test-schema.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/controllers/RouteController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/controllers/UserLoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/controllers/UserProfileController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/data/RouteJdbcRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/data/RouteRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/data/UserLoginJdbcRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/data/UserLoginRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/data/UserProfileJdbcRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/data/UserProfileRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/domain/RouteService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/domain/UserLoginService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/domain/UserProfileService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/models/Area.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/models/Crag.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/models/Location.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/models/Route.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/models/RouteList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/models/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/models/enums/DangerLevel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/models/enums/Discipline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/cragdatabase/controllers/RouteControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/cragdatabase/controllers/UserLoginControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/cragdatabase/controllers/UserProfileControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/cragdatabase/data/RouteJdbcRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/cragdatabase/data/UserLoginJdbcRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/cragdatabase/data/UserProfileJdbcRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/cragdatabase/domain/RouteServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/cragdatabase/domain/UserLoginServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/cragdatabase/domain/UserProfileServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,6 +132,7 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "Merging crag-database-epic",
     "kotlin-language-version-configured": "true",
     "onboarding.tips.debug.path": "C:/Users/halle/Documents/dev10-repos/crag-database/server/src/main/java/org/example/Main.java"
   }
