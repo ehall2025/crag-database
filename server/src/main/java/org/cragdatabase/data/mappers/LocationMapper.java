@@ -10,6 +10,11 @@ public class LocationMapper implements RowMapper<Location> {
 
     @Override
     public Location mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return null;
+        return new Location(
+                rs.getInt("id"),
+                rs.getString("country"),
+                rs.getString("region"),
+                rs.getString("description")
+        );
     }
 }

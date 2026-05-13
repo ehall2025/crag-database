@@ -4,11 +4,19 @@ import java.util.Objects;
 
 public class Location {
 
+    private int id;
     private String country;
     private String region;
     private String description;
 
     public Location() {
+    }
+
+    public Location(int id, String country, String region, String description) {
+        this.id = id;
+        this.country = country;
+        this.region = region;
+        this.description = description;
     }
 
     @Override
