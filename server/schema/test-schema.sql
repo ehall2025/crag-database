@@ -100,7 +100,13 @@ ALTER TABLE Crag ADD CONSTRAINT Crag_fk2 FOREIGN KEY (location_id) REFERENCES Lo
 ALTER TABLE List_Route ADD CONSTRAINT List_Route_fk0 FOREIGN KEY (list_id) REFERENCES List(id);
 ALTER TABLE List_Route ADD CONSTRAINT List_Route_fk1 FOREIGN KEY (route_id) REFERENCES Route(id);
 
+-- -- -- -- -- --
+--  Test data  --
+-- -- -- -- -- --
 
+insert into location (Country, Region, description) values
+	('United States', 'Wisconsin', 'A heavily forested landscape nesled in the glacial valley which gave way to the unique types of rock formations and compositions such as baraboo quartzite which is only found in the near the small town of baraboo'),
+	('United States', 'Minnesota', 'Despite not being well know for its climbing, Minnesota has some of the greatest diversity of rock types in the country. Minnesota also has deep roots in climbings history being home to one of, if not the, first commercial climbing gym in the country and many big names accross of parts of the climbing industry hailing from this land of 10,000 lakes');
 
 
 
