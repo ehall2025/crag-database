@@ -12,7 +12,7 @@ public class LocationJdbcRepository implements LocationRepository {
 
     private final JdbcClient jdbcClient;
 
-    private final String BASE_SELECT = "SELECT l.country , l.region , l.description FROM location l";
+    private final String BASE_SELECT = "SELECT l.id , l.country , l.region , l.description FROM location l";
 
     public LocationJdbcRepository(JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
@@ -20,6 +20,6 @@ public class LocationJdbcRepository implements LocationRepository {
 
     @Override
     public List<Location> findAllLocations() {
-        return jdbcClient.sql(BASE_SELECT).query(new LocationMapper()).list();
+        return jdbcClient.sql(BASE_SELECT + ";").query(new LocationMapper()).list();
     }
 }
