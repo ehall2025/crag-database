@@ -4,8 +4,7 @@ import org.cragdatabase.models.Location;
 
 import java.util.List;
 
-public interface RouteRepository {
+public interface LocationRepository {
 
-    public List<Location> findByLocation();
-
+    List<Location> findAllLocations();
 }
