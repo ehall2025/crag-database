@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 
-function LocationView() {
-
-    const [locations, setLocations] = useState([])
+function LocationView({ locations, setLocations }) {
 
     useEffect(() => {
         fetch("http://localhost:8080/api/locations")
@@ -19,7 +17,7 @@ function LocationView() {
             <div>
                 {locations.map((loc) => {
                     return (
-                        <div>
+                        <div key={loc.id}>
                             <Link to={"/locations/" + loc.id}>{loc.region}</Link>
                         </div>
                     )

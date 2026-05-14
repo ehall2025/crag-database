@@ -9,10 +9,13 @@ import UserLayout from "./user-components/UserLayout"
 import UserForm from "./profile-components/CreateUserForm"
 import UserLoginForm from "./user-components/UserLoginForm"
 
+import LocationLayout from "./location-components/LocationLayout"
 import LocationView from "./location-components/LocationView"
+import LocationBio from "./location-components/LocationBio"
 
 function AppRouter() {
     const [loggedInUser, setLoggedInUser] = useState(JSON.parse(localStorage.getItem("loggedInUser")))
+    const [locations, setLocations] = useState([])
 
     const routes = [
         {
@@ -24,8 +27,18 @@ function AppRouter() {
                     element: <Home />
                 },
                 {
-                    path: "/locations",
-                    element: <LocationView/>
+                    path: "locations",
+                    element: <LocationLayout/>,
+                    children: [
+                        {
+                            path: "",
+                            element: <LocationView locations={locations} setLocations={setLocations}/>
+                        },
+                        {
+                            path: "{id}",
+                            element: <LocationBio locations={locations}/>
+                        },
+                    ]
                 },
                 {
                     path: "users",
