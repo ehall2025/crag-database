@@ -1,5 +1,5 @@
 @url = http://localhost:8080
 
-GET {{url}}/api/location HTTP/1.1
+GET {{url}}/api/locations HTTP/1.1
 
 ###

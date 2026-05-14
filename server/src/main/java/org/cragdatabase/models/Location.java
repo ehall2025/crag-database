@@ -31,6 +31,14 @@ public class Location {
         return Objects.hash(country, region, description);
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getCountry() {
         return country;
     }
