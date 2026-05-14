@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserLoginService implements UserDetailsService {
     @Autowired
     private final UserLoginRepository userLoginRepository;
+
+    //TODO decide if use @Bean or @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(12); //TODO de-magic bcrypt strength
 
     public UserLoginService(UserLoginRepository userLoginRepository) {
         this.userLoginRepository = userLoginRepository;
@@ -29,5 +33,12 @@ public class UserLoginService implements UserDetailsService {
         }
 
         return new UserPrincipal(user);
+    }
+
+    public User register(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user = userLoginRepository.createUser(user);
+
+        return user;
     }
 }
