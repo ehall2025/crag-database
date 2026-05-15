@@ -1,6 +1,9 @@
 package org.cragdatabase.data;
 
+import org.cragdatabase.models.RouteList;
 import org.cragdatabase.models.User;
+
+import java.util.List;
 
 public interface UserLoginRepository {
 

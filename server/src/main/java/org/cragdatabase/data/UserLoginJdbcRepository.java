@@ -17,8 +17,15 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
 
     @Override
     public User findByUsername(String username) {
-        return null;
+
+        String query = "SELECT u.id , u.email , u.password FROM User u WHERE u.email = ?";
+
+        return jdbcClient.sql(query)
+                .param(username)
+                .query(User.class)
+                .optional().orElse(null);
     }
+
 
     @Override
     public User createUser(User user) {
