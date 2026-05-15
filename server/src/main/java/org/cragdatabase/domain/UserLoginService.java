@@ -32,7 +32,7 @@ public class UserLoginService {
     }
 
     //TODO return result
-    public User register(User user) {
+    public Result<User> register(User user) {
         Result<User> result = new Result<>();
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -42,7 +42,7 @@ public class UserLoginService {
             result.addErrorMessage("could not create user", ResultType.NOT_FOUND);
         }
 
-        return user;
+        return result;
     }
 
     //TODO return result
@@ -53,6 +53,6 @@ public class UserLoginService {
             return jwtService.generateToken(user.getUsername()); //TODO make sure to validate the token when connecting everything together
         }
 
-        return "failed to login";
+        return null;
     }
 }

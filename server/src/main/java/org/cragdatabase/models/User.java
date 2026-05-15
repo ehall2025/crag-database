@@ -15,6 +15,12 @@ public class User {
     private int locationId;
     private List<Integer> listIds;
 
+    public User(int id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
     public User(int id, String displayName, String username, String password, Role role, int locationId) {
         this.id = id;
         this.displayName = displayName;
@@ -23,12 +29,6 @@ public class User {
         this.role = role;
         this.locationId = locationId;
         this.listIds = new ArrayList<>();
-    }
-
-    public User(int id, String username, String password) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
     }
 
     public int getId() {

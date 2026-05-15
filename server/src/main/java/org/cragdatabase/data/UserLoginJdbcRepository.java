@@ -32,8 +32,8 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
     @Override
     public User createUser(User user) {
         final String sql = """
-                insert into user (email, password)
-                values (:email, :password);
+                insert into user (email, password, role)
+                values (:email, :password, :role);
                 """;
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -41,6 +41,7 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
         int rowsAffected = jdbcClient.sql(sql)
                 .param("email", user.getUsername())
                 .param("password", user.getPassword())
+                .param("role", user.getRole())
                 .update(keyHolder, "id");
 
         if (rowsAffected == 0) {

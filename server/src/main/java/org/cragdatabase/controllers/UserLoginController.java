@@ -1,8 +1,11 @@
 package org.cragdatabase.controllers;
 
 import org.cragdatabase.domain.UserLoginService;
+import org.cragdatabase.domain.results.Result;
 import org.cragdatabase.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,14 +24,26 @@ public class UserLoginController {
 
     //TODO return proper response
     @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return userLoginService.register(user);
+    public ResponseEntity register(@RequestBody User user) {
+        Result<User> result = userLoginService.register(user);
+
+        if (!result.isSuccess()) {
+            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     //TODO return proper response
     @PostMapping("/login")
-    public String login(@RequestBody User user) {
-        return userLoginService.login(user) + "";
+    public ResponseEntity login(@RequestBody User user) {
+        String result = userLoginService.login(user);
+
+        if (result == null) {
+            return new ResponseEntity<>("failed to login", HttpStatus.UNAUTHORIZED);
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
 }
