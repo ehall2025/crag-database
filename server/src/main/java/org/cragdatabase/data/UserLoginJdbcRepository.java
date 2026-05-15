@@ -3,7 +3,9 @@ package org.cragdatabase.data;
 import org.cragdatabase.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.simple.JdbcClient;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserLoginJdbcRepository implements UserLoginRepository {
 
     @Autowired
