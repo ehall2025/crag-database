@@ -27,14 +27,19 @@ public class SecurityConfig {
     @Autowired
     private JwtFilter jwtFilter;
 
+    private static final String[] PERMITTED_ENDPOINTS = new String[]{
+            "/api/users/register",
+            "/api/users/login"
+    };
+
+    public static final int BCRYPT_ENCODER_STRENGTH = 12;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        //TODO go over current filters and decide if they should stay and if more should be added
         return http
-                .csrf(customizer -> customizer.disable()) //TODO implement csrf
+                .csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("register", "login") //TODO de-magic change to match userLoginApi endpoints
+                        .requestMatchers(PERMITTED_ENDPOINTS)
                         .permitAll()
                         .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults())
@@ -47,7 +52,7 @@ public class SecurityConfig {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(new BCryptPasswordEncoder(12)); //TODO de-magic bcrypt strength
+        provider.setPasswordEncoder(new BCryptPasswordEncoder(BCRYPT_ENCODER_STRENGTH));
         provider.setUserDetailsService(userDetailsService);
 
         return provider;
