@@ -2,6 +2,9 @@ package org.cragdatabase.models;
 
 import org.cragdatabase.models.enums.Role;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 
     private int id;
@@ -9,13 +12,17 @@ public class User {
     private String username;
     private String password;
     private Role role;
+    private int locationId;
+    private List<Integer> listIds;
 
-    public User(int id, String displayName, String username, String password, Role role) {
+    public User(int id, String displayName, String username, String password, Role role, int locationId) {
         this.id = id;
         this.displayName = displayName;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.locationId = locationId;
+        this.listIds = new ArrayList<>();
     }
 
     public int getId() {
@@ -56,5 +63,21 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public List<Integer> getListIds() {
+        return listIds;
+    }
+
+    public void setListIds(List<Integer> listIds) {
+        this.listIds = listIds;
     }
 }
