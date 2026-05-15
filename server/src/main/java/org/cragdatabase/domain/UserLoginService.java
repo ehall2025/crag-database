@@ -14,12 +14,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserLoginService implements UserDetailsService {
+public class UserLoginService {
     @Autowired
     private final UserLoginRepository userLoginRepository;
 
     @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private JwtService jwtService;
@@ -29,19 +29,6 @@ public class UserLoginService implements UserDetailsService {
 
     public UserLoginService(UserLoginRepository userLoginRepository) {
         this.userLoginRepository = userLoginRepository;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        User user = userLoginRepository.findByUsername(username);
-
-        if (user == null) {
-            System.out.println("User not found"); //TODO refactor to use result
-            throw new UsernameNotFoundException("user not found");
-        }
-
-        return new UserPrincipal(user);
     }
 
     //TODO return result
