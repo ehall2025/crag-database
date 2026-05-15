@@ -57,7 +57,7 @@ public class UserLoginService implements UserDetailsService {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken();
+            return jwtService.generateToken(user.getUsername());
         }
         return "failed to login";
     }
