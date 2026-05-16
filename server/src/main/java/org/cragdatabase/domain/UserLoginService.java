@@ -47,8 +47,9 @@ public class UserLoginService {
 
     //TODO return result
     public String login(User user) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+        Authentication authentication;
 
+        authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         if (authentication.isAuthenticated()) {
             return jwtService.generateToken(user.getUsername()); //TODO make sure to validate the token when connecting everything together
         }

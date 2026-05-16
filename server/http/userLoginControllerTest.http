@@ -1,7 +1,7 @@
 @url = http://localhost:8080/api/users
 
 
-POST {{url}}/register
+POST {{url}}/register HTTP/1.1
 Content-Type: application/json
 
 {
@@ -13,8 +13,7 @@ Content-Type: application/json
 
 ###
 
-POST {{url}}/login
-Authorization: Basic YUBhLmNvbTph
+POST {{url}}/login HTTP/1.1
 Content-Type: application/json
 
 {
@@ -23,3 +22,9 @@ Content-Type: application/json
     "password": "a",
     "role": "USER"
 }
+
+###
+
+GET {{url}} HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGEuY29tIiwiaWF0IjoxNzc4OTcxNDg1LCJleHAiOjE3Nzg5NzE1OTN9.ZK8V2Mc_yhVghLfgq7iHsIKHyBSqx1yYbleIDGrevH4
+Content-Type: application/json

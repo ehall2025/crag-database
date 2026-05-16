@@ -1,5 +1,6 @@
 package org.cragdatabase.data;
 
+import org.cragdatabase.data.mappers.UserMapper;
 import org.cragdatabase.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.simple.JdbcClient;
@@ -24,7 +25,7 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
 
         return jdbcClient.sql(query)
                 .param(username)
-                .query(User.class)
+                .query(new UserMapper())
                 .optional().orElse(null);
     }
 

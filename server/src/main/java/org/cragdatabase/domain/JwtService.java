@@ -27,6 +27,7 @@ public class JwtService {
             keyGenerator = KeyGenerator.getInstance("HmacSHA256");
             SecretKey sk = keyGenerator.generateKey();
             secretKey = Base64.getEncoder().encodeToString(sk.getEncoded());
+            System.out.println(secretKey);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
@@ -43,7 +44,7 @@ public class JwtService {
                 .add(claims)
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() * 60 * 60 * 30))
+                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 30))
                 .and()
                 .signWith(getKey())
                 .compact();
@@ -73,6 +74,7 @@ public class JwtService {
 
     public boolean validateToken(String token, UserDetails userDetails) {
         final String userName = extractUsername(token);
+        System.out.println(userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
         return (userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
