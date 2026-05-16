@@ -20,7 +20,7 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
     @Override
     public User findByUsername(String username) {
 
-        String query = "SELECT u.id , u.email , u.password FROM User u WHERE u.email = ?";
+        String query = "SELECT u.id , u.email , u.password , u.role FROM User u WHERE u.email = ?";
 
         return jdbcClient.sql(query)
                 .param(username)
@@ -41,7 +41,7 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
         int rowsAffected = jdbcClient.sql(sql)
                 .param("email", user.getUsername())
                 .param("password", user.getPassword())
-                .param("role", user.getRole())
+                .param("role", user.getRole().toString())
                 .update(keyHolder, "id");
 
         if (rowsAffected == 0) {

@@ -15,10 +15,14 @@ public class User {
     private int locationId;
     private List<Integer> listIds;
 
-    public User(int id, String username, String password) {
+    public User() {
+    }
+
+    public User(int id, String username, String password, String role) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.role = Role.valueOf(role);
     }
 
     public User(int id, String displayName, String username, String password, Role role, int locationId) {

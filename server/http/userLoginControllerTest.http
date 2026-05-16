@@ -1,4 +1,25 @@
-@url = http://localhost:8080
+@url = http://localhost:8080/api/users
 
 
-POST {{url}}/api/users
+POST {{url}}/register
+Content-Type: application/json
+
+{
+    "id": 0,
+    "username": "a@a.com",
+    "password": "a",
+    "role": "USER"
+}
+
+###
+
+POST {{url}}/login
+Authorization: Basic YUBhLmNvbTph
+Content-Type: application/json
+
+{
+    "id": 0,
+    "username": "a@a.com",
+    "password": "a",
+    "role": "USER"
+}

@@ -22,7 +22,6 @@ public class UserLoginController {
         this.userLoginService = userLoginService;
     }
 
-    //TODO return proper response
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody User user) {
         Result<User> result = userLoginService.register(user);
@@ -34,7 +33,6 @@ public class UserLoginController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    //TODO return proper response
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody User user) {
         String result = userLoginService.login(user);
