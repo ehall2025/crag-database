@@ -5,16 +5,16 @@ import Home from "./Home"
 import Layout from "./Layout"
 import ErrorBoundry from "./ErrorBoundry"
 
-import UserLayout from "./user-components/UserLayout"
-import UserForm from "./profile-components/CreateUserForm"
-import UserLoginForm from "./user-components/UserLoginForm"
+import UserLayout from "./profile-components/UserLayout"
+import AccountRegistrationForm from "./profile-components/AccountRegistrationForm"
+import UserLoginForm from "./profile-components/UserLoginForm"
 
 import LocationLayout from "./location-components/LocationLayout"
 import LocationView from "./location-components/LocationView"
 import LocationBio from "./location-components/LocationBio"
 
 function AppRouter() {
-    const [loggedInUser, setLoggedInUser] = useState(JSON.parse(localStorage.getItem("loggedInUser")))
+    const [loggedInUser, setLoggedInUser] = useState(JSON.parse(localStorage.getItem("loggedInUser"))) // TODO set logged in user to an object that has the jwt
     const [locations, setLocations] = useState([])
 
     const routes = [
@@ -45,9 +45,9 @@ function AppRouter() {
                     element: <UserLayout />,
                     children: [
                         {
-                            path: "add",
+                            path: "register",
                             element: loggedInUser === null ? 
-                                <UserForm /> 
+                                <AccountRegistrationForm /> 
                                 : 
                                 <Navigate to="/" state={{ message: "You you are already logged in" }} />
                         },

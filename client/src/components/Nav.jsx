@@ -23,7 +23,7 @@ function Nav({ loggedInUser, setLoggedInUser }) {
                         <>
                             {/* only available if logged out */}
                             <li className='nav-item'>
-                                <NavLink id="link" className='nav-link' to='/users/add'>
+                                <NavLink id="link" className='nav-link' to='/users/register'>
                                     Create an account
                                 </NavLink>
                             </li>
