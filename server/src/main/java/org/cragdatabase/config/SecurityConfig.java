@@ -29,7 +29,8 @@ public class SecurityConfig {
 
     private static final String[] PERMITTED_ENDPOINTS = new String[]{
             "/api/users/register",
-            "/api/users/login"
+            "/api/users/login",
+            "/api/locations"
     };
 
     public static final int BCRYPT_ENCODER_STRENGTH = 12;
@@ -39,7 +40,7 @@ public class SecurityConfig {
         return http
                 .csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/users/register", "/api/users/login")
+                        .requestMatchers(PERMITTED_ENDPOINTS)
                         .permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
