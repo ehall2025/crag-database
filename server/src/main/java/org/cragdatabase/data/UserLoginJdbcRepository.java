@@ -8,6 +8,8 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 @Repository
 public class UserLoginJdbcRepository implements UserLoginRepository {
 
@@ -19,14 +21,18 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
     }
 
     @Override
-    public User findByUsername(String username) {
+    public User findByUsername(String username) throws DataAccessException {
 
         String query = "SELECT u.id , u.email , u.password , u.role FROM User u WHERE u.email = ?";
 
-        return jdbcClient.sql(query)
-                .param(username)
-                .query(new UserMapper())
-                .optional().orElse(null);
+        try {
+            return jdbcClient.sql(query)
+                    .param(username)
+                    .query(new UserMapper())
+                    .optional().orElse(null);
+        } catch (SQLIntegrityConstraintViolationException ex) {
+
+        }
     }
 
 
