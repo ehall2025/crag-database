@@ -8,8 +8,7 @@ CREATE TABLE User (
 	email text NOT NULL,
 	password text NOT NULL,
 	role text NOT NULL,
-	location_id int,
-	list_id int NOT NULL
+	location_id int
 );
 
 CREATE TABLE Route (
@@ -67,7 +66,8 @@ CREATE TABLE Location (
 
 CREATE TABLE List (
 	id int AUTO_INCREMENT PRIMARY KEY,
-	name text NOT NULL
+	name text NOT NULL,
+	user_id int NOT NULL
 );
 
 CREATE TABLE List_Route (
@@ -82,7 +82,6 @@ CREATE TABLE Danger_level (
 
 
 ALTER TABLE User ADD CONSTRAINT User_fk5 FOREIGN KEY (location_id) REFERENCES Location(id);
-ALTER TABLE User ADD CONSTRAINT User_fk6 FOREIGN KEY (list_id) REFERENCES List(id);
 
 ALTER TABLE Route ADD CONSTRAINT Route_fk2 FOREIGN KEY (area_id) REFERENCES Area(id);
 ALTER TABLE Route ADD CONSTRAINT Route_fk4 FOREIGN KEY (danger_level_id) REFERENCES Danger_level(id);
@@ -96,6 +95,8 @@ ALTER TABLE Comment ADD CONSTRAINT comment_fk3 FOREIGN KEY (route_id) REFERENCES
 ALTER TABLE Comment ADD CONSTRAINT comment_fk4 FOREIGN KEY (parent_comment_id) REFERENCES Comment(id);
 
 ALTER TABLE Crag ADD CONSTRAINT Crag_fk2 FOREIGN KEY (location_id) REFERENCES Location(id);
+
+ALTER TABLE List ADD CONSTRAINT List_fk1 FOREIGN KEY (user_id) REFERENCES User(id);
 
 ALTER TABLE List_Route ADD CONSTRAINT List_Route_fk0 FOREIGN KEY (list_id) REFERENCES List(id);
 ALTER TABLE List_Route ADD CONSTRAINT List_Route_fk1 FOREIGN KEY (route_id) REFERENCES Route(id);
