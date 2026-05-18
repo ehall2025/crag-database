@@ -14,7 +14,6 @@ function AccountRegistrationForm () {
     })
     
     function resetForm () {
-        //TODO reset form elements
         document.getElementById("registerEmailForm").value = ""
         document.getElementById("registerPasswordForm").value = ""
     }
@@ -25,9 +24,6 @@ function AccountRegistrationForm () {
 
     async function handleSubmit () {
         event.preventDefault()
-        console.log("handleSubmit called")
-
-        console.log(user)
 
         const response = await fetch("http://localhost:8080/api/users/register", {
             method: "POST",
@@ -38,8 +34,8 @@ function AccountRegistrationForm () {
         })
 
         if (response.status >= 200 && response.status < 300) {
-            resetForm() //only reset if account creation failed
-            navigate("/")
+            resetForm()
+            navigate("/user/login")
         } else {
             const payload = await response.json()
             setErrors(payload)

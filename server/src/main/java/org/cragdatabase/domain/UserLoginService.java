@@ -4,6 +4,7 @@ import org.cragdatabase.data.UserLoginRepository;
 import org.cragdatabase.domain.results.Result;
 import org.cragdatabase.domain.results.ResultType;
 import org.cragdatabase.models.User;
+import org.cragdatabase.models.UserWithJWT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -46,12 +47,14 @@ public class UserLoginService {
         return result;
     }
 
-    public String login(User user) {
+    public Result<UserWithJWT> login(User user) {
+        Result<UserWithJWT> result = new Result<UserWithJWT>();
         Authentication authentication;
 
         authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(user.getUsername()); //TODO make sure to validate the token when connecting everything together
+            result.setpayload(new UserWithJWT(user, jwtService.generateToken(user.getUsername())));
+            return result;
         }
 
         return null;

@@ -14,7 +14,7 @@ import LocationView from "./location-components/LocationView"
 import LocationBio from "./location-components/LocationBio"
 
 function AppRouter() {
-    const [loggedInUser, setLoggedInUser] = useState(JSON.parse(localStorage.getItem("loggedInUser"))) // TODO set logged in user to an object that has the jwt
+    const [loggedInUser, setLoggedInUser] = useState(null)
     const [locations, setLocations] = useState([])
 
     const routes = [

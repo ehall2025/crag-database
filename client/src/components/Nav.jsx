@@ -49,7 +49,6 @@ function Nav({ loggedInUser, setLoggedInUser }) {
                             <li className='nav-item'>
                                 <button id="link" className='nav-link' onClick={() => {
                                     setLoggedInUser(null)
-                                    localStorage.clear("loggedInUser")
                                 }}>
                                     Logout
                                 </button>

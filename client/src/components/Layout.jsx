@@ -15,7 +15,7 @@ function Layout({ loggedInUser, setLoggedInUser }) {
 			<main>
 				<h1 className='mb-3'>Cragbase</h1>
 				{message && <p>{message}</p>}
-				{ loggedInUser !== null ? <h2>Welcome, {loggedInUser.email}!</h2> : null }
+				{ loggedInUser !== null ? <h2>Welcome, {loggedInUser.user.username}!</h2> : null }
 				<Outlet />
 			</main>
 		</div>
