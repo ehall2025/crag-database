@@ -42,10 +42,4 @@ public class UserLoginController {
 
         return new ResponseEntity<>(result.getpayload(), HttpStatus.CREATED);
     }
-
-    @GetMapping
-    public ResponseEntity testJwt() {
-        return new ResponseEntity("success!", HttpStatus.OK);
-    }
-
 }
