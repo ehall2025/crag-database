@@ -37,15 +37,10 @@ public class UserLoginService {
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
-
-        try {
-            result.setpayload(userLoginRepository.createUser(user));
-        } catch (SQLIntegrityConstraintViolationException ex) {
-
-        }
+        result.setpayload(userLoginRepository.createUser(user));
 
         if (result.getpayload() == null) {
-            result.addErrorMessage("could not create user", ResultType.NOT_FOUND);
+            result.addErrorMessage("could not create account, email already in use", ResultType.NOT_FOUND);
         }
 
         return result;

@@ -25,7 +25,7 @@ public class UserLoginController {
         Result<User> result = userLoginService.register(user);
 
         if (!result.isSuccess()) {
-            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.CONFLICT);
         }
 
         return new ResponseEntity<>(HttpStatus.CREATED);

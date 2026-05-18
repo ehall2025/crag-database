@@ -9,9 +9,11 @@ insert into user(email , password , role) values
 	('a@a.com', 'a' , 'USER'),
 	('b@b.com', 'b' , 'USER');
 
+insert ignore into user(email , password , role) values
+	('b@b.com', 'b' , 'USER')
 
-insert into user(email , password , role) values
-	('b@b.com', 'b' , 'USER');
+insert ignore into user(email , password , role) values
+	('c@c.com', 'c' , 'USER')
 
 
 select * from user;

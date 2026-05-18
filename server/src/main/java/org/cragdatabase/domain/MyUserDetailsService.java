@@ -21,11 +21,8 @@ public class MyUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user = null;
-        try {
-            user = userLoginRepository.findByUsername(username);
-        } catch (SQLIntegrityConstraintViolationException e) { //TODO handle gracefully
-            throw new RuntimeException(e);
-        }
+
+        user = userLoginRepository.findByUsername(username);
 
         if (user == null) {
             System.out.println("User not found"); //TODO refactor to use result
