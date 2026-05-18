@@ -37,7 +37,7 @@ function UserLoginForm({ setLoggedInUser }) {
         if (response.status >= 200 && response.status < 300) {
             setLoggedInUser(await response.json())
             resetForm()
-            navigate("/user/login")
+            navigate("/")
         } else {
             const payload = await response.json()
             setErrors(payload)
