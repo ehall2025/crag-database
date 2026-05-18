@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -30,7 +31,10 @@ public class SecurityConfig {
     private static final String[] PERMITTED_ENDPOINTS = new String[]{
             "/api/users/register",
             "/api/users/login",
-            "/api/locations"
+            "/api/locations/crag/**",
+            "/api/locations/area/**",
+            "/api/locations/route/**",
+            "/api/locations/**"
     };
 
     public static final int BCRYPT_ENCODER_STRENGTH = 12;
