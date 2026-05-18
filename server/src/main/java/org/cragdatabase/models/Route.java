@@ -27,6 +27,14 @@ public class Route {
     public Route() {
     }
 
+    public Route(int id, String name, int areaId, String description, String startPosition) {
+        this.id = id;
+        this.name = name;
+        this.areaId = areaId;
+        this.description = description;
+        this.startPosition = startPosition;
+    }
+
     public Route(int id, String name, int areaId, String description, String directions, String protection, String startPosition, Date faDate, String faName, int height, Discipline discipline, BoulderGrades grade, DangerLevel danger, int quality, Boolean isClassic) {
         this.id = id;
         this.name = name;
