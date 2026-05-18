@@ -21,7 +21,7 @@ public class LocationJdbcRepository implements LocationRepository {
     private final String LOCATION_SELECT = "SELECT l.id , l.country , l.region , l.description FROM location l";
     private final String CRAG_SELECT = "SELECT c.id , c.name , c.location_id , c.description FROM crag c";
     private final String AREA_SELECT = "SELECT a.id , a.name , a.crag_id , a.super_area_id , a.description FROM area a";
-    private final String ROUTE_SELECT = "SELECT r.id , r.name , r.difficulty , r.description FROM route r";//TODO
+    private final String ROUTE_SELECT = "SELECT r.id , r.name , r.area_id , r.description , r.start_position FROM route r";//TODO
 
 
     public LocationJdbcRepository(JdbcClient jdbcClient) {
@@ -90,6 +90,7 @@ public class LocationJdbcRepository implements LocationRepository {
     @Override
     public Area findAreaById(int areaId) {
         Area area = jdbcClient.sql(AREA_SELECT + " where a.id = ?;")
+                .param(areaId)
                 .query(new AreaMapper())
                 .optional().orElse(null);
 
@@ -112,6 +113,7 @@ public class LocationJdbcRepository implements LocationRepository {
     @Override
     public Route findRouteById(int routeId) {
         return jdbcClient.sql(ROUTE_SELECT + " where r.id = ?;")
+                .param(routeId)
                 .query(new RouteMapper())
                 .optional().orElse(null);
     }

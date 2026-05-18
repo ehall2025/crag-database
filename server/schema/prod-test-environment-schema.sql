@@ -13,7 +13,7 @@ CREATE TABLE User (
 
 CREATE TABLE Route (
 	id int AUTO_INCREMENT PRIMARY KEY,
-	name int NOT NULL,
+	name text NOT NULL,
 	area_id int NOT NULL,
 	difficulty double,
 	danger_level_id int,
@@ -36,7 +36,7 @@ CREATE TABLE Discipline (
 
 CREATE TABLE Area (
 	id int AUTO_INCREMENT PRIMARY KEY,
-	name int NOT NULL,
+	name text NOT NULL,
 	super_area_id int,
 	crag_id int,
 	description text NOT NULL
@@ -54,7 +54,7 @@ CREATE TABLE Crag (
 	id int AUTO_INCREMENT PRIMARY KEY,
 	name text NOT NULL,
 	location_id int NOT NULL,
-	desciption text
+	description text
 );
 
 CREATE TABLE Location (
