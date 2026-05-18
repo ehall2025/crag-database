@@ -15,9 +15,16 @@ insert into area(name , super_area_id , crag_id , description) values
 	('Cave boulder' , null , 2 , 'most popular sport at TFalls, very polished after years of mn climbers cutting their teeth on these classics');
 
 insert into route(name , area_id , description , start_position) values 
-	('Dagger of the lake' , 1 , 'super classic and one of my personal projects' , 'start compressing on a low undercling and slopey pod');
+	('Dagger of the lake' , 1 , 'super classic and one of my personal projects' , 'start compressing on a low undercling and slopey pod'),
+	('Super Slab' , 2 , '25\' beauty of a climb' , 'start standing on holds in the middle of the face');
 
+insert into list (name , user_id) values
+	('todo' , 1),
+	('ticks' , 1);
 
+insert into list_route (list_id , route_id) values
+	(1 , 1),
+	(2, 2);
 
 
 
