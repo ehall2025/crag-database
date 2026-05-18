@@ -19,9 +19,11 @@ public interface LocationRepository {
 
     List<Area> findAreasByCrag(int cragId);
 
-    Crag findAreaById(int areaId);
+    List<Area> findAreasBySuperArea(int superAreaId);
+
+    Area findAreaById(int areaId);
 
     List<Route> findRoutesByArea(int areaId);
 
-    Crag findRouteById(int routeId);
+    Route findRouteById(int routeId);
 }

@@ -1,6 +1,9 @@
 package org.cragdatabase.data;
 
+import org.cragdatabase.data.mappers.AreaMapper;
+import org.cragdatabase.data.mappers.CragMapper;
 import org.cragdatabase.data.mappers.LocationMapper;
+import org.cragdatabase.data.mappers.RouteMapper;
 import org.cragdatabase.models.Area;
 import org.cragdatabase.models.Crag;
 import org.cragdatabase.models.Location;
@@ -34,38 +37,82 @@ public class LocationJdbcRepository implements LocationRepository {
 
     @Override
     public Location findLocationById(int locationId) {
-        return jdbcClient.sql(LOCATION_SELECT + ";")
+        Location location = jdbcClient.sql(LOCATION_SELECT + " where l.id = ?;")
+                .param(locationId)
                 .query(new LocationMapper())
                 .optional().orElse(null);
+
+        if (location != null) {
+            location.setCrags(findCragsByLocation(locationId));
+        }
+
+        return location;
     }
 
     @Override
     public List<Crag> findCragsByLocation(int locationId) {
-        return List.of();
+        return jdbcClient.sql(CRAG_SELECT + " where c.location_id = ?;")
+                .param(locationId)
+                .query(new CragMapper())
+                .list();
     }
 
     @Override
     public Crag findCragById(int cragId) {
-        return null;
+        Crag crag = jdbcClient.sql(CRAG_SELECT + " where c.id = ?;")
+                .param(cragId)
+                .query(new CragMapper())
+                .optional().orElse(null);
+
+        if (crag != null) {
+            crag.setAreas(findAreasByCrag(cragId));
+        }
+
+        return crag;
     }
 
     @Override
     public List<Area> findAreasByCrag(int cragId) {
-        return List.of();
+        return jdbcClient.sql(AREA_SELECT + " where a.crag_id = ?;")
+                .param(cragId)
+                .query(new AreaMapper())
+                .list();
     }
 
     @Override
-    public Crag findAreaById(int areaId) {
-        return null;
+    public List<Area> findAreasBySuperArea(int superAreaId) {
+        return jdbcClient.sql(AREA_SELECT + " where a.super_area_id = ?;")
+                .param(superAreaId)
+                .query(new AreaMapper())
+                .list();
+    }
+
+    @Override
+    public Area findAreaById(int areaId) {
+        Area area = jdbcClient.sql(AREA_SELECT + " where a.id = ?;")
+                .query(new AreaMapper())
+                .optional().orElse(null);
+
+        if (area != null) {
+            area.setSubareas(findAreasBySuperArea(areaId));
+            if (area.getSubareas().isEmpty()) area.setRoutes(findRoutesByArea(areaId));
+        }
+
+        return area;
     }
 
     @Override
     public List<Route> findRoutesByArea(int areaId) {
-        return List.of();
+        return jdbcClient.sql(ROUTE_SELECT + " where r.area_id = ?;")
+                .param(areaId)
+                .query(new RouteMapper())
+                .list();
     }
 
     @Override
-    public Crag findRouteById(int routeId) {
-        return null;
+    public Route findRouteById(int routeId) {
+        return jdbcClient.sql(ROUTE_SELECT + " where r.id = ?;")
+                .query(new RouteMapper())
+                .optional().orElse(null);
     }
 }
