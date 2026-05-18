@@ -65,6 +65,14 @@ public class Location {
         this.description = description;
     }
 
+    public List<Crag> getCrags() {
+        return crags;
+    }
+
+    public void setCrags(List<Crag> crags) {
+        this.crags = crags;
+    }
+
     @Override
     public String toString() {
         return "Location{" +

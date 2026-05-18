@@ -6,6 +6,7 @@ public class Area {
 
     private int id;
     private String name;
+    private int superAreaId;
     private int cragId;
     private String description;
     private List<Area> subareas;
@@ -14,9 +15,10 @@ public class Area {
     public Area() {
     }
 
-    public Area(int id, String name, int cragId, String description) {
+    public Area(int id, String name, int superAreaId, int cragId, String description) {
         this.id = id;
         this.name = name;
+        this.superAreaId = superAreaId;
         this.cragId = cragId;
         this.description = description;
     }
@@ -35,6 +37,14 @@ public class Area {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getSuperAreaId() {
+        return superAreaId;
+    }
+
+    public void setSuperAreaId(int superAreaId) {
+        this.superAreaId = superAreaId;
     }
 
     public int getCragId() {
