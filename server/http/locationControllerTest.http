@@ -4,6 +4,10 @@ GET {{url}} HTTP/1.1
 
 ###
 
+GET {{url}}/1 HTTP/1.1
+
+###
+
 GET {{url}}/crag/1 HTTP/1.1
 
 ###

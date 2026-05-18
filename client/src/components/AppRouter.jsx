@@ -12,6 +12,10 @@ import UserLoginForm from "./profile-components/UserLoginForm"
 import LocationLayout from "./location-components/LocationLayout"
 import LocationView from "./location-components/LocationView"
 import LocationBio from "./location-components/LocationBio"
+import CragBio from "./location-components/CragBio"
+import AreaBio from "./location-components/AreaBio"
+import RouteBio from "./location-components/Routebio"
+
 
 function AppRouter() {
     const [loggedInUser, setLoggedInUser] = useState(null)
@@ -35,9 +39,21 @@ function AppRouter() {
                             element: <LocationView locations={locations} setLocations={setLocations}/>
                         },
                         {
-                            path: "{id}",
-                            element: <LocationBio locations={locations}/>
+                            path: ":id",
+                            element: <LocationBio/>
                         },
+                        {
+                            path: "crag/:id",
+                            element: <CragBio/>
+                        },
+                        {
+                            path: "area/:id",
+                            element: <AreaBio/>
+                        },
+                        {
+                            path: "route/:id",
+                            element: <RouteBio/>
+                        }
                     ]
                 },
                 {
