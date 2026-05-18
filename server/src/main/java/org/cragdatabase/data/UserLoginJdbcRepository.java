@@ -1,6 +1,8 @@
 package org.cragdatabase.data;
 
+import org.cragdatabase.data.mappers.ListMapper;
 import org.cragdatabase.data.mappers.UserMapper;
+import org.cragdatabase.models.Route;
 import org.cragdatabase.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.simple.JdbcClient;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
 
 @Repository
 public class UserLoginJdbcRepository implements UserLoginRepository {
@@ -26,11 +29,35 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
 
         String query = "SELECT u.id , u.email , u.password , u.role FROM User u WHERE u.email = ?";
 
-        return jdbcClient.sql(query)
+        User user = jdbcClient.sql(query)
                 .param(username)
                 .query(new UserMapper())
                 .optional().orElse(null);
+
+        if (user != null) {
+            //List<List<Route>> lists = findListsByUserId(user.getId());
+        }
+
+        return user;
     }
+
+    @Override
+    public List<List<Route>> findListsByUserId (int userId) {
+        String sql = """
+                        select l.id
+                        from user u join list l on u.id = l.user_id
+                        where u.id = ?;
+                        """;
+        List<Integer> listIds = jdbcClient.sql(sql)
+                .param(userId)
+                .query(Integer.class)
+                .list();
+
+        //TODO for each list query for all routes on the list
+
+        return null;
+    }
+
 
 
     @Override
