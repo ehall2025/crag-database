@@ -19,15 +19,17 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
+    private final int TOKEN_LIFE_IN_MILLISECONDS = 1800000; //30 min
+
     private String secretKey;
 
     public JwtService() {
         KeyGenerator keyGenerator = null;
+
         try {
             keyGenerator = KeyGenerator.getInstance("HmacSHA256");
             SecretKey sk = keyGenerator.generateKey();
             secretKey = Base64.getEncoder().encodeToString(sk.getEncoded());
-            System.out.println(secretKey);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
@@ -44,7 +46,7 @@ public class JwtService {
                 .add(claims)
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 30))
+                .expiration(new Date(System.currentTimeMillis() + TOKEN_LIFE_IN_MILLISECONDS))
                 .and()
                 .signWith(getKey())
                 .compact();

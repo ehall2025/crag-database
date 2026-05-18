@@ -5,7 +5,7 @@ USE crag_database_prod_test_env;
 CREATE TABLE User (
 	id int AUTO_INCREMENT primary key,
 	displayName text,
-	email text NOT NULL,
+	email varchar(255) unique not NULL,
 	password text NOT NULL,
 	role text NOT NULL,
 	location_id int

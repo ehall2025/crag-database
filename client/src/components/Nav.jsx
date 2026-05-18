@@ -23,7 +23,7 @@ function Nav({ loggedInUser, setLoggedInUser }) {
                         <>
                             {/* only available if logged out */}
                             <li className='nav-item'>
-                                <NavLink id="link" className='nav-link' to='/users/add'>
+                                <NavLink id="link" className='nav-link' to='/users/register'>
                                     Create an account
                                 </NavLink>
                             </li>
@@ -49,7 +49,6 @@ function Nav({ loggedInUser, setLoggedInUser }) {
                             <li className='nav-item'>
                                 <button id="link" className='nav-link' onClick={() => {
                                     setLoggedInUser(null)
-                                    localStorage.clear("loggedInUser")
                                 }}>
                                     Logout
                                 </button>

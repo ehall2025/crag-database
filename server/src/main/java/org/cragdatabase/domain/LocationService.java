@@ -1,6 +1,7 @@
 package org.cragdatabase.domain;
 
 import org.cragdatabase.data.LocationRepository;
+import org.cragdatabase.domain.results.Result;
 import org.cragdatabase.models.Location;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +18,9 @@ public class LocationService {
 
     public List<Location> findAllLocations() {
         return locationRepository.findAllLocations();
+    }
+
+    public Result<Location> findLocationById(int id) {
+        return null;
     }
 }

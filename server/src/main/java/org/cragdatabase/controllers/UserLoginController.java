@@ -3,6 +3,7 @@ package org.cragdatabase.controllers;
 import org.cragdatabase.domain.UserLoginService;
 import org.cragdatabase.domain.results.Result;
 import org.cragdatabase.models.User;
+import org.cragdatabase.models.UserWithJWT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin
 public class UserLoginController {
 
     @Autowired
@@ -24,7 +26,7 @@ public class UserLoginController {
         Result<User> result = userLoginService.register(user);
 
         if (!result.isSuccess()) {
-            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.CONFLICT);
         }
 
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -32,13 +34,13 @@ public class UserLoginController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody User user) {
-        String result = userLoginService.login(user);
+        Result<UserWithJWT> result = userLoginService.login(user);
 
         if (result == null) {
-            return new ResponseEntity<>("failed to login", HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>("email or password was incorrect", HttpStatus.UNAUTHORIZED);
         }
 
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+        return new ResponseEntity<>(result.getpayload(), HttpStatus.CREATED);
     }
 
     @GetMapping

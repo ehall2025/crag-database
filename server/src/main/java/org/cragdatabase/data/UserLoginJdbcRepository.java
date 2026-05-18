@@ -8,6 +8,9 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+
 @Repository
 public class UserLoginJdbcRepository implements UserLoginRepository {
 
@@ -33,7 +36,7 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
     @Override
     public User createUser(User user) {
         final String sql = """
-                insert into user (email, password, role)
+                insert ignore into user (email, password, role)
                 values (:email, :password, :role);
                 """;
 
