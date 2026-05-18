@@ -1,5 +1,6 @@
 package org.cragdatabase.models;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Location {
@@ -8,6 +9,7 @@ public class Location {
     private String country;
     private String region;
     private String description;
+    private List<Crag> crags;
 
     public Location() {
     }
