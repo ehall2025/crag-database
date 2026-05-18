@@ -38,12 +38,7 @@ function Nav({ loggedInUser, setLoggedInUser }) {
                             {/* only available if logged in */}
                             <li className='nav-item'>
                                 <NavLink id="link" className='nav-link' to='/solarpanels/add'>
-                                    Add Solar Panel
-                                </NavLink>
-                            </li>
-                            <li className='nav-item'>
-                                <NavLink id="link" className='nav-link' to='/solarpanels/myPanels'>
-                                    My Panels
+                                    Post Route
                                 </NavLink>
                             </li>
                             <li className='nav-item'>

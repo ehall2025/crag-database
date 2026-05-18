@@ -35,7 +35,7 @@ function AccountRegistrationForm () {
 
         if (response.status >= 200 && response.status < 300) {
             resetForm()
-            navigate("/user/login")
+            navigate("/users/login")
         } else {
             const payload = await response.json()
             setErrors(payload)

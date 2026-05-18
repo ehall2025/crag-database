@@ -1,20 +1,35 @@
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 
 
-function LocationBio({ locations }) {
+function LocationBio() {
 
     const { id } = useParams();
+    const [location, setLocation] = useState({
+        id:0,
+        region: "",
+        country: "",
+        description: "",
+        crags: []
+    })
 
-    const location = () => {
-        locations.forEach(element => {
-            if (element.id === id) return element;
-        });
-    }
+    useEffect(() => {
+        fetch("http://localhost:8080/api/locations/" + id)
+        .then(response => response.json())
+        .then(payload => setLocation(payload))
+    }, [])
 
     return (
         <>
             <h2>{location.region}</h2>
             <p>{location.description}</p>
+            {location.crags.map((crag) => {
+                    return (
+                        <div key={crag.id}>
+                            <Link to={"/locations/crag/" + crag.id}>{crag.name}</Link>
+                        </div>
+                    )
+                })}
         </>
     );
 }
