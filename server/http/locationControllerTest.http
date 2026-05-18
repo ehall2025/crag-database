@@ -1,5 +1,17 @@
-@url = http://localhost:8080
+@url = http://localhost:8080/api/locations
 
-GET {{url}}/api/locations HTTP/1.1
+GET {{url}} HTTP/1.1
+
+###
+
+GET {{url}}/crag/1 HTTP/1.1
+
+###
+
+GET {{url}}/area/1 HTTP/1.1
+
+###
+
+GET {{url}}/route/1 HTTP/1.1
 
 ###
