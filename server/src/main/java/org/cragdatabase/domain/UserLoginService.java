@@ -13,8 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
-
 import static org.cragdatabase.config.SecurityConfig.BCRYPT_ENCODER_STRENGTH;
 
 @Service
