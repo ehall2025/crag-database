@@ -2,7 +2,6 @@ package org.cragdatabase.data;
 
 import org.cragdatabase.data.mappers.RouteMapper;
 import org.cragdatabase.models.Route;
-import org.cragdatabase.models.RouteList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
@@ -34,7 +33,14 @@ public class UserProfileJdbcRepository implements UserProfileRepository {
                     (:list_id , :route_id);
                 """;
 
-        return jdbcClient.sql(insertSql + SELECT_ROUTES)
+        boolean success = jdbcClient.sql(insertSql)
+                .param("list_id", listId)
+                .param("route_id", routeId)
+                .update() > 0;
+
+        if (!success) return List.of();
+
+        return jdbcClient.sql(SELECT_ROUTES)
                 .param("list_id", listId)
                 .param("route_id", routeId)
                 .query(new RouteMapper())
@@ -47,7 +53,14 @@ public class UserProfileJdbcRepository implements UserProfileRepository {
                 delete from list_route where list_id = :list_id and route_id = :route_id;
                 """;
 
-        return jdbcClient.sql(deleteSql + SELECT_ROUTES)
+        boolean success = jdbcClient.sql(deleteSql)
+                .param("list_id", listId)
+                .param("route_id", routeId)
+                .update() > 0;
+
+        if (!success) return List.of();
+
+        return jdbcClient.sql(SELECT_ROUTES)
                 .param("list_id", listId)
                 .param("route_id", routeId)
                 .query(new RouteMapper())
