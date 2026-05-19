@@ -22,9 +22,6 @@ function UserLoginForm({ setLoggedInUser }) {
 
     async function handleSubmit () {
         event.preventDefault()
-        console.log("handleSubmit called")
-
-        console.log(credentials)
 
         const response = await fetch("http://localhost:8080/api/users/login", {
             method: "POST",

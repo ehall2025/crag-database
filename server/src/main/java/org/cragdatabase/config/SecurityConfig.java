@@ -20,6 +20,7 @@ import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+//@EnableWebSecurity(debug = true) //TODO remove when done with proj
 public class SecurityConfig {
 
     @Autowired

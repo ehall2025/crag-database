@@ -1,6 +1,7 @@
 package org.cragdatabase.data;
 
 import org.cragdatabase.data.mappers.ListMapper;
+import org.cragdatabase.data.mappers.RouteMapper;
 import org.cragdatabase.data.mappers.UserMapper;
 import org.cragdatabase.models.Route;
 import org.cragdatabase.models.User;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -35,7 +37,9 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
                 .optional().orElse(null);
 
         if (user != null) {
-            //List<List<Route>> lists = findListsByUserId(user.getId());
+            List<List<Route>> lists = findListsByUserId(user.getId());
+            user.setTickList(lists.get(0));
+            user.setTodoList(lists.get(1));
         }
 
         return user;
@@ -43,6 +47,7 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
 
     @Override
     public List<List<Route>> findListsByUserId (int userId) {
+        //fetch list of list_id's associated with a user
         String sql = """
                         select l.id
                         from user u join list l on u.id = l.user_id
@@ -53,9 +58,25 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
                 .query(Integer.class)
                 .list();
 
-        //TODO for each list query for all routes on the list
+        //fetch all routes in each list
+        sql = """
+                select r.id , r.name , r.area_id , r.description , r.start_position
+                from route r
+                join list_route lr on r.id = lr.route_id
+                join list l on l.id = lr.list_id
+                where l.id = ?;
+                """;
 
-        return null;
+        List<List<Route>> userLists = new ArrayList<>();
+
+        for (int i = 0; i < listIds.size(); i++) {
+            userLists.add(jdbcClient.sql(sql)
+                    .param(listIds.get(i))
+                    .query(new RouteMapper())
+                    .list());
+        }
+
+        return userLists;
     }
 
 

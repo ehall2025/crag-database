@@ -1,6 +1,5 @@
 @url = http://localhost:8080/api/users
 
-
 POST {{url}}/register HTTP/1.1
 Content-Type: application/json
 
@@ -17,10 +16,8 @@ POST {{url}}/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": 0,
     "username": "a@a.com",
-    "password": "a",
-    "role": "USER"
+    "password": "a"
 }
 
 ###

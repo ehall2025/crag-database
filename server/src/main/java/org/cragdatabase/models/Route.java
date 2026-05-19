@@ -172,4 +172,25 @@ public class Route {
     public void setDirections(String directions) {
         this.directions = directions;
     }
+
+    @Override
+    public String toString() {
+        return "Route{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", areaId=" + areaId +
+                ", grade=" + grade +
+                ", danger=" + danger +
+                ", quality=" + quality +
+                ", isClassic=" + isClassic +
+                ", height=" + height +
+                ", discipline=" + discipline +
+                ", faName='" + faName + '\'' +
+                ", faDate=" + faDate +
+                ", description='" + description + '\'' +
+                ", startPosition='" + startPosition + '\'' +
+                ", protection='" + protection + '\'' +
+                ", directions='" + directions + '\'' +
+                '}';
+    }
 }
