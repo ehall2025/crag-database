@@ -1,6 +1,7 @@
 package org.cragdatabase.data;
 
 import org.cragdatabase.models.Route;
+import org.cragdatabase.models.RouteList;
 import org.cragdatabase.models.User;
 
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -10,7 +11,7 @@ public interface UserLoginRepository {
 
     User findByUsername(String username);
 
-    List<List<Route>> findListsByUserId(int userId);
+    List<RouteList> findListsByUserId(int userId);
 
     User createUser(User user);
 }

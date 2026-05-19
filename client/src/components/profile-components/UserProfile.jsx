@@ -17,11 +17,11 @@ function UserProfile ({ loggedInUser , setLoggedInUser }) {
             </div>
             <div>
                 <h5>ticks</h5>
-                <RouteListTable routeListId={user.listIds}/>
+                <RouteListTable routeList={user.tickList} setLoggedInUser={setLoggedInUser}/>
             </div>
             <div>
                 <h5>to-dos</h5>
-                <RouteListTable routeListId={user.listIds}/>
+                <RouteListTable routeList={user.todoList} setLoggedInUser={setLoggedInUser}/>
             </div>
         </>
     );

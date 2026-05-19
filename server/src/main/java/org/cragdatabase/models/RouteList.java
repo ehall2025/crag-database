@@ -7,6 +7,13 @@ public class RouteList {
     private String name;
     private List<Route> routes;
 
+    public RouteList() {}
+
+    public RouteList(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public RouteList(int id, String name, List<Route> routes) {
         this.id = id;
         this.name = name;

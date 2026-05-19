@@ -1,10 +1,25 @@
+import { Link } from "react-router-dom";
 
 
 
-function RouteListTable ({ routeListId }) {
+function RouteListTable ({ routeList , setLoggedInUser }) {
+
+
+    function handleDelete () {
+        //send delete to 
+        
+    }
+
     return (
         <>
-            <p>route list</p>
+            {routeList.routes.map(route => {
+                return (
+                    <div key={route.id}>
+                        <Link to={"/locations/route/" + route.id}>{route.name}</Link>
+                        <button onClick={handleDelete}>Delete</button>
+                    </div>
+                )
+            })}
         </>
     );
 }

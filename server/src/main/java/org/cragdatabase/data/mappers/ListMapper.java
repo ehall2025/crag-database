@@ -11,6 +11,9 @@ public class ListMapper implements RowMapper<RouteList> {
 
     @Override
     public RouteList mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return null;
+        return new RouteList(
+                rs.getInt("id"),
+                rs.getString("name")
+        );
     }
 }

@@ -13,8 +13,8 @@ public class User {
     private String password;
     private Role role;
     private int locationId;
-    private List<Route> tickList;
-    private List<Route> todoList;
+    private RouteList tickList;
+    private RouteList todoList;
 
     public User() {
     }
@@ -31,7 +31,7 @@ public class User {
         this.role = Role.valueOf(role);
     }
 
-    public User(int id, String displayName, String username, String password, Role role, int locationId, List<Route> tickList, List<Route> todoList) {
+    public User(int id, String displayName, String username, String password, Role role, int locationId, RouteList tickList, RouteList todoList) {
         this.id = id;
         this.displayName = displayName;
         this.username = username;
@@ -90,19 +90,19 @@ public class User {
         this.locationId = locationId;
     }
 
-    public List<Route> getTickList() {
+    public RouteList getTickList() {
         return tickList;
     }
 
-    public void setTickList(List<Route> tickList) {
+    public void setTickList(RouteList tickList) {
         this.tickList = tickList;
     }
 
-    public List<Route> getTodoList() {
+    public RouteList getTodoList() {
         return todoList;
     }
 
-    public void setTodoList(List<Route> todoList) {
+    public void setTodoList(RouteList todoList) {
         this.todoList = todoList;
     }
 }
