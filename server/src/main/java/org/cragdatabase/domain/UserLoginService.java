@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,9 +51,8 @@ public class UserLoginService {
         Result<UserWithJWT> result = new Result<>();
         Authentication authentication;
 
-        System.out.println("hit service layer");
-
         authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+
         if (authentication.isAuthenticated()) {
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
             user = userPrincipal.getUser(); //get user loaded from database
@@ -67,7 +67,7 @@ public class UserLoginService {
     public Result registerAdminAccount(int userId) {
         Result result = new Result();
 
-        if (userLoginRepository.registerAdminAccount(userId)) {
+        if (!userLoginRepository.registerAdminAccount(userId)) {
             result.addErrorMessage("could not find user", ResultType.NOT_FOUND);
         }
 

@@ -29,6 +29,14 @@ CREATE TABLE Route (
 	directions text
 );
 
+CREATE TABLE Route_Staging (
+	id int AUTO_INCREMENT PRIMARY KEY,
+	name text NOT NULL,
+	area_id int NOT NULL,
+	description text NOT NULL,
+	start_position text NOT NULL
+);
+
 create table Route_Summary (
 	id int auto_increment primary key,
 	route_id int not null,
