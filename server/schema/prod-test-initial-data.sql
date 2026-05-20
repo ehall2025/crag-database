@@ -26,6 +26,10 @@ insert into list (name , user_id) values
 	('todo' , 1),
 	('ticks' , 1);
 
+insert into list (name , user_id) values
+	('todo' , 2),
+	('ticks' , 2);
+
 insert into list_route (list_id , route_id) values
 	(1 , 1),
 	(2, 2);

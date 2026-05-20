@@ -23,7 +23,12 @@ public class RouteController {
 
     @PostMapping
     public ResponseEntity userPost (@RequestBody Route route) {
-        Result<Route> result = routeService.userPost(route);
+        Result<Route> result = null;
+        try {
+            result = routeService.userPost(route);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (!result.isSuccess() && result.getResultType() == ResultType.INVALID) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.BAD_REQUEST);

@@ -34,13 +34,7 @@ public class UserLoginController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody User user) {
-        Result<UserWithJWT> result = null;
-        try {
-            result = userLoginService.login(user);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
+        Result<UserWithJWT> result = userLoginService.login(user);
         if (result == null) {
             return new ResponseEntity<>("email or password was incorrect", HttpStatus.UNAUTHORIZED);
         }

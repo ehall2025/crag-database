@@ -51,8 +51,8 @@ public class RouteService {
 
         if (!result.isSuccess()) return result;
 
-        if (routeRepository.adminUpdateRoute(route)) {
-            result.addErrorMessage("unable to add route", ResultType.NOT_FOUND);
+        if (!routeRepository.adminUpdateRoute(route)) {
+            result.addErrorMessage("unable to update route", ResultType.NOT_FOUND);
         }
 
         return result;

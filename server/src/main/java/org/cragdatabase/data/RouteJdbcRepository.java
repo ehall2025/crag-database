@@ -55,10 +55,10 @@ public class RouteJdbcRepository implements RouteRepository {
     public boolean adminUpdateRoute(Route route) {
         String sql = """
                 UPDATE Route SET
-                name=:name,
+                name = :name,
                 area_id = :area_id,
                 description = :description,
-                start_position = :start_position)
+                start_position = :start_position
                 WHERE id = :id;
                 """;
 
