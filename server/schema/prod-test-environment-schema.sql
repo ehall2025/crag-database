@@ -15,8 +15,8 @@ CREATE TABLE Route (
 	id int AUTO_INCREMENT PRIMARY KEY,
 	name text NOT NULL,
 	area_id int NOT NULL,
-	difficulty double,
-	danger_level_id int,
+	difficulty int,
+	danger_level int,
 	quality int,
 	is_classic int NOT null default false,
 	height int,
@@ -27,6 +27,23 @@ CREATE TABLE Route (
 	start_position text NOT NULL,
 	protection text,
 	directions text
+);
+
+CREATE TABLE Route_Staging (
+	id int AUTO_INCREMENT PRIMARY KEY,
+	name text NOT NULL,
+	area_id int NOT NULL,
+	description text NOT NULL,
+	start_position text NOT NULL
+);
+
+create table Route_Summary (
+	id int auto_increment primary key,
+	route_id int not null,
+	user_id int not null,
+	difficulty int,
+	quality int,
+	danger_level int
 );
 
 CREATE TABLE Discipline (
@@ -75,17 +92,13 @@ CREATE TABLE List_Route (
 	route_id int NOT NULL
 );
 
-CREATE TABLE Danger_level (
-	id int AUTO_INCREMENT PRIMARY KEY,
-	name text NOT NULL
-);
-
-
 ALTER TABLE User ADD CONSTRAINT User_fk5 FOREIGN KEY (location_id) REFERENCES Location(id);
 
 ALTER TABLE Route ADD CONSTRAINT Route_fk2 FOREIGN KEY (area_id) REFERENCES Area(id);
-ALTER TABLE Route ADD CONSTRAINT Route_fk4 FOREIGN KEY (danger_level_id) REFERENCES Danger_level(id);
 ALTER TABLE Route ADD CONSTRAINT Route_fk8 FOREIGN KEY (discipline_id) REFERENCES Discipline(id);
+
+ALTER TABLE Route_Summary ADD CONSTRAINT route_summary_fk2 FOREIGN KEY (user_id) REFERENCES User(id);
+ALTER TABLE Route_Summary ADD CONSTRAINT route_summary_fk3 FOREIGN KEY (route_id) REFERENCES Route(id);
 
 ALTER TABLE Area ADD CONSTRAINT Area_fk2 FOREIGN KEY (super_area_id) REFERENCES Area(id);
 ALTER TABLE Area ADD CONSTRAINT Area_fk3 FOREIGN KEY (crag_id) REFERENCES Crag(id);

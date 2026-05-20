@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity//(debug = true //TODO remove when done with proj
 public class SecurityConfig {
 
     @Autowired
@@ -28,13 +28,17 @@ public class SecurityConfig {
     @Autowired
     private JwtFilter jwtFilter;
 
-    private static final String[] PERMITTED_ENDPOINTS = new String[]{
+    private static final String[] PUBLIC_ENDPOINTS = new String[] {
             "/api/users/register",
             "/api/users/login",
             "/api/locations/crag/**",
             "/api/locations/area/**",
             "/api/locations/route/**",
             "/api/locations/**"
+    };
+
+    private static final String[] ADMIN_ENDPOINTS = new String[] {
+            "/api/post_route/admin/**"
     };
 
     public static final int BCRYPT_ENCODER_STRENGTH = 12;
@@ -44,8 +48,8 @@ public class SecurityConfig {
         return http
                 .csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers(PERMITTED_ENDPOINTS)
-                        .permitAll()
+                        .requestMatchers(ADMIN_ENDPOINTS).hasRole("ADMIN")
+                        .requestMatchers(PUBLIC_ENDPOINTS).permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -35,9 +35,19 @@ public class UserLoginController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody User user) {
         Result<UserWithJWT> result = userLoginService.login(user);
-
         if (result == null) {
             return new ResponseEntity<>("email or password was incorrect", HttpStatus.UNAUTHORIZED);
+        }
+
+        return new ResponseEntity<>(result.getpayload(), HttpStatus.OK);
+    }
+
+    @PutMapping("/register/admin/{userId}")
+    public ResponseEntity registerAdmin (@PathVariable int userId) {
+        Result result = userLoginService.registerAdminAccount(userId);
+
+        if (!result.isSuccess()) {
+            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(result.getpayload(), HttpStatus.CREATED);

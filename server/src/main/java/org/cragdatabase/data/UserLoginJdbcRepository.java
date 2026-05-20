@@ -1,6 +1,10 @@
 package org.cragdatabase.data;
 
+import org.cragdatabase.data.mappers.ListMapper;
+import org.cragdatabase.data.mappers.RouteMapper;
 import org.cragdatabase.data.mappers.UserMapper;
+import org.cragdatabase.models.Route;
+import org.cragdatabase.models.RouteList;
 import org.cragdatabase.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.simple.JdbcClient;
@@ -10,6 +14,8 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class UserLoginJdbcRepository implements UserLoginRepository {
@@ -26,11 +32,52 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
 
         String query = "SELECT u.id , u.email , u.password , u.role FROM User u WHERE u.email = ?";
 
-        return jdbcClient.sql(query)
+        User user = jdbcClient.sql(query)
                 .param(username)
                 .query(new UserMapper())
                 .optional().orElse(null);
+
+        if (user != null) {
+            List<RouteList> lists = findListsByUserId(user.getId());
+            user.setTodoList(lists.get(0));
+            user.setTickList(lists.get(1));
+        }
+
+        return user;
     }
+
+    @Override
+    public List<RouteList> findListsByUserId (int userId) {
+        //fetch list of list_id's associated with a user
+        String sql = """
+                        select l.id, l.name
+                        from user u join list l on u.id = l.user_id
+                        where u.id = ?;
+                        """;
+        List<RouteList> listIds = jdbcClient.sql(sql)
+                .param(userId)
+                .query(new ListMapper())
+                .list();
+
+        //fetch all routes in each list
+        sql = """
+                select r.id , r.name , r.area_id , r.description , r.start_position
+                from route r
+                join list_route lr on r.id = lr.route_id
+                join list l on l.id = lr.list_id
+                where l.id = ?;
+                """;
+
+        for (int i = 0; i < listIds.size(); i++) {
+            listIds.get(i).setRoutes(jdbcClient.sql(sql)
+                    .param(listIds.get(i).getId())
+                    .query(new RouteMapper())
+                    .list());
+        }
+
+        return listIds;
+    }
+
 
 
     @Override
@@ -55,5 +102,19 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
         user.setId(keyHolder.getKey().intValue());
 
         return user;
+    }
+
+    @Override
+    public boolean registerAdminAccount(int userId) {
+        String sql = """
+                update User set
+                role = :role
+                where id = :id;
+                """;
+
+        return jdbcClient.sql(sql)
+                .param("role", "ROLE_ADMIN")
+                .param("id", userId)
+                .update() > 0;
     }
 }

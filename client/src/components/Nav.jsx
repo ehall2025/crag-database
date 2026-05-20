@@ -4,9 +4,6 @@ function Nav({ loggedInUser, setLoggedInUser }) {
     return (
         <nav className='navbar navbar-expand'>
             <div className='d-flex'>
-                <Link className='navbar-brand' to="/">
-                    {/*logo image goes here*/}
-                </Link>
                 <ul className='navbar-nav'>
                     <li className='nav-item'>
                         <NavLink id="link" className='nav-link ' to='/'>
@@ -33,12 +30,17 @@ function Nav({ loggedInUser, setLoggedInUser }) {
                                 </NavLink>
                             </li>
                         </>
-                    :
+                        :
                         <>
                             {/* only available if logged in */}
                             <li className='nav-item'>
-                                <NavLink id="link" className='nav-link' to='/solarpanels/add'>
+                                <NavLink id="link" className='nav-link' to='locations/post'>
                                     Post Route
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink id="link" className='nav-link' to='/users/profile'>
+                                    Profile
                                 </NavLink>
                             </li>
                             <li className='nav-item'>

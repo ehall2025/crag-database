@@ -8,6 +8,7 @@ import ErrorBoundry from "./ErrorBoundry"
 import UserLayout from "./profile-components/UserLayout"
 import AccountRegistrationForm from "./profile-components/AccountRegistrationForm"
 import UserLoginForm from "./profile-components/UserLoginForm"
+import UserProfile from "./profile-components/UserProfile"
 
 import LocationLayout from "./location-components/LocationLayout"
 import LocationView from "./location-components/LocationView"
@@ -15,6 +16,7 @@ import LocationBio from "./location-components/LocationBio"
 import CragBio from "./location-components/CragBio"
 import AreaBio from "./location-components/AreaBio"
 import RouteBio from "./location-components/Routebio"
+import PostLocationForm from "./location-components/route-location-form-components/PostLocationForm"
 
 
 function AppRouter() {
@@ -52,7 +54,14 @@ function AppRouter() {
                         },
                         {
                             path: "route/:id",
-                            element: <RouteBio/>
+                            element: <RouteBio loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
+                        },
+                        {
+                            path: "post",
+                            element: loggedInUser !== null ? 
+                                <PostLocationForm/> 
+                                : 
+                                <Navigate to="/" state={{ message: "You you are not logged in" }} />
                         }
                     ]
                 },
@@ -73,6 +82,13 @@ function AppRouter() {
                                 <UserLoginForm setLoggedInUser={setLoggedInUser} /> 
                                 : 
                                 <Navigate to="/" state={{ message: "You you are already logged in" }} />
+                        },
+                        {
+                            path: "profile",
+                            element: loggedInUser !== null ? 
+                                <UserProfile loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} /> 
+                                : 
+                                <Navigate to="/" state={{ message: "You you are not logged in" }} />
                         }
                     ]
                 },

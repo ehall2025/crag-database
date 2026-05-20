@@ -1,11 +1,16 @@
 package org.cragdatabase.data;
 
-import org.cragdatabase.models.Location;
-
-import java.util.List;
+import org.cragdatabase.models.Route;
 
 public interface RouteRepository {
 
-    public List<Location> findByLocation();
+    boolean userPostRoute(Route route);
 
+    boolean adminPostRoute(Route route);
+
+    boolean adminDeleteStagedRoute(int stagedRouteId);
+
+    boolean adminUpdateRoute(Route route);
+
+    boolean adminDeleteRoute(int routeId);
 }
