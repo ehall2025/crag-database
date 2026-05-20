@@ -103,4 +103,18 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
 
         return user;
     }
+
+    @Override
+    public boolean registerAdminAccount(int userId) {
+        String sql = """
+                update User set
+                role = :role
+                where id = :id;
+                """;
+
+        return jdbcClient.sql(sql)
+                .param("role", "ROLE_ADMIN")
+                .param("id", userId)
+                .update() > 0;
+    }
 }

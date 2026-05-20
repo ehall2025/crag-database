@@ -14,4 +14,6 @@ public interface UserLoginRepository {
     List<RouteList> findListsByUserId(int userId);
 
     User createUser(User user);
+
+    boolean registerAdminAccount(int userId);
 }

@@ -50,6 +50,8 @@ public class UserLoginService {
         Result<UserWithJWT> result = new Result<>();
         Authentication authentication;
 
+        System.out.println("hit service layer");
+
         authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         if (authentication.isAuthenticated()) {
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
@@ -60,5 +62,15 @@ public class UserLoginService {
         }
 
         return null;
+    }
+
+    public Result registerAdminAccount(int userId) {
+        Result result = new Result();
+
+        if (userLoginRepository.registerAdminAccount(userId)) {
+            result.addErrorMessage("could not find user", ResultType.NOT_FOUND);
+        }
+
+        return result;
     }
 }

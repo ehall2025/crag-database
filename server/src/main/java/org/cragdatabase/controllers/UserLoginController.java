@@ -34,10 +34,27 @@ public class UserLoginController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody User user) {
-        Result<UserWithJWT> result = userLoginService.login(user);
+        System.out.println("hit controller");
+        Result<UserWithJWT> result = null;
+        try {
+            result = userLoginService.login(user);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         if (result == null) {
             return new ResponseEntity<>("email or password was incorrect", HttpStatus.UNAUTHORIZED);
+        }
+
+        return new ResponseEntity<>(result.getpayload(), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/register/admin/{id}")
+    public ResponseEntity registerAdmin (@PathVariable int userId) {
+        Result result = userLoginService.registerAdminAccount(userId);
+
+        if (!result.isSuccess()) {
+            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(result.getpayload(), HttpStatus.CREATED);
