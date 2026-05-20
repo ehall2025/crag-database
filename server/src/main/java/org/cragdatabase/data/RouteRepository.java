@@ -4,11 +4,13 @@ import org.cragdatabase.models.Route;
 
 public interface RouteRepository {
 
-    Route userPostRoute(Route route);
+    boolean userPostRoute(Route route);
 
-    Route adminPostRoute(Route route);
+    boolean adminPostRoute(Route route);
 
-    Route adminUpdateRoute(Route route);
+    boolean adminDeleteStagedRoute(int stagedRouteId);
+
+    boolean adminUpdateRoute(Route route);
 
     boolean adminDeleteRoute(int routeId);
 }
