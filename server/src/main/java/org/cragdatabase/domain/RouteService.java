@@ -2,6 +2,7 @@ package org.cragdatabase.domain;
 
 import org.cragdatabase.data.RouteRepository;
 import org.cragdatabase.domain.results.Result;
+import org.cragdatabase.domain.results.ResultType;
 import org.cragdatabase.models.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,19 +19,66 @@ public class RouteService {
     }
 
     public Result<Route> userPost(Route route) {
-        return null;
+        Result<Route> result = validateRoute(route);
+
+        if (!result.isSuccess()) return result;
+
+        if (!routeRepository.userPostRoute(route)) {
+            result.addErrorMessage("unable to add route", ResultType.NOT_FOUND);
+        }
+
+        return result;
     }
 
     public Result<Route> adminPost(Route route) {
-        return null;
+        Result<Route> result = validateRoute(route);
+
+        if (!result.isSuccess()) return result;
+
+        if (routeRepository.adminPostRoute(route)) {
+            if(!routeRepository.adminDeleteStagedRoute(route.getId())) {
+                result.addErrorMessage("could not find staged route to delete", ResultType.NOT_FOUND);
+            }
+        } else {
+            result.addErrorMessage("unable to add route", ResultType.NOT_FOUND);
+        }
+
+        return result;
     }
 
     public Result<Route> adminPut(Route route) {
-        return null;
+        Result<Route> result = validateRoute(route);
+
+        if (!result.isSuccess()) return result;
+
+        if (routeRepository.adminUpdateRoute(route)) {
+            result.addErrorMessage("unable to add route", ResultType.NOT_FOUND);
+        }
+
+        return result;
     }
 
-    public Result<Route> adminDelete(int routeId) {
-        return null;
+    public Result adminDelete(int routeId) {
+        Result result = new Result();
+
+        if(!routeRepository.adminDeleteRoute(routeId)) {
+            result.addErrorMessage("could not find route to delete", ResultType.NOT_FOUND);
+        }
+
+        return result;
     }
 
+    private Result<Route> validateRoute (Route route) {
+        Result<Route> result = new Result<>();
+
+        if (route.getName().isBlank() || route.getDescription().isBlank() || route.getStartPosition().isBlank()) {
+            result.addErrorMessage("Name, Description, and Start Position are all required fields", ResultType.INVALID);
+        }
+
+        if (route.getAreaId() <= 0) {
+            result.addErrorMessage("valid Area field is required", ResultType.INVALID);
+        }
+
+        return result;
+    }
 }
