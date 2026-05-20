@@ -1,10 +1,8 @@
 package org.cragdatabase.data;
 
-import org.cragdatabase.models.Location;
+import org.cragdatabase.models.Route;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public class RouteJdbcRepository implements RouteRepository {
@@ -18,7 +16,22 @@ public class RouteJdbcRepository implements RouteRepository {
             """;
 
     @Override
-    public List<Location> findByLocation() {
-        return List.of();
+    public Route userPostRoute(Route route) {
+        return null;
+    }
+
+    @Override
+    public Route adminPostRoute(Route route) {
+        return null;
+    }
+
+    @Override
+    public Route adminUpdateRoute(Route route) {
+        return null;
+    }
+
+    @Override
+    public boolean adminDeleteRoute(int routeId) {
+        return false;
     }
 }
