@@ -5,9 +5,7 @@ import { Link } from "react-router-dom";
 function RouteListTable ({ routeList , loggedInUser , setLoggedInUser }) {
 
     async function handleDelete (event) {
-        console.log(routeList.id)
-        console.log(event.target.attributes.routeId.value)
-        //send delete to 
+        
         const response = await fetch("http://localhost:8080/api/profile", {
             "method": "DELETE",
             "headers": {

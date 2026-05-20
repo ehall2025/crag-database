@@ -54,7 +54,7 @@ function AppRouter() {
                         },
                         {
                             path: "route/:id",
-                            element: <RouteBio/>
+                            element: <RouteBio loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
                         },
                         {
                             path: "post",
