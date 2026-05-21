@@ -32,7 +32,7 @@ function AppRouter() {
             children: [
                 {
                     path: "/",
-                    element: <Home />
+                    element: <Home loggedInUser={loggedInUser}/>
                 },
                 {
                     path: "locations",

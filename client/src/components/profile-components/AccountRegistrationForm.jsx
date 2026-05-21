@@ -10,7 +10,7 @@ function AccountRegistrationForm () {
         id:0,
         username: "",
         password: "",
-        role: "USER"
+        role: "ROLE_USER"
     })
     
     function resetForm () {

@@ -76,8 +76,8 @@ function RouteBio({ loggedInUser , setLoggedInUser }) {
     return (
         <>
             <h2>{route.name}</h2>
-            <button onClick={handleAdd}>Log Ascent</button>
-            <button onClick={handleAddTodo}>Add to Todo</button>
+            {loggedInUser && <button onClick={handleAdd}>Log Ascent</button>}
+            {loggedInUser && <button onClick={handleAddTodo}>Add to Todo</button>}
             <h5>Description</h5>
             <p>{route.description}</p>
             <h5>Start Position</h5>
