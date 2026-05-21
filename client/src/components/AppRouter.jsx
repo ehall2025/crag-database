@@ -61,7 +61,7 @@ function AppRouter() {
                         {
                             path: "post",
                             element: loggedInUser !== null ? 
-                                <PostLocationForm/> 
+                                <PostLocationForm loggedInUser={loggedInUser}/> 
                                 : 
                                 <Navigate to="/" state={{ message: "You are not logged in" }} />
                         }

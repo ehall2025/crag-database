@@ -34,7 +34,8 @@ public class SecurityConfig {
             "/api/locations/crag/**",
             "/api/locations/area/**",
             "/api/locations/route/**",
-            "/api/locations/**"
+            "/api/locations/**",
+            "/api/locations"
     };
 
     private static final String[] ADMIN_ENDPOINTS = new String[] {
