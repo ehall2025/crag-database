@@ -38,6 +38,10 @@ function Nav({ loggedInUser, setLoggedInUser }) {
                                     Post Route
                                 </NavLink>
                             </li>
+                            {loggedInUser.user.role === "ROLE_ADMIN" &&
+                                <NavLink id="link" className='nav-link' to='admin/staged'>
+                                    Staged Routes     
+                                </NavLink>}
                             <li>
                                 <NavLink id="link" className='nav-link' to='/users/profile'>
                                     Profile

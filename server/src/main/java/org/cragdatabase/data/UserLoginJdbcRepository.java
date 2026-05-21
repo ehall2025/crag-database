@@ -82,7 +82,7 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
 
     @Override
     public User createUser(User user) {
-        final String sql = """
+        String sql = """
                 insert ignore into user (email, password, role)
                 values (:email, :password, :role);
                 """;
@@ -100,6 +100,19 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
         }
 
         user.setId(keyHolder.getKey().intValue());
+
+        //create to-do and tick lists
+        sql = """
+            insert into list (name , user_id) values
+                ('todo' , :user_id),
+                ('ticks' , :user_id);
+            """;
+
+        keyHolder = new GeneratedKeyHolder();
+
+        jdbcClient.sql(sql)
+                .param("user_id", user.getId())
+                .update(keyHolder, "id");
 
         return user;
     }
