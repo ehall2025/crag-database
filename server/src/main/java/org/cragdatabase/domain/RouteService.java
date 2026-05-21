@@ -7,6 +7,8 @@ import org.cragdatabase.models.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RouteService {
 
@@ -61,7 +63,7 @@ public class RouteService {
     public Result adminDelete(int routeId) {
         Result result = new Result();
 
-        if(!routeRepository.adminDeleteRoute(routeId)) {
+        if(!routeRepository.adminDeleteStagedRoute(routeId)) {
             result.addErrorMessage("could not find route to delete", ResultType.NOT_FOUND);
         }
 
@@ -78,6 +80,14 @@ public class RouteService {
         if (route.getAreaId() <= 0) {
             result.addErrorMessage("valid Area field is required", ResultType.INVALID);
         }
+
+        return result;
+    }
+
+    public Result<List<Route>> getStagedRoutes() {
+        Result<List<Route>> result = new Result<>();
+
+        result.setpayload(routeRepository.getStagedRoutes());
 
         return result;
     }

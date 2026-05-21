@@ -1,11 +1,14 @@
 package org.cragdatabase.data;
 
+import org.cragdatabase.data.mappers.RouteMapper;
 import org.cragdatabase.models.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class RouteJdbcRepository implements RouteRepository {
@@ -79,6 +82,17 @@ public class RouteJdbcRepository implements RouteRepository {
         return jdbcClient.sql(sql) //Make new method so service can tell who fails
                 .param(routeId)
                 .update() > 0;
+    }
+
+    @Override
+    public List<Route> getStagedRoutes() {
+        String sql = """
+                SELECT r.id , r.name , r.area_id , r.description , r.start_position FROM route_staging r;
+                """;
+
+        return jdbcClient.sql(sql)
+                .query(new RouteMapper())
+                .list();
     }
 
     @Override
