@@ -36,6 +36,29 @@ function RouteBio({ loggedInUser , setLoggedInUser }) {
         }
     }
 
+    async function handleAddTodo (event) {
+
+        const response = await fetch("http://localhost:8080/api/profile", {
+            "method": "POST",
+            "headers": {
+                "Authorization": "Bearer " + loggedInUser.jwt,
+                "Content-Type": "application/json" ,
+            },
+            "body" : JSON.stringify({
+                "listId": loggedInUser.user.todoList.id,
+                "routeId": id
+            })
+        })
+
+        if (response.status >= 200 && response.status < 300) {
+            const payload = await response.json()
+            updateUser(loggedInUser, payload)
+        } else {
+            const payload = await response.json()
+            setErrors(payload)
+        }
+    }
+
     function updateUser (oldUser , newRouteList) {
         let newUser = {...oldUser}
 
@@ -54,6 +77,7 @@ function RouteBio({ loggedInUser , setLoggedInUser }) {
         <>
             <h2>{route.name}</h2>
             <button onClick={handleAdd}>Log Ascent</button>
+            <button onClick={handleAddTodo}>Add to Todo</button>
             <h5>Description</h5>
             <p>{route.description}</p>
             <h5>Start Position</h5>
