@@ -1,0 +1,52 @@
+@url = http://localhost:8080/api/post_route
+
+
+POST {{url}} HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQHVzZXIuY29tIiwiaWF0IjoxNzc5MzA4MzExLCJleHAiOjE3NzkzMTAxMTF9.MiQiZAJi2BVwJUNbb91DfV04H3CmLeoD-aD2q3vS7uw
+Content-Type: application/json
+
+{
+    "id":0,
+    "name": "Cave Traverse",
+    "areaId": 2,
+    "description": "Pinnicle of Minnesota outdoor culture. Has been awarded v8 despite being as hard or harder than v10 out west. Also perfectly encapsulates the contrivances of midwest climbing.",
+    "startPosition": "start as for cave sit on the jugs far right of the cave"
+}
+
+###
+
+POST {{url}}/admin HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyQHVzZXIuY29tIiwiaWF0IjoxNzc5MzA4MzExLCJleHAiOjE3NzkzMTAxMTF9.MiQiZAJi2BVwJUNbb91DfV04H3CmLeoD-aD2q3vS7uw
+Content-Type: application/json
+
+{
+    "id": 1,
+    "name": "Cave Traverse",
+    "areaId": 2,
+    "description": "Pinnicle of Minnesota outdoor culture. Has been awarded v8 despite being as hard or harder than v10 out west. Also perfectly encapsulates the contrivances of midwest climbing.",
+    "startPosition": "start as for cave sit on the now broken jugs far right of the cave, detached block is on"
+}
+
+###
+
+GET {{url}}/admin HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NzkzODczODUsImV4cCI6MTc3OTM4OTE4NX0.p8PJle2adDq7rQhmlFReeoDNT5r3GEuhmeay55vv2GQ
+
+###
+
+Put {{url}}/admin HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NzkzMDgwNjIsImV4cCI6MTc3OTMwOTg2Mn0.1VYw2vEu7M6EqvBW2O-gwFxhQ5wCRGbcU8CMLRTzlL0
+Content-Type: application/json
+
+{
+    "id":3,
+    "name": "Cave Traverse",
+    "areaId": 3,
+    "description": "Pinnicle of Minnesota outdoor culture. Has been awarded v8 despite being as hard or harder than v10 out west. Also perfectly encapsulates the contrivances of midwest climbing.",
+    "startPosition": "start as for cave sit on the now broken jugs far right of the cave"
+}
+
+###
+
+DELETE {{url}}/admin/3 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NzkzMDgwNjIsImV4cCI6MTc3OTMwOTg2Mn0.1VYw2vEu7M6EqvBW2O-gwFxhQ5wCRGbcU8CMLRTzlL0
