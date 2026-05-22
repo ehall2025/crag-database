@@ -1,0 +1,21 @@
+@url = http://localhost:8080/api/profile
+
+POST {{url}} HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGEuY29tIiwiaWF0IjoxNzc5MjE5MjM1LCJleHAiOjE3NzkyMjEwMzV9.Vm_Btd2JF5jVvyUY2Iry9Uq9dL0fZxKNN_LqKD5HR78
+Content-Type: application/json 
+
+{
+    "listId": 1,
+    "routeId": 1
+}
+
+###
+
+DELETE {{url}} HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGEuY29tIiwiaWF0IjoxNzc5MjE5MjM1LCJleHAiOjE3NzkyMjEwMzV9.Vm_Btd2JF5jVvyUY2Iry9Uq9dL0fZxKNN_LqKD5HR78
+Content-Type: application/json 
+
+{
+    "listId": 1,
+    "routeId": 1
+}
