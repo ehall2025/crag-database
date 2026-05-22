@@ -93,17 +93,16 @@ function PostLocationForm ({ loggedInUser }) {
 
     return (
         <>
-            <form>
+            <h1>Post a Route</h1>
+            <form className="form-control">
                 {errors.length > 0 ?
                     <ul>{errors.map(error => <li key={error}>{error}</li>)}</ul>
                     : null
                 }
-                <div>
-                    <label>Route Name</label>
-                    <input name="name" id="name" type="text" onChange={handleRouteChange}/>
+                <div className="form-control">
+                    <input name="name" id="name" type="text" placeholder="Route Name" onChange={handleRouteChange}/>
                 </div>
-                <div>
-                    <label>Select Location</label>
+                <div className="form-control">
                     <select id="locationId" onChange={handleLocationChange}>
                         <option>select location</option>
                         {locations.map((location) => (
@@ -112,8 +111,7 @@ function PostLocationForm ({ loggedInUser }) {
                     </select>
                 </div>
                 {areaForms.map(({areaId, subAreas}, index) => (
-                    <div key={index}>
-                        <label>Select Area</label>
+                    <div key={index} className="form-control">
                         <select id="areaId" onChange={handleAreaSelectChange}>
                             <option>Select Area</option>
                             {subAreas.map((subArea) => (
@@ -122,15 +120,13 @@ function PostLocationForm ({ loggedInUser }) {
                         </select>
                     </div>
                 ))}
-                <div>
-                    <label>Route description</label>
-                    <textarea name="description" id="description" onChange={handleRouteChange}/>
+                <div className="form-control">
+                    <textarea name="description" id="description" placeholder="Route Description" onChange={handleRouteChange}/>
                 </div>
-                <div>
-                    <label>Route start postition</label>
-                    <textarea name="startPosition" id="startPosition" onChange={handleRouteChange}/>
+                <div className="form-control">
+                    <textarea name="startPosition" id="startPosition" placeholder="Start Position" onChange={handleRouteChange}/>
                 </div>
-                <button type="submit" onClick={handleSubmit}>Submit</button>
+                <button className="btn btn-primary" type="submit" onClick={handleSubmit}>Submit</button>
             </form>
         </>
     );
