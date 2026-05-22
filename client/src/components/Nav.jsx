@@ -6,6 +6,9 @@ function Nav({ loggedInUser, setLoggedInUser }) {
             <div className='d-flex'>
                 <ul className='navbar-nav'>
                     <li className='nav-item'>
+                        <h4><NavLink className="nav-link" to='/'>Cragbase</NavLink></h4>
+                    </li>
+                    <li className='nav-item'>
                         <NavLink id="link" className='nav-link ' to='/'>
                             Home
                         </NavLink>
@@ -38,6 +41,10 @@ function Nav({ loggedInUser, setLoggedInUser }) {
                                     Post Route
                                 </NavLink>
                             </li>
+                            {loggedInUser.user.role === "ROLE_ADMIN" &&
+                                <NavLink id="link" className='nav-link' to='admin/staged'>
+                                    Staged Routes     
+                                </NavLink>}
                             <li>
                                 <NavLink id="link" className='nav-link' to='/users/profile'>
                                     Profile

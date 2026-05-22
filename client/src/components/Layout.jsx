@@ -10,12 +10,10 @@ function Layout({ loggedInUser, setLoggedInUser }) {
     return (
         <div className='container'>
 			<header className='mb-3'>
-				<Nav loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
+					<Nav loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
 			</header>
 			<main>
-				<h1 className='mb-3'>Cragbase</h1>
 				{message && <p>{message}</p>}
-				{ loggedInUser !== null ? <h2>Welcome, {loggedInUser.user.username}!</h2> : null }
 				<Outlet />
 			</main>
 		</div>

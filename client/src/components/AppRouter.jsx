@@ -18,6 +18,8 @@ import AreaBio from "./location-components/AreaBio"
 import RouteBio from "./location-components/Routebio"
 import PostLocationForm from "./location-components/route-location-form-components/PostLocationForm"
 
+import StagedRoutes from "./profile-components/admin-components/StagedRoutes"
+
 
 function AppRouter() {
     const [loggedInUser, setLoggedInUser] = useState(null)
@@ -30,7 +32,7 @@ function AppRouter() {
             children: [
                 {
                     path: "/",
-                    element: <Home />
+                    element: <Home loggedInUser={loggedInUser}/>
                 },
                 {
                     path: "locations",
@@ -59,9 +61,9 @@ function AppRouter() {
                         {
                             path: "post",
                             element: loggedInUser !== null ? 
-                                <PostLocationForm/> 
+                                <PostLocationForm loggedInUser={loggedInUser}/> 
                                 : 
-                                <Navigate to="/" state={{ message: "You you are not logged in" }} />
+                                <Navigate to="/" state={{ message: "You are not logged in" }} />
                         }
                     ]
                 },
@@ -74,23 +76,30 @@ function AppRouter() {
                             element: loggedInUser === null ? 
                                 <AccountRegistrationForm /> 
                                 : 
-                                <Navigate to="/" state={{ message: "You you are already logged in" }} />
+                                <Navigate to="/" state={{ message: "" }} />
                         },
                         {
                             path: "login",
                             element: loggedInUser === null ? 
                                 <UserLoginForm setLoggedInUser={setLoggedInUser} /> 
                                 : 
-                                <Navigate to="/" state={{ message: "You you are already logged in" }} />
+                                <Navigate to="/" state={{ message: "" }} />
                         },
                         {
                             path: "profile",
                             element: loggedInUser !== null ? 
                                 <UserProfile loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} /> 
                                 : 
-                                <Navigate to="/" state={{ message: "You you are not logged in" }} />
+                                <Navigate to="/" state={{ message: "" }} />
                         }
                     ]
+                },
+                {
+                    path: "admin/staged",
+                    element: loggedInUser !== null ? 
+                                <StagedRoutes loggedInUser={loggedInUser}/>
+                                : 
+                                <Navigate to="/" state={{ message: "You are not logged in" }} />
                 },
                 {
                     path: "*",

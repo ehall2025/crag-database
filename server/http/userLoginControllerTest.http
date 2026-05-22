@@ -5,7 +5,7 @@ Content-Type: application/json
 
 {
     "id": 0,
-    "username": "admin@admin.com",
+    "username": "test@admin.com",
     "password": "admin",
     "role": "ROLE_USER"
 }

@@ -42,17 +42,18 @@ function UserLoginForm({ setLoggedInUser }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <>
+        <h1>Log In</h1>
+         <form onSubmit={handleSubmit}>
             <div>
-                <label>Email: </label>
-                <input id="loginEmailForm" name="username" type="text" placeholder="Enter your email here" onChange={handleChange}></input>
+                <input id="loginEmailForm" name="username" type="text" placeholder="Email Address" onChange={handleChange}></input>
             </div>
             <div>
-                <label>Password: </label>
-                <input id="loginPasswordForm" name="password" type="password" placeholder="Enter your password here" onChange={handleChange}></input>
+                <input id="loginPasswordForm" name="password" type="password" placeholder="Password" onChange={handleChange}></input>
             </div>
-            <button type="submit" onClick={handleSubmit}>Login</button>
+            <button className="btn btn-primary" type="submit" onClick={handleSubmit}>Login</button>
         </form>
+         </>
     );
 }
 

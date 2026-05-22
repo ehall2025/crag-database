@@ -13,16 +13,24 @@ function LocationView({ locations, setLocations }) {
 
     return (
         <>
-            <div>location view</div>
-            <div>
-                {locations.map((loc) => {
-                    return (
-                        <div key={loc.id}>
-                            <Link to={"/locations/" + loc.id}>{loc.region}</Link>
-                        </div>
-                    )
-                })}
+        <div className="card">
+            <div className="card-header">
+                <h1>Locations</h1>
             </div>
+            
+            <div className="card-body">
+                <ul className="list-group">
+                    {locations.map((loc) => (
+                        <li className="list-group-item" key={loc.id}>
+                            <Link className="d-inline-flex align-items-baseline" to={"/locations/" + loc.id}>
+                                <h5>{loc.region + "," + loc.country}</h5>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+            
         </>
     );
 }

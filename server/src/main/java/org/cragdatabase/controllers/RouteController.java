@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/post_route")
 @CrossOrigin
@@ -19,6 +21,17 @@ public class RouteController {
 
     public RouteController(RouteService routeService) {
         this.routeService = routeService;
+    }
+
+    @GetMapping("/admin")
+    public ResponseEntity getStagedRoutes () {
+        Result<List<Route>> result = routeService.getStagedRoutes();
+
+        if (!result.isSuccess()) {
+            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(result.getpayload(), HttpStatus.OK);
     }
 
     @PostMapping

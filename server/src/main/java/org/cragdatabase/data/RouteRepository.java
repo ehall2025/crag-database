@@ -2,6 +2,8 @@ package org.cragdatabase.data;
 
 import org.cragdatabase.models.Route;
 
+import java.util.List;
+
 public interface RouteRepository {
 
     boolean userPostRoute(Route route);
@@ -13,4 +15,6 @@ public interface RouteRepository {
     boolean adminUpdateRoute(Route route);
 
     boolean adminDeleteRoute(int routeId);
+
+    List<Route> getStagedRoutes();
 }
