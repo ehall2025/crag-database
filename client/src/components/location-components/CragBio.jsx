@@ -21,17 +21,25 @@ function CragBio() {
 
     return (
         <>
-            <h2>{crag.name}</h2>
-            <h5>Description</h5>
-            <p>{crag.description}</p>
-            <h5>Areas</h5>
-            {crag.areas.map((area) => {
-                    return (
-                        <div key={area.id}>
-                            <Link to={"/locations/area/" + area.id}>{area.name}</Link>
-                        </div>
-                    )
-                })}
+            <div className="card">
+                <div className="card-header">
+                    <h2>{crag.name}</h2>
+                </div>
+                <div className="card-body">
+                    <h5>Description</h5>
+                    <p>{crag.description}</p>
+                    <h5>Areas</h5>
+                    <div className="card col-2">
+                        <ul className="list-group">
+                            {crag.areas.map((area) => (
+                                <li key={area.id} className="list-group-item">
+                                    <Link to={"/locations/area/" + area.id}>{area.name}</Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </>
     );
 }
