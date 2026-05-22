@@ -41,12 +41,14 @@ function RouteListTable ({ routeList , loggedInUser , setLoggedInUser }) {
 
     return (
         <>
+        <ul className="list-group">
             {routeList.routes.map(route => (
-                <div key={route.id}>
+                <li key={route.id} className="list-group-item d-inline-flex gap-1">
                     <Link to={"/locations/route/" + route.id}>{route.name}</Link>
-                    <button routeId={route.id} onClick={handleDelete}>remove from list</button>
-                </div>
+                    <button className="btn btn-danger" routeId={route.id} onClick={handleDelete}>remove from list</button>
+                </li>
             ))}
+        </ul>
         </>
     );
 }

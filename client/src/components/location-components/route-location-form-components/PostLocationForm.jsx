@@ -94,40 +94,42 @@ function PostLocationForm ({ loggedInUser }) {
     return (
         <>
             <h1>Post a Route</h1>
-            <form className="form-control">
-                {errors.length > 0 ?
-                    <ul>{errors.map(error => <li key={error}>{error}</li>)}</ul>
-                    : null
-                }
-                <div className="form-control">
-                    <input name="name" id="name" type="text" placeholder="Route Name" onChange={handleRouteChange}/>
-                </div>
-                <div className="form-control">
-                    <select id="locationId" onChange={handleLocationChange}>
-                        <option>select location</option>
-                        {locations.map((location) => (
-                            <option key={location.id} value={location.id}>{location.region}</option>
-                        ))}
-                    </select>
-                </div>
-                {areaForms.map(({areaId, subAreas}, index) => (
-                    <div key={index} className="form-control">
-                        <select id="areaId" onChange={handleAreaSelectChange}>
-                            <option>Select Area</option>
-                            {subAreas.map((subArea) => (
-                                <option key={subArea.id} value={subArea.id}>{subArea.name}</option>
+            <div className="col-4">
+                <form className="form-control">
+                    {errors.length > 0 ?
+                        <ul>{errors.map(error => <li key={error}>{error}</li>)}</ul>
+                        : null
+                    }
+                    <div className="form-control">
+                        <input name="name" id="name" type="text" placeholder="Route Name" onChange={handleRouteChange}/>
+                    </div>
+                    <div className="form-control">
+                        <select id="locationId" onChange={handleLocationChange}>
+                            <option>select location</option>
+                            {locations.map((location) => (
+                                <option key={location.id} value={location.id}>{location.region}</option>
                             ))}
                         </select>
                     </div>
-                ))}
-                <div className="form-control">
-                    <textarea name="description" id="description" placeholder="Route Description" onChange={handleRouteChange}/>
-                </div>
-                <div className="form-control">
-                    <textarea name="startPosition" id="startPosition" placeholder="Start Position" onChange={handleRouteChange}/>
-                </div>
-                <button className="btn btn-primary" type="submit" onClick={handleSubmit}>Submit</button>
-            </form>
+                    {areaForms.map(({areaId, subAreas}, index) => (
+                        <div key={index} className="form-control">
+                            <select id="areaId" onChange={handleAreaSelectChange}>
+                                <option>Select Area</option>
+                                {subAreas.map((subArea) => (
+                                    <option key={subArea.id} value={subArea.id}>{subArea.name}</option>
+                                ))}
+                            </select>
+                        </div>
+                    ))}
+                    <div className="form-control">
+                        <textarea name="description" id="description" placeholder="Route Description" onChange={handleRouteChange}/>
+                    </div>
+                    <div className="form-control">
+                        <textarea name="startPosition" id="startPosition" placeholder="Start Position" onChange={handleRouteChange}/>
+                    </div>
+                    <button className="btn btn-primary" type="submit" onClick={handleSubmit}>Submit</button>
+                </form>
+            </div>
         </>
     );
 }
