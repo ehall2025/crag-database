@@ -76,21 +76,21 @@ function AppRouter() {
                             element: loggedInUser === null ? 
                                 <AccountRegistrationForm /> 
                                 : 
-                                <Navigate to="/" state={{ message: "You are already logged in" }} />
+                                <Navigate to="/" state={{ message: "" }} />
                         },
                         {
                             path: "login",
                             element: loggedInUser === null ? 
                                 <UserLoginForm setLoggedInUser={setLoggedInUser} /> 
                                 : 
-                                <Navigate to="/" state={{ message: "You are already logged in" }} />
+                                <Navigate to="/" state={{ message: "" }} />
                         },
                         {
                             path: "profile",
                             element: loggedInUser !== null ? 
                                 <UserProfile loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} /> 
                                 : 
-                                <Navigate to="/" state={{ message: "You are not logged in" }} />
+                                <Navigate to="/" state={{ message: "" }} />
                         }
                     ]
                 },

@@ -13,12 +13,12 @@ function LocationView({ locations, setLocations }) {
 
     return (
         <>
-            <div>location view</div>
+            <h1>Locations</h1>
             <div>
                 {locations.map((loc) => {
                     return (
                         <div key={loc.id}>
-                            <Link to={"/locations/" + loc.id}>{loc.region}</Link>
+                            <h3><Link to={"/locations/" + loc.id}>{loc.region + ", " + loc.country}</Link></h3>
                         </div>
                     )
                 })}

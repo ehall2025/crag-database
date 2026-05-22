@@ -43,22 +43,23 @@ function AccountRegistrationForm () {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <>
+            <h1>Create an Account</h1>
+            <form onSubmit={handleSubmit}>
 
-            {errors.length > 0 && <ul>
-                {errors.map(error => <li key={error}>{error}</li>)}    
-            </ul>}
+                {errors.length > 0 && <ul>
+                    {errors.map(error => <li key={error}>{error}</li>)}    
+                </ul>}
 
-            <div>
-                <label>Email: </label>
-                <input id="registerEmailForm" name="username" type="text" placeholder="Enter your email here" onChange={handleChange}></input>
-            </div>
-            <div>
-                <label>Password: </label>
-                <input id="registerPasswordForm" name="password" type="password" placeholder="Enter your password here" onChange={handleChange}></input>
-            </div>
-            <button type="submit" onClick={handleSubmit}>Create Account</button>
-        </form>
+                <div>
+                    <input id="registerEmailForm" name="username" type="text" placeholder="Email Address" onChange={handleChange}></input>
+                </div>
+                <div>
+                    <input id="registerPasswordForm" name="password" type="password" placeholder="Password" onChange={handleChange}></input>
+                </div>
+                <button className="btn btn-primary" type="submit" onClick={handleSubmit}>Create Account</button>
+            </form>
+        </>
     );
 }
 

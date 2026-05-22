@@ -56,10 +56,10 @@ function PostLocationForm ({ loggedInUser }) {
             fetch(fetchUrl + event.target.value)
             .then(response => response.json())
             .then(payload => {
-                if (payload.subareas.length > 0) {
+                if (payload.subareas.length !== null && payload.subareas.length > 0) {
                     setAreaForms([...areaForms, {
                         areaId: event.target.value,
-                        subAreas: payload.areas
+                        subAreas: payload.subareas
                     }])
                 }
             })

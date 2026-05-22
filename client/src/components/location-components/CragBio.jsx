@@ -22,7 +22,9 @@ function CragBio() {
     return (
         <>
             <h2>{crag.name}</h2>
+            <h5>Description</h5>
             <p>{crag.description}</p>
+            <h5>Areas</h5>
             {crag.areas.map((area) => {
                     return (
                         <div key={area.id}>

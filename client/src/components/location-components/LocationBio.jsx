@@ -22,14 +22,16 @@ function LocationBio() {
     return (
         <>
             <h2>{location.region}</h2>
+            <h5>Description</h5>
             <p>{location.description}</p>
+            <h5>Crags</h5>
             {location.crags.map((crag) => {
-                    return (
-                        <div key={crag.id}>
-                            <Link to={"/locations/crag/" + crag.id}>{crag.name}</Link>
-                        </div>
-                    )
-                })}
+                return (
+                    <div key={crag.id}>
+                        <Link to={"/locations/crag/" + crag.id}>{crag.name}</Link>
+                    </div>
+                )
+            })}
         </>
     );
 }
