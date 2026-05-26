@@ -67,4 +67,12 @@ public class UserProfileJdbcRepository implements UserProfileRepository {
                 .query(new RouteMapper())
                 .list();
     }
+
+    @Override
+    public List<Route> findRouteList(int listId) {
+        return jdbcClient.sql(SELECT_ROUTES)
+                .param("list_id", listId)
+                .query(new RouteMapper())
+                .list();
+    }
 }
