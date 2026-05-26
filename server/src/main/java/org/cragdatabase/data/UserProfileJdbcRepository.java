@@ -40,7 +40,7 @@ public class UserProfileJdbcRepository implements UserProfileRepository {
 
         if (!success) return List.of();
 
-        return jdbcClient.sql(SELECT_ROUTES)
+        return jdbcClient.sql(SELECT_ROUTES)//TODO repeated code A
                 .param("list_id", listId)
                 .param("route_id", routeId)
                 .query(new RouteMapper())
@@ -60,7 +60,8 @@ public class UserProfileJdbcRepository implements UserProfileRepository {
 
         if (!success) return List.of();
 
-        return jdbcClient.sql(SELECT_ROUTES)
+        //return updated list of routes
+        return jdbcClient.sql(SELECT_ROUTES)//TODO repeated code A
                 .param("list_id", listId)
                 .param("route_id", routeId)
                 .query(new RouteMapper())

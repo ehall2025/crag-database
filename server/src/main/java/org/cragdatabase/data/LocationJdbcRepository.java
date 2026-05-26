@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class LocationJdbcRepository implements LocationRepository {
+public class LocationJdbcRepository implements LocationRepository {//TODO repeated code throughout whole file
 
     private final JdbcClient jdbcClient;
 

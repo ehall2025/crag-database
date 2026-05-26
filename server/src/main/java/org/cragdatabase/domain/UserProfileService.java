@@ -19,7 +19,7 @@ public class UserProfileService {
         this.userProfileRepository = userProfileRepository;
     }
 
-    public Result<List<Route>> addListEntry (int listId, int routeId) {
+    public Result<List<Route>> addListEntry (int listId, int routeId) {//TODO repeated code C
         Result<List<Route>> result = new Result<>();
 
         if (listId <= 0 || routeId <= 0) {
@@ -36,7 +36,7 @@ public class UserProfileService {
         return result;
     }
 
-    public Result<List<Route>> removeListEntry (int listId, int routeId) {
+    public Result<List<Route>> removeListEntry (int listId, int routeId) {//TODO repeated code C
         Result<List<Route>> result = new Result<>();
 
         if (listId <= 0 || routeId <= 0) {

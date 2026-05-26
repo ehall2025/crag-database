@@ -29,7 +29,7 @@ public class RouteJdbcRepository implements RouteRepository {
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        return jdbcClient.sql(sql)
+        return jdbcClient.sql(sql)//TODO repeated code B
                 .param("name", route.getName())
                 .param("area_id", route.getAreaId())
                 .param("description", route.getDescription())
@@ -46,7 +46,7 @@ public class RouteJdbcRepository implements RouteRepository {
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        return jdbcClient.sql(sql)
+        return jdbcClient.sql(sql)//TODO repeated code B
                 .param("name", route.getName())
                 .param("area_id", route.getAreaId())
                 .param("description", route.getDescription())

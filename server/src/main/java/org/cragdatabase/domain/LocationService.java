@@ -29,7 +29,7 @@ public class LocationService {
 
         result.setpayload(locationRepository.findLocationById(id));
 
-        if (result.getpayload() == null) {
+        if (result.getpayload() == null) {//TODO repeated code D
             result.addErrorMessage("Could not find location", ResultType.NOT_FOUND);
         }
 
@@ -41,7 +41,7 @@ public class LocationService {
 
         result.setpayload(locationRepository.findCragById(cragId));
 
-        if (result.getpayload() == null) {
+        if (result.getpayload() == null) {//TODO repeated code D
             result.addErrorMessage("Could not find crag", ResultType.NOT_FOUND);
         }
 
@@ -53,7 +53,7 @@ public class LocationService {
 
         result.setpayload(locationRepository.findAreaById(areaId));
 
-        if (result.getpayload() == null) {
+        if (result.getpayload() == null) {//TODO repeated code D
             result.addErrorMessage("Could not find area", ResultType.NOT_FOUND);
         }
 
@@ -65,7 +65,7 @@ public class LocationService {
 
         result.setpayload(locationRepository.findRouteById(routeId));
 
-        if (result.getpayload() == null) {
+        if (result.getpayload() == null) {//TODO repeated code D
             result.addErrorMessage("Could not find route", ResultType.NOT_FOUND);
         }
 
