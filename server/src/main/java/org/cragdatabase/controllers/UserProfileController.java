@@ -24,7 +24,7 @@ public class UserProfileController {
     }
 
     @PostMapping
-    public ResponseEntity addListEntry (@RequestBody ListEntry listEntry) {//TODO repeated code E
+    public ResponseEntity addListEntry (@RequestBody ListEntry listEntry) {
         Result<List<Route>> result = userProfileService.addOrRemoveListEntry(listEntry.getListId(), listEntry.getRouteId(), "add");
 
         if (!result.isSuccess()) {
@@ -35,7 +35,7 @@ public class UserProfileController {
     }
 
     @DeleteMapping
-    public ResponseEntity removeListEntry (@RequestBody ListEntry listEntry) {//TODO repeated code E
+    public ResponseEntity removeListEntry (@RequestBody ListEntry listEntry) {
         Result<List<Route>> result = userProfileService.addOrRemoveListEntry(listEntry.getListId(), listEntry.getRouteId(), "remove");
 
         if (!result.isSuccess()) {
