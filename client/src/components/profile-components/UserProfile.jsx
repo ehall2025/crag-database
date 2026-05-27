@@ -1,39 +1,56 @@
 import { useState } from "react";
 import RouteListTable from "./RouteListTable";
+import "./UserProfile.css";
 
-
-function UserProfile ({ loggedInUser , setLoggedInUser }) {
+function UserProfile({ loggedInUser, setLoggedInUser }) {
     const [user, setUser] = useState(loggedInUser.user)
     const jwt = loggedInUser.jwt
 
     return (
-        <>
-            <h1>Profile</h1>
-            <div className="card">
-                <div className="card-header">
+        <div className="profile-page">
+
+            <div className="profile-header">
+                <h1>Profile</h1>
+                <p>Your saved climbs and climbing history.</p>
+            </div>
+
+            <div className="profile-card">
+
+                <div className="profile-user-header">
                     <h2>{user.displayName || user.username}</h2>
                 </div>
 
-                <div className="card-body d-inline-flex gap-5">
-                    <div className="card">
-                        <div className="card-header">
-                            <h5>Ticks</h5>
+                <div className="profile-lists">
+
+                    <div className="profile-list-card">
+                        <div className="profile-list-header">
+                            <h3>Ticks</h3>
                         </div>
-                        <div className="card-body">
-                            <RouteListTable routeList={user.tickList} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
-                        </div>
+
+                        <RouteListTable
+                            routeList={user.tickList}
+                            loggedInUser={loggedInUser}
+                            setLoggedInUser={setLoggedInUser}
+                        />
                     </div>
-                    <div className="card">
-                        <div className="card-header">
-                            <h5>To-dos</h5>
+
+                    <div className="profile-list-card">
+                        <div className="profile-list-header">
+                            <h3>To-dos</h3>
                         </div>
-                        <div className="card-body">
-                            <RouteListTable routeList={user.todoList} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
-                        </div>
+
+                        <RouteListTable
+                            routeList={user.todoList}
+                            loggedInUser={loggedInUser}
+                            setLoggedInUser={setLoggedInUser}
+                        />
                     </div>
+
                 </div>
+
             </div>
-        </>
+
+        </div>
     );
 }
 

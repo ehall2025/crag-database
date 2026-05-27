@@ -1,0 +1,78 @@
+.locations-page {
+    width: min(900px, 90%);
+    margin: 3rem auto;
+}
+
+.locations-card {
+    background-color: #f8f4ed;
+
+    border-radius: 20px;
+
+    padding: 2rem;
+
+    box-shadow:
+        0 6px 24px rgba(0,0,0,0.08);
+
+    border: 1px solid rgba(47, 58, 50, 0.08);
+}
+
+.locations-header h1 {
+    color: #2f3a32;
+
+    font-size: 2.2rem;
+    font-weight: 700;
+
+    margin-bottom: 2rem;
+}
+
+.locations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    padding: 0;
+    margin: 0;
+}
+
+.location-item {
+    list-style: none;
+}
+
+.location-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 1rem 1.25rem;
+
+    background-color: #e8dfd1;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.location-link:hover {
+    background-color: #d9a441;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 14px rgba(0,0,0,0.12);
+}
+
+.location-link h5 {
+    margin: 0;
+
+    color: #2f3a32;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    letter-spacing: 0.03em;
+}

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-
+import "./LocationBio.css";
 
 function LocationBio() {
 
     const { id } = useParams();
     const [location, setLocation] = useState({
-        id:0,
+        id: 0,
         region: "",
         country: "",
         description: "",
@@ -15,38 +15,53 @@ function LocationBio() {
 
     useEffect(() => {
         fetch("http://localhost:8080/api/locations/" + id)
-        .then(response => response.json())
-        .then(payload => setLocation(payload))
+            .then(response => response.json())
+            .then(payload => setLocation(payload))
     }, [])
 
     return (
-        <>
-            <div className="card">
-                <div className="card-header">
-                    <div className="d-inline-flex align-items-baseline">
-                        <h2>{location.region}</h2>
-                        <h6>, {location.country}</h6>
+            <div className="location-bio-page">
+
+                <div className="location-bio-card">
+
+                    <div className="location-title">
+                        <h1>{location.region}</h1>
+                        <span>{location.country}</span>
                     </div>
-                </div>
-                <div className="card-body">
-                        <h5>Description</h5>
-                    
-                    <p>{location.description}</p>
-                    <h5>Crags</h5>
-                    <div className="card col-3">
-                        <ul className="list-group list-group-flush">
-                            {location.crags.map((crag) => {
-                                return (
-                                    <li key={crag.id} className="list-group-item">
-                                            <Link to={"/locations/crag/" + crag.id}>{crag.name}</Link>
-                                    </li>
-                                )
-                            })}
-                        </ul>
+
+                    <div>
+                        <h4 className="section-title">
+                            Description
+                        </h4>
+
+                        <p className="location-description">
+                            {location.description}
+                        </p>
                     </div>
+
+                    <div>
+                        <h4 className="section-title">
+                            Crags
+                        </h4>
+
+                        <div className="crag-grid">
+
+                            {location.crags.map((crag) => (
+                                <Link
+                                    key={crag.id}
+                                    className="crag-card"
+                                    to={"/locations/crag/" + crag.id}
+                                >
+                                    <h5>{crag.name}</h5>
+                                </Link>
+                            ))}
+
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
-        </>
     );
 }
 

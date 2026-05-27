@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom";
+import "./RouteListTable.css";
 
 
+function RouteListTable({ routeList, loggedInUser, setLoggedInUser }) {
 
-function RouteListTable ({ routeList , loggedInUser , setLoggedInUser }) {
+    async function handleDelete(event) {
 
-    async function handleDelete (event) {
-        
         const response = await fetch("http://localhost:8080/api/profile", {
             "method": "DELETE",
             "headers": {
                 "Authorization": "Bearer " + loggedInUser.jwt,
-                "Content-Type": "application/json" ,
+                "Content-Type": "application/json",
             },
-            "body" : JSON.stringify({
+            "body": JSON.stringify({
                 "listId": routeList.id,
                 "routeId": event.target.attributes.routeId.value
             })
@@ -27,8 +27,8 @@ function RouteListTable ({ routeList , loggedInUser , setLoggedInUser }) {
         }
     }
 
-    function updateUser (oldUser , newRouteList) {
-        let newUser = {...oldUser}
+    function updateUser(oldUser, newRouteList) {
+        let newUser = { ...oldUser }
 
         if (routeList.name == 'todo') {
             newUser.user.todoList.routes = newRouteList
@@ -40,16 +40,35 @@ function RouteListTable ({ routeList , loggedInUser , setLoggedInUser }) {
     }
 
     return (
-        <>
-        <ul className="list-group">
+        <ul className="route-list">
+
             {routeList.routes.map(route => (
-                <li key={route.id} className="list-group-item d-inline-flex gap-1">
-                    <Link to={"/locations/route/" + route.id}>{route.name}</Link>
-                    <button className="btn btn-danger" routeId={route.id} onClick={handleDelete}>remove from list</button>
+
+                <li
+                    key={route.id}
+                    className="route-list-item"
+                >
+
+                    <Link
+                        className="route-link"
+                        to={"/locations/route/" + route.id}
+                    >
+                        {route.name}
+                    </Link>
+
+                    <button
+                        className="remove-route-button"
+                        routeId={route.id}
+                        onClick={handleDelete}
+                    >
+                        Remove
+                    </button>
+
                 </li>
+
             ))}
+
         </ul>
-        </>
     );
 }
 

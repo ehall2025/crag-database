@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-
+import "./CragBio.css";
 
 function CragBio() {
 
     const { id } = useParams();
     const [crag, setCrag] = useState({
-        id:0,
+        id: 0,
         name: "",
         locationId: 0,
         description: "",
@@ -15,32 +15,44 @@ function CragBio() {
 
     useEffect(() => {
         fetch("http://localhost:8080/api/locations/crag/" + id)
-        .then(response => response.json())
-        .then(payload => setCrag(payload))
+            .then(response => response.json())
+            .then(payload => setCrag(payload))
     }, [])
 
     return (
-        <>
-            <div className="card">
-                <div className="card-header">
-                    <h2>{crag.name}</h2>
+        <div className="crag-bio-page">
+            <div className="crag-bio-card">
+
+                <div className="crag-title">
+                    <h1>{crag.name}</h1>
                 </div>
-                <div className="card-body">
-                    <h5>Description</h5>
-                    <p>{crag.description}</p>
-                    <h5>Areas</h5>
-                    <div className="card col-2">
-                        <ul className="list-group">
-                            {crag.areas.map((area) => (
-                                <li key={area.id} className="list-group-item">
-                                    <Link to={"/locations/area/" + area.id}>{area.name}</Link>
-                                </li>
-                            ))}
-                        </ul>
+
+                <div>
+                    <h4 className="section-title">Description</h4>
+
+                    <p className="crag-description">
+                        {crag.description}
+                    </p>
+                </div>
+
+                <div>
+                    <h4 className="section-title">Areas</h4>
+
+                    <div className="area-grid">
+                        {crag.areas.map((area) => (
+                            <Link
+                                key={area.id}
+                                className="area-card"
+                                to={"/locations/area/" + area.id}
+                            >
+                                <h5>{area.name}</h5>
+                            </Link>
+                        ))}
                     </div>
                 </div>
+
             </div>
-        </>
+        </div>
     );
 }
 
