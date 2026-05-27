@@ -84,12 +84,12 @@ function RouteBio({ loggedInUser, setLoggedInUser }) {
                     <h1>{route.name}</h1>
                 </div>
 
-                <div className="route-section">
+                <div className="route-bio-section">
                     <h4 className="section-title">Description</h4>
                     <p className="route-description">{route.description}</p>
                 </div>
 
-                <div className="route-section">
+                <div className="route-bio-section">
                     <h4 className="section-title">Start Position</h4>
                     <p className="route-start">{route.startPosition}</p>
                 </div>
