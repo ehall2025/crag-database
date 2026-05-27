@@ -3,19 +3,17 @@
 
     width: 100vw;
 
+    min-height: 100vh;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
 
-    background-image:
-        linear-gradient(
-            rgba(0,0,0,0.35),
-            rgba(0,0,0,0.45)
-        ),
-        url("../images/login-background.jpg");
-
+    background-image: url("../images/login-background.jpg");
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
+
+    position: relative;
+    overflow: hidden;
 
     display: flex;
     align-items: center;

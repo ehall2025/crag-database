@@ -82,73 +82,75 @@ function StagedRoutes({ loggedInUser }) {
 
     return (
         <div className="staged-page">
+            <div className="staged-body">
+                <div className="staged-header">
+                    <h1>Staged Routes</h1>
 
-            <div className="staged-header">
-                <h1>Staged Routes</h1>
+                    <p>
+                        Review and approve submitted routes.
+                    </p>
+                </div>
 
-                <p>
-                    Review and approve submitted routes.
-                </p>
-            </div>
+                {errors.length > 0 && (
+                    <ul className="error-list">
+                        {errors.map(error => (
+                            <li key={error}>{error}</li>
+                        ))}
+                    </ul>
+                )}
 
-            {errors.length > 0 && (
-                <ul className="error-list">
-                    {errors.map(error => (
-                        <li key={error}>{error}</li>
+                <div className="staged-grid">
+
+                    {stagedRoutes.map((route) => (
+
+                        <div key={route.id} className="staged-card">
+
+                            <div className="staged-card-header">
+                                <h3>{route.name}</h3>
+                            </div>
+
+                            <div className="staged-card-body">
+
+                                <div className="staged-section">
+                                    <h5>Description</h5>
+                                    <p>{route.description}</p>
+                                </div>
+
+                                <div className="staged-section">
+                                    <h5>Start Position</h5>
+                                    <p>{route.startPosition}</p>
+                                </div>
+
+                            </div>
+
+                            <div className="staged-card-footer">
+
+                                <button
+                                    className="approve-button"
+                                    value={route.id}
+                                    onClick={handlePost}
+                                >
+                                    Approve
+                                </button>
+
+                                <button
+                                    className="delete-button"
+                                    value={route.id}
+                                    onClick={handleDelete}
+                                >
+                                    Delete
+                                </button>
+
+                            </div>
+
+                        </div>
+
                     ))}
-                </ul>
-            )}
 
-            <div className="staged-grid">
-
-                {stagedRoutes.map((route) => (
-
-                    <div key={route.id} className="staged-card">
-
-                        <div className="staged-card-header">
-                            <h3>{route.name}</h3>
-                        </div>
-
-                        <div className="staged-card-body">
-
-                            <div className="staged-section">
-                                <h5>Description</h5>
-                                <p>{route.description}</p>
-                            </div>
-
-                            <div className="staged-section">
-                                <h5>Start Position</h5>
-                                <p>{route.startPosition}</p>
-                            </div>
-
-                        </div>
-
-                        <div className="staged-card-footer">
-
-                            <button
-                                className="approve-button"
-                                value={route.id}
-                                onClick={handlePost}
-                            >
-                                Approve
-                            </button>
-
-                            <button
-                                className="delete-button"
-                                value={route.id}
-                                onClick={handleDelete}
-                            >
-                                Delete
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                ))}
+                </div>
 
             </div>
-
+            
         </div>
     );
 }
