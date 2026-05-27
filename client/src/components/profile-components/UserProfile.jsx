@@ -1,57 +1,68 @@
 import { useState } from "react";
 import RouteListTable from "./RouteListTable";
-import "./UserProfile.css";
+import "../styles/UserProfile.css";
 
-function UserProfile({ loggedInUser, setLoggedInUser }) {
+
+function UserProfile ({ loggedInUser , setLoggedInUser }) {
     const [user, setUser] = useState(loggedInUser.user)
     const jwt = loggedInUser.jwt
 
     return (
-        <div className="profile-page">
+    <div className="profile-page">
 
-            <div className="profile-header">
-                <h1>Profile</h1>
-                <p>Your saved climbs and climbing history.</p>
+        <div className="profile-hero">
+
+            <div className="profile-overlay">
+
+                <div className="profile-info">
+
+                    <div className="profile-avatar">
+                        {user.username.charAt(0).toUpperCase()}
+                    </div>
+
+                    <div>
+                        <h1 className="profile-name">
+                            {user.displayName || user.username}
+                        </h1>
+
+                        <p className="profile-subtitle">
+                            Tracking sends and projects
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div className="profile-content">
+
+            <div className="route-section">
+
+                <h2>Ticks</h2>
+
+                <RouteListTable
+                    routeList={user.tickList}
+                    loggedInUser={loggedInUser}
+                    setLoggedInUser={setLoggedInUser}
+                />
+
             </div>
 
-            <div className="profile-card">
+            <div className="route-section">
 
-                <div className="profile-user-header">
-                    <h2>{user.displayName || user.username}</h2>
-                </div>
+                <h2>Projects</h2>
 
-                <div className="profile-lists">
-
-                    <div className="profile-list-card">
-                        <div className="profile-list-header">
-                            <h3>Ticks</h3>
-                        </div>
-
-                        <RouteListTable
-                            routeList={user.tickList}
-                            loggedInUser={loggedInUser}
-                            setLoggedInUser={setLoggedInUser}
-                        />
-                    </div>
-
-                    <div className="profile-list-card">
-                        <div className="profile-list-header">
-                            <h3>To-dos</h3>
-                        </div>
-
-                        <RouteListTable
-                            routeList={user.todoList}
-                            loggedInUser={loggedInUser}
-                            setLoggedInUser={setLoggedInUser}
-                        />
-                    </div>
-
-                </div>
+                <RouteListTable
+                    routeList={user.todoList}
+                    loggedInUser={loggedInUser}
+                    setLoggedInUser={setLoggedInUser}
+                />
 
             </div>
 
         </div>
-    );
+    </div>
+)
 }
 
 export default UserProfile

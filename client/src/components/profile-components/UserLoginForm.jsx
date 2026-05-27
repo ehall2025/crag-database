@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import "../styles/Login.css";
 
 
 function UserLoginForm({ setLoggedInUser }) {
@@ -20,7 +21,7 @@ function UserLoginForm({ setLoggedInUser }) {
         setCredentials({ ...credentials, [event.target.name]: event.target.value })
     }
 
-    async function handleSubmit () {
+    async function handleSubmit (event) {
         event.preventDefault()
 
         const response = await fetch("http://localhost:8080/api/users/login", {
@@ -42,18 +43,33 @@ function UserLoginForm({ setLoggedInUser }) {
     }
 
     return (
-        <>
-        <h1>Log In</h1>
-         <form onSubmit={handleSubmit}>
-            <div>
-                <input id="loginEmailForm" name="username" type="text" placeholder="Email Address" onChange={handleChange}></input>
+        
+            <div className="login-page">
+                <div className="overlay">
+
+                    <div className="login-card">
+
+                        <h1 className="login-title">Log In</h1>
+
+                        <p className="login-subtitle">
+                        Your climbing journal for every send.
+                        </p>
+
+                        <form onSubmit={handleSubmit}>
+
+                            <div className="form-group">
+                                <input id="loginEmailForm" name="username" type="text" placeholder="Email Address" onChange={handleChange}></input>
+                            </div>
+
+                            <div className="form-group">
+                                <input id="loginPasswordForm" name="password" type="password" placeholder="Password" onChange={handleChange}></input>
+                            </div>
+
+                            <button className="login-btn" type="submit">Login</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div>
-                <input id="loginPasswordForm" name="password" type="password" placeholder="Password" onChange={handleChange}></input>
-            </div>
-            <button className="btn btn-primary" type="submit" onClick={handleSubmit}>Login</button>
-        </form>
-         </>
     );
 }
 

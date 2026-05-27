@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom";
-import "./RouteListTable.css";
+import "../styles/RouteListTable.css";
 
 
-function RouteListTable({ routeList, loggedInUser, setLoggedInUser }) {
+function RouteListTable ({ routeList , loggedInUser , setLoggedInUser }) {
 
-    async function handleDelete(event) {
-
+    async function handleDelete (event) {
+        
         const response = await fetch("http://localhost:8080/api/profile", {
             "method": "DELETE",
             "headers": {
                 "Authorization": "Bearer " + loggedInUser.jwt,
-                "Content-Type": "application/json",
+                "Content-Type": "application/json" ,
             },
-            "body": JSON.stringify({
+            "body" : JSON.stringify({
                 "listId": routeList.id,
                 "routeId": event.target.attributes.routeId.value
             })
@@ -27,8 +27,8 @@ function RouteListTable({ routeList, loggedInUser, setLoggedInUser }) {
         }
     }
 
-    function updateUser(oldUser, newRouteList) {
-        let newUser = { ...oldUser }
+    function updateUser (oldUser , newRouteList) {
+        let newUser = {...oldUser}
 
         if (routeList.name == 'todo') {
             newUser.user.todoList.routes = newRouteList
@@ -40,36 +40,32 @@ function RouteListTable({ routeList, loggedInUser, setLoggedInUser }) {
     }
 
     return (
-        <ul className="route-list">
+    <ul className="route-list">
 
-            {routeList.routes.map(route => (
+        {routeList.routes.map(route => (
 
-                <li
-                    key={route.id}
-                    className="route-list-item"
+            <li key={route.id} className="route-item">
+
+                <Link
+                    className="route-link"
+                    to={"/locations/route/" + route.id}
                 >
+                    {route.name}
+                </Link>
 
-                    <Link
-                        className="route-link"
-                        to={"/locations/route/" + route.id}
-                    >
-                        {route.name}
-                    </Link>
+                <button
+                    className="route-remove-btn"
+                    routeId={route.id}
+                    onClick={handleDelete}
+                >
+                    Remove
+                </button>
 
-                    <button
-                        className="remove-route-button"
-                        routeId={route.id}
-                        onClick={handleDelete}
-                    >
-                        Remove
-                    </button>
+            </li>
+        ))}
 
-                </li>
-
-            ))}
-
-        </ul>
-    );
+    </ul>
+)
 }
 
 export default RouteListTable

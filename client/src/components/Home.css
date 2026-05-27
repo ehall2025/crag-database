@@ -1,0 +1,153 @@
+.home-page {
+    min-height: calc(100vh - 100px);
+
+    width: 100vw;
+
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    background-image:
+        linear-gradient(
+            rgba(0,0,0,0.35),
+            rgba(0,0,0,0.45)
+        ),
+        url("../images/login-background.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation:
+        backgroundZoom 18s ease-in-out infinite alternate;
+}
+
+.home-overlay {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 2rem;
+}
+
+.home-content {
+    text-align: center;
+
+    max-width: 750px;
+
+    color: white;
+
+    animation:
+        slideFade 0.8s ease;
+}
+
+.home-title {
+    font-size: clamp(3rem, 7vw, 5rem);
+
+    font-weight: 800;
+
+    margin-bottom: 1rem;
+
+    text-shadow:
+        0 8px 24px rgba(0,0,0,0.45);
+}
+
+.home-subtitle {
+    font-size: 1.2rem;
+
+    line-height: 1.7;
+
+    color: rgba(255,255,255,0.9);
+
+    margin-bottom: 2.5rem;
+}
+
+.home-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    flex-wrap: wrap;
+}
+
+.hero-button {
+    padding: 1rem 1.5rem;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.hero-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 24px rgba(0,0,0,0.25);
+}
+
+.hero-button.primary {
+    background-color: #355e3b;
+    color: white;
+}
+
+.hero-button.primary:hover {
+    background-color: #3f7046;
+}
+
+.hero-button.secondary {
+    background-color: rgba(255,255,255,0.14);
+
+    backdrop-filter: blur(8px);
+
+    color: white;
+
+    border:
+        1px solid rgba(255,255,255,0.2);
+}
+
+.hero-button.secondary:hover {
+    background-color: rgba(255,255,255,0.22);
+}
+
+.welcome-section h2 {
+    font-size: 1.8rem;
+
+    color: rgba(255,255,255,0.95);
+}
+
+@keyframes slideFade {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes backgroundZoom {
+    from {
+        background-size: 100%;
+    }
+
+    to {
+        background-size: 108%;
+    }
+}
