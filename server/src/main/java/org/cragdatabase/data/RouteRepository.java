@@ -6,9 +6,7 @@ import java.util.List;
 
 public interface RouteRepository {
 
-    boolean userPostRoute(Route route);
-
-    boolean adminPostRoute(Route route);
+    boolean postRoute(Route route, String table);
 
     boolean adminDeleteStagedRoute(int stagedRouteId);
 
