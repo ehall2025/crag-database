@@ -39,7 +39,7 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
 
         if (user != null) {
             List<RouteList> lists = findListsByUserId(user.getId());
-            user.setTodoList(lists.get(0)); //TODO magic numbers?
+            user.setTodoList(lists.get(0));
             user.setTickList(lists.get(1));
         }
 
@@ -69,7 +69,7 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
                 """;
 
         for (int i = 0; i < listIds.size(); i++) {
-            listIds.get(i).setRoutes(jdbcClient.sql(sql)//TODO repeated code A
+            listIds.get(i).setRoutes(jdbcClient.sql(sql)
                     .param(listIds.get(i).getId())
                     .query(new RouteMapper())
                     .list());

@@ -19,7 +19,7 @@ public class UserProfileService {
         this.userProfileRepository = userProfileRepository;
     }
 
-    public Result<List<Route>> addListEntry (int listId, int routeId) {//TODO repeated code C
+    public Result<List<Route>> addOrRemoveListEntry (int listId, int routeId, String action) {
         Result<List<Route>> result = new Result<>();
 
         if (listId <= 0 || routeId <= 0) {
@@ -27,24 +27,11 @@ public class UserProfileService {
             return result;
         }
 
-        result.setpayload(userProfileRepository.addListEntry(listId, routeId));
-
-        if (result.getpayload() == null) {
-            result.addErrorMessage("unable to match an id to existing table row", ResultType.NOT_FOUND);
+        if (action.equals("add")) {
+            result.setpayload(userProfileRepository.addListEntry(listId, routeId));
+        } else {
+            result.setpayload(userProfileRepository.removeListEntry(listId, routeId));
         }
-
-        return result;
-    }
-
-    public Result<List<Route>> removeListEntry (int listId, int routeId) {//TODO repeated code C
-        Result<List<Route>> result = new Result<>();
-
-        if (listId <= 0 || routeId <= 0) {
-            result.addErrorMessage("ids must be greater than or equal to 1", ResultType.INVALID);
-            return result;
-        }
-
-        result.setpayload(userProfileRepository.removeListEntry(listId, routeId));
 
         if (result.getpayload() == null) {
             result.addErrorMessage("unable to match an id to existing table row", ResultType.NOT_FOUND);
