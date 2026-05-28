@@ -1,5 +1,6 @@
 package org.cragdatabase.data;
 
+import org.cragdatabase.models.Crag;
 import org.cragdatabase.models.Location;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,12 +55,28 @@ class LocationJdbcRepositoryTest {
     }
 
     @Test
-    void shouldFindCragByLocation() {
+    void shouldFindCragsByLocation() {
+        List<Crag> actual = repository.findCragsByLocation(VALID_ID);
 
+        assertEquals(1, actual.size());
+        assertEquals("Devil's Lake", actual.get(0).getName());
     }
 
     @Test
-    void shouldNotFindCragByLocation() {
+    void shouldFindCragById() {
+        Crag actual = repository.findCragById(VALID_ID);
 
+        assertNotNull(actual);
+        assertEquals("Devil's Lake", actual.getName());
+        assertFalse(actual.getAreas().isEmpty());
     }
+
+    @Test
+    void shouldNotFindCragById() {
+        Crag actual = repository.findCragById(INVALID_ID);
+
+        assertNull(actual);
+    }
+
+    
 }
