@@ -110,6 +110,12 @@ create procedure set_known_good_state()
 begin
 	delete from list_route;
     delete from list;
+    delete from route;
+    alter table route auto_increment = 1;
+    delete from area;
+    alter table area auto_increment = 1;
+    delete from crag;
+    alter table crag auto_increment = 1;
     delete from user;
     alter table user auto_increment = 1;
 
@@ -125,10 +131,23 @@ begin
     ('tommy@4fingers.com', '$2a$12$S2Uu.lenW46InFyq6.dJ2ubt1Xsdwe8iVfXSCzRkA1V6tZCccU6.G', 'ROLE_USER'),
     ('user2@user.com', '$2a$12$S2Uu.lenW46InFyq6.dJ2ubt1Xsdwe8iVfXSCzRkA1V6tZCccU6.G', 'ROLE_USER');
 
+    insert into crag (name, location_id, desciption) values ('Test Crag', 1, '');
+
+    insert into area (name, super_area_id, crag_id, description) values (1, null, 1, '');
+
+    insert into route (name, area_id, description, start_position) values
+    (1, 1, '', ''),
+    (2, 1, '', ''),
+    (3, 1, '', '');
+
+    alter table list auto_increment = 1;
+
     insert into list (name, user_id) values
     ('todo', 1), ('ticks', 1),
     ('todo', 2), ('ticks', 2),
     ('todo', 3), ('ticks', 3);
+
+    insert into list_route (list_id, route_id) values (3, 3);
 
 end //
 delimiter ;

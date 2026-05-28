@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e30b3821-b9e4-4d2e-9336-40b27f721041" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schema/test-schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/schema/test-schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/cragdatabase/data/UserProfileJdbcRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/cragdatabase/data/UserProfileJdbcRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/cragdatabase/controllers/UserProfileControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/cragdatabase/controllers/UserProfileControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/cragdatabase/data/UserProfileJdbcRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/cragdatabase/data/UserProfileJdbcRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/cragdatabase/domain/UserProfileServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/cragdatabase/domain/UserProfileServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +30,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MatthewMa929&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:ehall2025/crag-database.git&quot;,
+    &quot;accountId&quot;: &quot;af218bf2-d591-42ae-8631-80ea985af824&quot;
+  }
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -43,6 +60,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.App.executor": "Run",
+    "JUnit.UserLoginControllerTest.executor": "Run",
+    "JUnit.UserLoginJdbcRepositoryTest.executor": "Run",
+    "JUnit.UserLoginServiceTest.executor": "Run",
+    "JUnit.UserProfileControllerTest.executor": "Run",
+    "JUnit.UserProfileJdbcRepositoryTest.executor": "Run",
+    "JUnit.UserProfileServiceTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -51,7 +74,7 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "user-tests",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/halle/Documents/dev10-repos/crag-database/server",
     "nodejs_package_manager_path": "npm",
@@ -95,13 +118,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
+    <configuration name="UserLoginControllerTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="crag-database" />
-      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="org.cragdatabase.controllers" />
+      <option name="MAIN_CLASS_NAME" value="org.cragdatabase.controllers.UserLoginControllerTest" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <envs>
-        <env name="DB_PASSWORD" value="7#dqKGPCmn7d" />
+        <env name="DB_PASSWORD" value="DevDragon1230!" />
+        <env name="DB_URL" value="jdbc:mysql://localhost:3306/crag_database_test" />
+        <env name="DB_USERNAME" value="root" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <module name="crag-database" />
+      <option name="PACKAGE_NAME" value="org.cragdatabase.controllers" />
+      <option name="MAIN_CLASS_NAME" value="org.cragdatabase.controllers.UserLoginControllerTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="DB_PASSWORD" value="DevDragon1230!" />
         <env name="DB_URL" value="jdbc:mysql://localhost:3306/crag_database_test" />
         <env name="DB_USERNAME" value="root" />
       </envs>
@@ -120,6 +159,18 @@
       <option name="filePath" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="JUnit.UserLoginControllerTest" />
+    </list>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.24374.151" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.24374.151" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
