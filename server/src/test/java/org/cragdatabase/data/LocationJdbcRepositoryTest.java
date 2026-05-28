@@ -3,6 +3,7 @@ package org.cragdatabase.data;
 import org.cragdatabase.models.Area;
 import org.cragdatabase.models.Crag;
 import org.cragdatabase.models.Location;
+import org.cragdatabase.models.Route;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,5 +104,26 @@ class LocationJdbcRepositoryTest {
         assertNull(actual);
     }
 
-    
+    @Test
+    void shouldFindRoutesByArea() {
+        List<Route> actual = repository.findRoutesByArea(2);
+
+        assertEquals(1, actual.size());
+        assertEquals("Dagger of the lake", actual.get(0).getName());
+    }
+
+    @Test
+    void shouldFindRouteById() {
+        Route actual = repository.findRouteById(VALID_ID);
+
+        assertNotNull(actual);
+        assertEquals("Dagger of the lake", actual.getName());
+    }
+
+    @Test
+    void shouldNotFindRouteById() {
+        Route actual = repository.findRouteById(INVALID_ID);
+
+        assertNull(actual);
+    }
 }
