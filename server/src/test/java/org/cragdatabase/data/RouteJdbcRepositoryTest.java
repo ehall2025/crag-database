@@ -17,7 +17,7 @@ class RouteJdbcRepositoryTest {
     private JdbcClient jdbcClient;
 
     @Test
-    void shouldFindByLocation() {
+    void shouldFindStagedRoutes() {
 
     }
 }
