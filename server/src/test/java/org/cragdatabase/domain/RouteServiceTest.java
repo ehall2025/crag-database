@@ -144,12 +144,14 @@ class RouteServiceTest {
 
     @Test
     void shouldDelete() {
-
+        when(repository.adminDeleteStagedRoute(eq(1))).thenReturn(true);
+        assertTrue(service.adminDelete(1).isSuccess());
     }
 
     @Test
     void shouldNotDelete() {
-
+        when(repository.adminDeleteStagedRoute(eq(999))).thenReturn(false);
+        assertFalse(service.adminDelete(999).isSuccess());
     }
 
 }
