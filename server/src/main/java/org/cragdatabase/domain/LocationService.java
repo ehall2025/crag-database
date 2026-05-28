@@ -24,49 +24,18 @@ public class LocationService {
         return locationRepository.findAllLocations();
     }
 
-    public Result<Location> findLocationById(int id) {
-        Result<Location> result = new Result<>();
+    public Result<Object> findById(int id, String layer) {
+        Result<Object> result = new Result<>();
 
-        result.setpayload(locationRepository.findLocationById(id));
-
-        if (result.getpayload() == null) {
-            result.addErrorMessage("Could not find location", ResultType.NOT_FOUND);
+        switch (layer) {
+            case "location" -> result.setpayload(locationRepository.findLocationById(id));
+            case "crag" -> result.setpayload(locationRepository.findCragById(id));
+            case "area" -> result.setpayload(locationRepository.findAreaById(id));
+            case "route" -> result.setpayload(locationRepository.findRouteById(id));
         }
 
-        return result;
-    }
-
-    public Result<Crag> findCragById(int cragId) {
-        Result<Crag> result = new Result<>();
-
-        result.setpayload(locationRepository.findCragById(cragId));
-
         if (result.getpayload() == null) {
-            result.addErrorMessage("Could not find crag", ResultType.NOT_FOUND);
-        }
-
-        return result;
-    }
-
-    public Result<Area> findAreaById(int areaId) {
-        Result<Area> result = new Result<>();
-
-        result.setpayload(locationRepository.findAreaById(areaId));
-
-        if (result.getpayload() == null) {
-            result.addErrorMessage("Could not find area", ResultType.NOT_FOUND);
-        }
-
-        return result;
-    }
-
-    public Result<Route> findRouteById(int routeId) {
-        Result<Route> result = new Result<>();
-
-        result.setpayload(locationRepository.findRouteById(routeId));
-
-        if (result.getpayload() == null) {
-            result.addErrorMessage("Could not find route", ResultType.NOT_FOUND);
+            result.addErrorMessage("Could not find " + layer, ResultType.NOT_FOUND);
         }
 
         return result;
