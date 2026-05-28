@@ -48,7 +48,6 @@ class RouteJdbcRepositoryTest {
 
     @Test
     void shouldPostToRoute() {
-        Route expected = new Route(3, "Cave Traverse", 3, "", "");
         Route toAdd = new Route(0, "Cave Traverse", 3, "", "");
 
         assertTrue(repository.postRoute(toAdd, "Route"));
@@ -56,31 +55,35 @@ class RouteJdbcRepositoryTest {
 
     @Test
     void shouldUpdateRoute() {
-        
+        Route toUpdate = new Route(1, "Dagger of the Lake", 3, "new description", "");
+
+        assertTrue(repository.adminUpdateRoute(toUpdate));
     }
 
     @Test
     void shouldNotUpdateRoute() {
+        Route toUpdate = new Route(999, "Dagger of the Lake", 3, "new description", "");
 
+        assertFalse(repository.adminUpdateRoute(toUpdate));
     }
 
     @Test
     void shouldDeleteRoute() {
-
+        assertTrue(repository.adminDeleteRoute(1));
     }
 
     @Test
     void shouldNotDeleteRoute() {
-
+        assertFalse(repository.adminDeleteRoute(999));
     }
 
     @Test
     void shouldDeleteStagedRoute() {
-
+        assertTrue(repository.adminDeleteStagedRoute(1));
     }
 
     @Test
     void shouldNotDeleteStagedRoute() {
-
+        assertFalse(repository.adminDeleteStagedRoute(999));
     }
 }
