@@ -128,6 +128,14 @@ begin
 
     delete from location;
     alter table location auto_increment = 1;
+    delete from crag;
+    alter table crag auto_increment = 1;
+    delete from area;
+    alter table area auto_increment = 1;
+    delete from route;
+    alter table route auto_increment = 1;
+    delete from route_staging;
+    alter table route_staging auto_increment = 1;
 
     insert into user (email, password, role) values
     ('jim_merli@rockmaster.com', '$2a$12$01igN71/i6pFe7rTDSSGaulCR36jWBrOeAqt7dlFBluw2e5hYugwq', 'ROLE_ADMIN'),
