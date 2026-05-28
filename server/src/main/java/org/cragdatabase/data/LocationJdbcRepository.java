@@ -55,9 +55,10 @@ public class LocationJdbcRepository implements LocationRepository {
     public Location findLocationById(int locationId) {
         String sql = LOCATION_SELECT + " where l.id = ?;";
 
-        Location location = (Location) findById(sql, locationId, new LocationMapper()).get();
-
-        if (location != null) {
+        Optional result = findById(sql, locationId, new LocationMapper());
+        Location location = null;
+        if (result.isPresent()) {
+            location = (Location) result.get();
             location.setCrags(findCragsByLocation(locationId));
         }
 
@@ -75,9 +76,10 @@ public class LocationJdbcRepository implements LocationRepository {
     public Crag findCragById(int cragId) {
         String sql = CRAG_SELECT + " where c.id = ?;";
 
-        Crag crag = (Crag) findById(sql, cragId, new CragMapper()).get();
-
-        if (crag != null) {
+        Optional result = findById(sql, cragId, new CragMapper());
+        Crag crag = null;
+        if (result.isPresent()) {
+            crag = (Crag) result.get();
             crag.setAreas(findAreasByCrag(cragId));
         }
 
@@ -102,9 +104,10 @@ public class LocationJdbcRepository implements LocationRepository {
     public Area findAreaById(int areaId) {
         String sql = AREA_SELECT + " where a.id = ?;";
 
-        Area area = (Area) findById(sql, areaId, new AreaMapper()).get();
-
-        if (area != null) {
+        Optional result = findById(sql, areaId, new AreaMapper());
+        Area area = null;
+        if (result.isPresent()) {
+            area = (Area) result.get();
             area.setSubareas(findAreasBySuperArea(areaId));
             if (area.getSubareas().isEmpty()) area.setRoutes(findRoutesByArea(areaId));
         }
@@ -123,6 +126,7 @@ public class LocationJdbcRepository implements LocationRepository {
     public Route findRouteById(int routeId) {
         String sql = ROUTE_SELECT + " where r.id = ?;";
 
-        return (Route) findById(sql, routeId, new RouteMapper()).get();
+        Optional result = findById(sql, routeId, new RouteMapper());
+        return result.isPresent() ? (Route) result.get() : null;
     }
 }
