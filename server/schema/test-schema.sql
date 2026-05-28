@@ -130,6 +130,7 @@ begin
 	alter table route auto_increment = 1;
 	delete from route_staging;
 	alter table route_staging auto_increment = 1;
+	delete from area where crag_id is null;
 	delete from area;
 	alter table area auto_increment = 1;
 	delete from crag;
@@ -170,22 +171,6 @@ begin
 
 end //
 delimiter ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

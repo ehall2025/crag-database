@@ -36,17 +36,27 @@ class RouteJdbcRepositoryTest {
 
     @Test
     void shouldPostToRouteStaging() {
+        Route expected = new Route(3, "Cave Traverse", 3, "", "");
+        Route toAdd = new Route(0, "Cave Traverse", 3, "", "");
 
+        assertTrue(repository.postRoute(toAdd, "Route_Staging"));
+
+        Route actual = repository.getStagedRoutes().get(2);
+
+        assertEquals(expected, actual);
     }
 
     @Test
     void shouldPostToRoute() {
+        Route expected = new Route(3, "Cave Traverse", 3, "", "");
+        Route toAdd = new Route(0, "Cave Traverse", 3, "", "");
 
+        assertTrue(repository.postRoute(toAdd, "Route"));
     }
 
     @Test
     void shouldUpdateRoute() {
-
+        
     }
 
     @Test
