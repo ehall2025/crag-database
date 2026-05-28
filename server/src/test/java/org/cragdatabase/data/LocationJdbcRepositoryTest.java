@@ -14,6 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
 class LocationJdbcRepositoryTest {
 
+    private final int VALID_ID = 1;
+    private final int INVALID_ID = 999;
+
     @Autowired
     private LocationRepository repository;
 
@@ -32,5 +35,31 @@ class LocationJdbcRepositoryTest {
         assertEquals(2, actual.size());
         assertEquals("wisconsin", actual.get(0).getRegion().toLowerCase());
         assertEquals("minnesota", actual.get(1).getRegion().toLowerCase());
+    }
+
+    @Test
+    void shouldFindLocationById() {
+        Location actual = repository.findLocationById(VALID_ID);
+
+        assertNotNull(actual);
+        assertEquals("wisconsin", actual.getRegion().toLowerCase());
+        assertFalse(actual.getCrags().isEmpty());
+    }
+
+    @Test
+    void shouldNotFindLocationById() {
+        Location actual = repository.findLocationById(INVALID_ID);
+
+        assertNull(actual);
+    }
+
+    @Test
+    void shouldFindCragByLocation() {
+
+    }
+
+    @Test
+    void shouldNotFindCragByLocation() {
+
     }
 }
