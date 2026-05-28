@@ -11,8 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
@@ -70,27 +69,40 @@ class RouteServiceTest {
 
     @Test
     void shouldPostRoute() {
+        Route toAdd = new Route(0, "Cave Traverse", 3, "description", "start");
 
+        when(repository.postRoute(any(), eq("Route"))).thenReturn(true);
+        when(repository.adminDeleteStagedRoute(anyInt())).thenReturn(true);
+
+        assertTrue(service.adminPost(toAdd).isSuccess());
     }
 
     @Test
     void shouldNotPostRouteNoName() {
+        Route toAdd = new Route(0, "", 3, "description", "start");
 
+        assertFalse(service.adminPost(toAdd).isSuccess());
     }
 
     @Test
     void shouldNotPostRouteNoDescription() {
+        Route toAdd = new Route(0, "Cave Traverse", 3, "", "start");
 
+        assertFalse(service.adminPost(toAdd).isSuccess());
     }
 
     @Test
     void shouldNotPostRouteNoStartPosition() {
+        Route toAdd = new Route(0, "Cave Traverse", 3, "description", "");
 
+        assertFalse(service.adminPost(toAdd).isSuccess());
     }
 
     @Test
     void shouldNotPostRouteBadArea() {
+        Route toAdd = new Route(0, "Cave Traverse", 0, "description", "start");
 
+        assertFalse(service.adminPost(toAdd).isSuccess());
     }
 
     @Test
