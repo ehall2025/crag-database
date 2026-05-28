@@ -121,70 +121,54 @@ ALTER TABLE List_Route ADD CONSTRAINT List_Route_fk1 FOREIGN KEY (route_id) REFE
 delimiter //
 create procedure set_known_good_state()
 begin
-	delete from list_route;
+    delete from list_route;
     delete from list;
+    alter table list auto_increment = 1;
+    delete from route_staging;
+    alter table route_staging auto_increment = 1;
     delete from route;
     alter table route auto_increment = 1;
+    delete from area where crag_id is null;
     delete from area;
     alter table area auto_increment = 1;
     delete from crag;
     alter table crag auto_increment = 1;
+    delete from location;
+    alter table location auto_increment = 1;
     delete from user;
     alter table user auto_increment = 1;
 
-	delete from route;
-	alter table route auto_increment = 1;
-	delete from route_staging;
-	alter table route_staging auto_increment = 1;
-	delete from area where crag_id is null;
-	delete from area;
-	alter table area auto_increment = 1;
-	delete from crag;
-	alter table crag auto_increment = 1;
-    delete from location;
-    alter table location auto_increment = 1;
-
+    -- Insert in dependency order (parent before child)
     insert into user (email, password, role) values
     ('jim_merli@rockmaster.com', '$2a$12$01igN71/i6pFe7rTDSSGaulCR36jWBrOeAqt7dlFBluw2e5hYugwq', 'ROLE_ADMIN'),
     ('tommy@4fingers.com', '$2a$12$S2Uu.lenW46InFyq6.dJ2ubt1Xsdwe8iVfXSCzRkA1V6tZCccU6.G', 'ROLE_USER'),
     ('user2@user.com', '$2a$12$S2Uu.lenW46InFyq6.dJ2ubt1Xsdwe8iVfXSCzRkA1V6tZCccU6.G', 'ROLE_USER');
 
-    insert into crag (name, location_id, desciption) values ('Test Crag', 1, '');
+    insert into location (Country, Region, description) values
+        ('United States', 'Wisconsin', ''),
+        ('United States', 'Minnesota', '');
 
-    insert into area (name, super_area_id, crag_id, description) values (1, null, 1, '');
+    insert into crag (name, location_id, description) values
+        ('Devil\'s Lake', 1, ''),
+        ('Taylor\'s Falls', 2, '');
 
-    insert into route (name, area_id, description, start_position) values
-    (1, 1, '', ''),
-    (2, 1, '', ''),
-    (3, 1, '', '');
+    insert into area(name, super_area_id, crag_id, description) values
+        ('East Bluff', null, 1, ''),
+        ('East Talus North', 1, null, ''),
+        ('Cave boulder', null, 2, '');
 
-    alter table list auto_increment = 1;
+    insert into route(name, area_id, description, start_position) values
+        ('Dagger of the lake', 2, '', ''),
+        ('Oxygen Cocktail', 3, '', '');
+
+    insert into route_staging(name, area_id, description, start_position) values
+        ('Panic Room', 2, '', ''),
+        ('Ghostly Grips', 2, '', '');
 
     insert into list (name, user_id) values
     ('todo', 1), ('ticks', 1),
     ('todo', 2), ('ticks', 2),
     ('todo', 3), ('ticks', 3);
-
-    insert into location (Country, Region, description) values
-        ('United States', 'Wisconsin', ''),
-        ('United States', 'Minnesota', '');
-
-    insert into crag (name, location_id , description) values
-        ('Devil\'s Lake', 1 , ''),
-        ('Taylor\'s Falls', 2 , '');
-
-    insert into area(name , super_area_id , crag_id , description) values
-        ('East Bluff', null , 1 , ''),
-        ('East Talus North', 1, null, ''),
-        ('Cave boulder' , null , 2 , '');
-
-    insert into route(name , area_id , description , start_position) values
-        ('Dagger of the lake' , 2 , '' , ''),
-        ('Oxygen  Cocktail', 3, '', '');
-
-    insert into route_staging(name , area_id , description , start_position) values
-        ('Panic Room', 2, '', ''),
-        ('Ghostly Grips', 2, '', '');
 
 end //
 delimiter ;
