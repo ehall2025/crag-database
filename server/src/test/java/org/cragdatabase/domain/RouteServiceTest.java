@@ -107,27 +107,39 @@ class RouteServiceTest {
 
     @Test
     void shouldUpdateRoute() {
+        Route toUpdate = new Route(1, "Dagger of the Lake", 2, "description", "start");
 
+        when(repository.adminUpdateRoute(any())).thenReturn(true);
+
+        assertTrue(service.adminPut(toUpdate).isSuccess());
     }
 
     @Test
     void shouldNotUpdateRouteNoName() {
+        Route toUpdate = new Route(0, "", 3, "description", "start");
 
+        assertFalse(service.adminPut(toUpdate).isSuccess());
     }
 
     @Test
     void shouldNotUpdateRouteNoDescription() {
+        Route toUpdate = new Route(0, "Cave Traverse", 3, "", "start");
 
+        assertFalse(service.adminPut(toUpdate).isSuccess());
     }
 
     @Test
     void shouldNotUpdateRouteNoStartPosition() {
+        Route toUpdate = new Route(0, "Cave Traverse", 3, "description", "");
 
+        assertFalse(service.adminPut(toUpdate).isSuccess());
     }
 
     @Test
     void shouldNotUpdateRouteBadArea() {
+        Route toUpdate = new Route(0, "", 0, "description", "start");
 
+        assertFalse(service.adminPut(toUpdate).isSuccess());
     }
 
     @Test
