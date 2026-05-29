@@ -27,17 +27,6 @@ public class UserProfileJdbcRepository implements UserProfileRepository {
     }
 
     @Override
-    public boolean existsListEntry(int listId, int routeId) {
-        int count = jdbcClient.sql("select count(*) from list_route where list_id = :list_id and route_id = :route_id")
-                .param("list_id", listId)
-                .param("route_id", routeId)
-                .query(Integer.class)
-                .single();
-                
-        return count > 0;
-    }
-
-    @Override
     public List<Route> addListEntry(int listId, int routeId) {
         String insertSql = """
                 insert into list_route (list_id , route_id) values
