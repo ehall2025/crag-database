@@ -1,6 +1,6 @@
 package org.cragdatabase.models.enums;
 
-public enum GeographicLayers {
+public enum Layers {
     LOCATION,
     CRAG,
     AREA,
