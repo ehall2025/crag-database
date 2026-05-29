@@ -25,7 +25,7 @@ public class UserProfileController {
 
     @PostMapping
     public ResponseEntity addListEntry (@RequestBody ListEntry listEntry) {
-        Result<List<Route>> result = userProfileService.addOrRemoveListEntry(listEntry.getListId(), listEntry.getRouteId(), "add");
+        Result<List<Route>> result = userProfileService.addListEntry(listEntry.getListId(), listEntry.getRouteId());
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.BAD_REQUEST);
@@ -36,7 +36,7 @@ public class UserProfileController {
 
     @DeleteMapping
     public ResponseEntity removeListEntry (@RequestBody ListEntry listEntry) {
-        Result<List<Route>> result = userProfileService.addOrRemoveListEntry(listEntry.getListId(), listEntry.getRouteId(), "remove");
+        Result<List<Route>> result = userProfileService.removeListEntry(listEntry.getListId(), listEntry.getRouteId());
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.BAD_REQUEST);

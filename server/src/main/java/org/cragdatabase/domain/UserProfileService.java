@@ -19,7 +19,15 @@ public class UserProfileService {
         this.userProfileRepository = userProfileRepository;
     }
 
-    public Result<List<Route>> addOrRemoveListEntry (int listId, int routeId, String action) {
+    public Result<List<Route>> addListEntry (int listId, int routeId) {
+        return modifyListEntry(listId, routeId, "add");
+    }
+
+    public Result<List<Route>> removeListEntry (int listId, int routeId) {
+        return modifyListEntry(listId, routeId, "remove");
+    }
+
+    private Result<List<Route>> modifyListEntry (int listId, int routeId, String action) {
         Result<List<Route>> result = new Result<>();
 
         if (listId <= 0 || routeId <= 0) {
