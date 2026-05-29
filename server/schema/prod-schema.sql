@@ -73,7 +73,7 @@ CREATE TABLE List (
 CREATE TABLE List_Route (
 	list_id int NOT NULL,
 	route_id int NOT NULL,
-	CONSTRAINT uq_list_route UNIQUE (list_id, route_id)
+	CONSTRAINT list_route UNIQUE (list_id, route_id)
 );
 
 CREATE TABLE Danger_level (
