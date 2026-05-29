@@ -7,6 +7,7 @@ import org.cragdatabase.models.Area;
 import org.cragdatabase.models.Crag;
 import org.cragdatabase.models.Location;
 import org.cragdatabase.models.Route;
+import org.cragdatabase.models.enums.GeographicLayers;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,14 +25,14 @@ public class LocationService {
         return locationRepository.findAllLocations();
     }
 
-    public Result<Object> findById(int id, String layer) {
+    public Result<Object> findById(int id, GeographicLayers layer) {
         Result<Object> result = new Result<>();
 
         switch (layer) {
-            case "location" -> result.setpayload(locationRepository.findLocationById(id));
-            case "crag" -> result.setpayload(locationRepository.findCragById(id));
-            case "area" -> result.setpayload(locationRepository.findAreaById(id));
-            case "route" -> result.setpayload(locationRepository.findRouteById(id));
+            case LOCATION -> result.setpayload(locationRepository.findLocationById(id));
+            case CRAG -> result.setpayload(locationRepository.findCragById(id));
+            case AREA -> result.setpayload(locationRepository.findAreaById(id));
+            case ROUTE -> result.setpayload(locationRepository.findRouteById(id));
         }
 
         if (result.getpayload() == null) {
