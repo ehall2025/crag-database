@@ -89,7 +89,8 @@ CREATE TABLE List (
 
 CREATE TABLE List_Route (
 	list_id int NOT NULL,
-	route_id int NOT NULL
+	route_id int NOT NULL,
+	CONSTRAINT list_route UNIQUE (list_id, route_id)
 );
 
 ALTER TABLE User ADD CONSTRAINT User_fk5 FOREIGN KEY (location_id) REFERENCES Location(id);
@@ -138,11 +139,11 @@ begin
     delete from user;
     alter table user auto_increment = 1;
 
-    -- Insert in dependency order (parent before child)
-    insert into user (email, password, role) values --Comments are the password in plaintext
-    ('jim_merli@rockmaster.com', '$2a$12$01igN71/i6pFe7rTDSSGaulCR36jWBrOeAqt7dlFBluw2e5hYugwq', 'ROLE_ADMIN'), --admin
-    ('tommy@4fingers.com', '$2a$12$S2Uu.lenW46InFyq6.dJ2ubt1Xsdwe8iVfXSCzRkA1V6tZCccU6.G', 'ROLE_USER'), --user
-    ('user2@user.com', '$2a$12$S2Uu.lenW46InFyq6.dJ2ubt1Xsdwe8iVfXSCzRkA1V6tZCccU6.G', 'ROLE_USER'); --user
+	-- Comments are the password in plaintext
+    insert into user (email, password, role) values 
+    ('jim_merli@rockmaster.com', '$2a$12$01igN71/i6pFe7rTDSSGaulCR36jWBrOeAqt7dlFBluw2e5hYugwq', 'ROLE_ADMIN'), -- admin
+    ('tommy@4fingers.com', '$2a$12$S2Uu.lenW46InFyq6.dJ2ubt1Xsdwe8iVfXSCzRkA1V6tZCccU6.G', 'ROLE_USER'), -- user
+    ('user2@user.com', '$2a$12$S2Uu.lenW46InFyq6.dJ2ubt1Xsdwe8iVfXSCzRkA1V6tZCccU6.G', 'ROLE_USER'); -- user
 
     insert into location (Country, Region, description) values
         ('United States', 'Wisconsin', ''),

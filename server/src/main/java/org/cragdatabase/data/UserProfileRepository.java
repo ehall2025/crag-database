@@ -11,4 +11,6 @@ public interface UserProfileRepository {
     List<Route> removeListEntry(int listId, int routeId);
 
     List<Route> findRouteList(int listId);
+
+    boolean existsListEntry(int listId, int routeId);
 }

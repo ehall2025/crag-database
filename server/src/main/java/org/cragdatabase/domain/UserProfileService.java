@@ -27,6 +27,11 @@ public class UserProfileService {
             return result;
         }
 
+        if (userProfileRepository.existsListEntry(listId, routeId)) {
+            result.addErrorMessage("route is already in the list", ResultType.INVALID);
+            return result;
+        }
+
         result.setpayload(userProfileRepository.addListEntry(listId, routeId));
 
         if (result.getpayload() == null) {
