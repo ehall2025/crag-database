@@ -3,6 +3,7 @@ package org.cragdatabase.domain;
 import org.cragdatabase.data.LocationRepository;
 import org.cragdatabase.domain.results.Result;
 import org.cragdatabase.domain.results.ResultType;
+import org.cragdatabase.models.GeographicLayer;
 import org.cragdatabase.models.Location;
 import org.cragdatabase.models.enums.Layers;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ public class LocationService {
         return locationRepository.findAllLocations();
     }
 
-    public Result<Object> findById(int id, Layers layer) {
-        Result<Object> result = new Result<>();
+    public Result<GeographicLayer> findById(int id, Layers layer) {
+        Result<GeographicLayer> result = new Result<>();
 
         switch (layer) {
             case LOCATION -> result.setpayload(locationRepository.findLocationById(id));

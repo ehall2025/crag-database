@@ -2,6 +2,7 @@ package org.cragdatabase.controllers;
 
 import org.cragdatabase.domain.LocationService;
 import org.cragdatabase.domain.results.Result;
+import org.cragdatabase.models.GeographicLayer;
 import org.cragdatabase.models.Location;
 import org.cragdatabase.models.enums.Layers;
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class LocationController {
 
     @GetMapping("/{locationId}")
     public ResponseEntity findLocation (@PathVariable int locationId) {
-        Result<Object> result = locationService.findById(locationId, Layers.LOCATION);
+        Result<GeographicLayer> result = locationService.findById(locationId, Layers.LOCATION);
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.NOT_FOUND);
@@ -39,7 +40,7 @@ public class LocationController {
 
     @GetMapping("/crag/{cragId}")
     public ResponseEntity findCrag (@PathVariable int cragId) {
-        Result<Object> result = locationService.findById(cragId, Layers.CRAG);
+        Result<GeographicLayer> result = locationService.findById(cragId, Layers.CRAG);
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.NOT_FOUND);
@@ -50,7 +51,7 @@ public class LocationController {
 
     @GetMapping("/area/{areaId}")
     public ResponseEntity findArea (@PathVariable int areaId) {
-        Result<Object> result = locationService.findById(areaId, Layers.AREA);
+        Result<GeographicLayer> result = locationService.findById(areaId, Layers.AREA);
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.NOT_FOUND);
@@ -61,7 +62,7 @@ public class LocationController {
 
     @GetMapping("/route/{routeId}")
     public ResponseEntity findRoute (@PathVariable int routeId) {
-        Result<Object> result = locationService.findById(routeId, Layers.ROUTE);
+        Result<GeographicLayer> result = locationService.findById(routeId, Layers.ROUTE);
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.NOT_FOUND);
