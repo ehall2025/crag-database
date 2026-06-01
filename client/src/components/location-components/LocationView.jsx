@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import "./LocationView.css";
+import LocationPage from "./generic-location-components/LocationPage";
+import LocationGrid from "./generic-location-components/LocationGrid";
+import "./location-style/LocationDetails.css";
 
 function LocationView({ locations, setLocations }) {
 
@@ -12,32 +14,17 @@ function LocationView({ locations, setLocations }) {
 
 
     return (
-            <div className="locations-page">
-                <div className="locations-card">
-
-                    <div className="locations-header">
-                        <h1>Locations</h1>
-                    </div>
-
-                    <ul className="locations-list">
-                        {locations.map((loc) => (
-                            <li className="location-item" key={loc.id}>
-
-                                <Link
-                                    className="location-link"
-                                    to={"/locations/" + loc.id}
-                                >
-                                    <h5>
-                                        {loc.region}, {loc.country}
-                                    </h5>
-                                </Link>
-
-                            </li>
-                        ))}
-                    </ul>
-
-                </div>
+        <LocationPage>
+            <div className="location-title">
+                <h1>Locations</h1>
             </div>
+
+            <LocationGrid
+                items={locations}
+                getPath={(loc) => "/locations/" + loc.id}
+                getLabel={(loc) => loc.region + ", " + loc.country}
+            />
+        </LocationPage>
     );
 }
 

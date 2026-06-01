@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import "./LocationBio.css";
+import { useParams } from "react-router-dom";
+import LocationPage from "./generic-location-components/LocationPage";
+import LocationGrid from "./generic-location-components/LocationGrid";
+import "./location-style/LocationDetails.css";
 
 function LocationBio() {
 
@@ -20,48 +22,26 @@ function LocationBio() {
     }, [])
 
     return (
-            <div className="location-bio-page">
-
-                <div className="location-bio-card">
-
-                    <div className="location-title">
-                        <h1>{location.region}</h1>
-                        <span>{location.country}</span>
-                    </div>
-
-                    <div>
-                        <h4 className="section-title">
-                            Description
-                        </h4>
-
-                        <p className="location-description">
-                            {location.description}
-                        </p>
-                    </div>
-
-                    <div>
-                        <h4 className="section-title">
-                            Crags
-                        </h4>
-
-                        <div className="crag-grid">
-
-                            {location.crags.map((crag) => (
-                                <Link
-                                    key={crag.id}
-                                    className="crag-card"
-                                    to={"/locations/crag/" + crag.id}
-                                >
-                                    <h5>{crag.name}</h5>
-                                </Link>
-                            ))}
-
-                        </div>
-                    </div>
-
-                </div>
-
+        <LocationPage>
+            <div className="location-title">
+                <h1>{location.region}</h1>
+                <span>{location.country}</span>
             </div>
+
+            <h4 className="location-section-title">Description</h4>
+            <p className="location-description">{location.description}</p>
+
+            {location.crags?.length > 0 && (
+                <div className="location-content-section">
+                    <h4 className="location-section-title">Crags</h4>
+
+                    <LocationGrid
+                        items={location.crags}
+                        getPath={(crag) => "/locations/crag/" + crag.id}
+                    />
+                </div>
+            )}
+        </LocationPage>
     );
 }
 

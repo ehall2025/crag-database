@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import "./CragBio.css";
+import { useParams } from "react-router-dom";
+import LocationPage from "./generic-location-components/LocationPage";
+import LocationGrid from "./generic-location-components/LocationGrid";
+import "./location-style/LocationDetails.css";
 
 function CragBio() {
 
@@ -20,39 +22,25 @@ function CragBio() {
     }, [])
 
     return (
-        <div className="crag-bio-page">
-            <div className="crag-bio-card">
-
-                <div className="crag-title">
-                    <h1>{crag.name}</h1>
-                </div>
-
-                <div>
-                    <h4 className="section-title">Description</h4>
-
-                    <p className="crag-description">
-                        {crag.description}
-                    </p>
-                </div>
-
-                <div>
-                    <h4 className="section-title">Areas</h4>
-
-                    <div className="area-grid">
-                        {crag.areas.map((area) => (
-                            <Link
-                                key={area.id}
-                                className="area-card"
-                                to={"/locations/area/" + area.id}
-                            >
-                                <h5>{area.name}</h5>
-                            </Link>
-                        ))}
-                    </div>
-                </div>
-
+        <LocationPage>
+            <div className="location-title">
+                <h1>{crag.name}</h1>
             </div>
-        </div>
+
+            <h4 className="location-section-title">Description</h4>
+            <p className="location-description">{crag.description}</p>
+
+            {crag.areas?.length > 0 && (
+                <div className="location-content-section">
+                    <h4 className="location-section-title">Areas</h4>
+
+                    <LocationGrid
+                        items={crag.areas}
+                        getPath={(area) => "/locations/area/" + area.id}
+                    />
+                </div>
+            )}
+        </LocationPage>
     );
 }
 

@@ -6,6 +6,7 @@ function RouteBio({ loggedInUser, setLoggedInUser }) {
 
     const [addSuccess, setAddSuccess] = useState()
     const { id } = useParams();
+    const [errors, setErrors] = useState([]);
     const [route, setRoute] = useState({
         id: 0,
         name: "",
@@ -110,6 +111,14 @@ function RouteBio({ loggedInUser, setLoggedInUser }) {
                     <p className="route-success">
                         {addSuccess}
                     </p>
+                )}
+
+                {errors.length > 0 && (
+                    <div className="route-errors">
+                        {errors.map((error) => (
+                            <p key={error}>{error}</p>
+                        ))}
+                    </div>
                 )}
 
             </div>

@@ -35,15 +35,6 @@
     font-weight: 700;
 }
 
-.section-title {
-    color: #8a4f2b;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.75rem;
-}
-
 .route-bio-section {
     margin-bottom: 2rem;
 
@@ -119,4 +110,13 @@
     padding: 1rem 1.25rem;
     border-radius: 14px;
     font-weight: 600;
+}
+
+.section-title {
+    color: #8a4f2b;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
 }

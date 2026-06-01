@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import "./AreaBio.css";
+import LocationPage from "./generic-location-components/LocationPage";
+import LocationGrid from "./generic-location-components/LocationGrid";
+import "./location-style/LocationDetails.css";
 
 function AreaBio() {
 
@@ -22,76 +24,39 @@ function AreaBio() {
     }, [id])
 
     return (
-        <div className="area-bio-page">
-
-            <div className="area-bio-card">
-
-                <div className="area-title">
-                    <h1>{area.name}</h1>
-                </div>
-
-                <div>
-                    <h4 className="section-title">
-                        Description
-                    </h4>
-
-                    <p className="area-description">
-                        {area.description}
-                    </p>
-                </div>
-
-                {area.subareas !== null &&
-                    area.subareas.length !== 0 && (
-
-                        <div className="content-section">
-
-                            <h4 className="section-title">
-                                Subareas
-                            </h4>
-
-                            <div className="item-grid">
-                                {area.subareas.map((subarea) => (
-                                    <Link
-                                        key={subarea.id}
-                                        className="explore-card"
-                                        to={"/locations/area/" + subarea.id}
-                                    >
-                                        <h5>{subarea.name}</h5>
-                                    </Link>
-                                ))}
-                            </div>
-
-                        </div>
-                    )}
-
-                {area.routes !== null &&
-                    area.routes.length !== 0 && (
-
-                        <div className="content-section">
-
-                            <h4 className="section-title">
-                                Routes
-                            </h4>
-
-                            <div className="item-grid">
-                                {area.routes.map((route) => (
-                                    <Link
-                                        key={route.id}
-                                        className="explore-card route-card"
-                                        to={"/locations/route/" + route.id}
-                                    >
-                                        <h5>{route.name}</h5>
-                                    </Link>
-                                ))}
-                            </div>
-
-                        </div>
-                    )}
-
+        <LocationPage>
+            <div className="location-title">
+                <h1>{area.name}</h1>
             </div>
 
-        </div>
+            <h4 className="location-section-title">Description</h4>
+            <p className="location-description">{area.description}</p>
+
+            {area.subareas?.length > 0 && (
+                <div className="location-content-section">
+                    <h4 className="location-section-title">Subareas</h4>
+
+                    <LocationGrid
+                        items={area.subareas}
+                        getPath={(subarea) => "/locations/area/" + subarea.id}
+                    />
+                </div>
+            )}
+
+            {area.routes?.length > 0 && (
+                <div className="location-content-section">
+                    <h4 className="location-section-title">Routes</h4>
+
+                    <LocationGrid
+                        items={area.routes}
+                        getPath={(route) => "/locations/route/" + route.id}
+                        variant="route-card"
+                    />
+                </div>
+            )}
+        </LocationPage>
     );
 }
+
 
 export default AreaBio

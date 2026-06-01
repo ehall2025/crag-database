@@ -10,7 +10,7 @@ import AccountRegistrationForm from "./profile-components/AccountRegistrationFor
 import UserLoginForm from "./profile-components/UserLoginForm"
 import UserProfile from "./profile-components/UserProfile"
 
-import LocationLayout from "./location-components/LocationLayout"
+import LocationLayout from "./location-components/generic-location-components/LocationLayout";
 import LocationView from "./location-components/LocationView"
 import LocationBio from "./location-components/LocationBio"
 import CragBio from "./location-components/CragBio"
