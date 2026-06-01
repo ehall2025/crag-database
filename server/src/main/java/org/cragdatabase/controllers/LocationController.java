@@ -31,7 +31,7 @@ public class LocationController {
 
     @GetMapping("/{locationId}")
     public ResponseEntity findLocation (@PathVariable int locationId) {
-        Result<Location> result = locationService.findLocationById(locationId);
+        Result<Object> result = locationService.findById(locationId, "location");
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.NOT_FOUND);
@@ -42,7 +42,7 @@ public class LocationController {
 
     @GetMapping("/crag/{cragId}")
     public ResponseEntity findCrag (@PathVariable int cragId) {
-        Result<Crag> result = locationService.findCragById(cragId);
+        Result<Object> result = locationService.findById(cragId, "crag");
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.NOT_FOUND);
@@ -53,7 +53,7 @@ public class LocationController {
 
     @GetMapping("/area/{areaId}")
     public ResponseEntity findArea (@PathVariable int areaId) {
-        Result<Area> result = locationService.findAreaById(areaId);
+        Result<Object> result = locationService.findById(areaId, "area");
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.NOT_FOUND);
@@ -64,7 +64,7 @@ public class LocationController {
 
     @GetMapping("/route/{routeId}")
     public ResponseEntity findRoute (@PathVariable int routeId) {
-        Result<Route> result = locationService.findRouteById(routeId);
+        Result<Object> result = locationService.findById(routeId, "route");
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.NOT_FOUND);
@@ -72,5 +72,4 @@ public class LocationController {
 
         return new ResponseEntity(result.getpayload(), HttpStatus.OK);
     }
-
 }

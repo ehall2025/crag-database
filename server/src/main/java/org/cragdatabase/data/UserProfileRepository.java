@@ -9,4 +9,6 @@ public interface UserProfileRepository {
     List<Route> addListEntry(int listId, int routeId);
 
     List<Route> removeListEntry(int listId, int routeId);
+
+    List<Route> findRouteList(int listId);
 }
