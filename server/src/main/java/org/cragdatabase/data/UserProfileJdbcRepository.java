@@ -40,11 +40,7 @@ public class UserProfileJdbcRepository implements UserProfileRepository {
 
         if (!success) return List.of();
 
-        return jdbcClient.sql(SELECT_ROUTES)
-                .param("list_id", listId)
-                .param("route_id", routeId)
-                .query(new RouteMapper())
-                .list();
+        return findRouteList(listId);
     }
 
     @Override
@@ -60,9 +56,14 @@ public class UserProfileJdbcRepository implements UserProfileRepository {
 
         if (!success) return List.of();
 
+        //return updated list of routes
+        return findRouteList(listId);
+    }
+
+    @Override
+    public List<Route> findRouteList(int listId) {
         return jdbcClient.sql(SELECT_ROUTES)
                 .param("list_id", listId)
-                .param("route_id", routeId)
                 .query(new RouteMapper())
                 .list();
     }

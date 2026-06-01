@@ -8,10 +8,12 @@ import org.cragdatabase.models.Area;
 import org.cragdatabase.models.Crag;
 import org.cragdatabase.models.Location;
 import org.cragdatabase.models.Route;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class LocationJdbcRepository implements LocationRepository {
@@ -28,6 +30,20 @@ public class LocationJdbcRepository implements LocationRepository {
         this.jdbcClient = jdbcClient;
     }
 
+    private List findChildrenOfParentById(String sql, int parentId, RowMapper mapper) {
+        return jdbcClient.sql(sql)
+                .param(parentId)
+                .query(mapper)
+                .list();
+    }
+
+    private Optional findById(String sql, int id, RowMapper mapper) {
+        return jdbcClient.sql(sql)
+                .param(id)
+                .query(mapper)
+                .optional();
+    }
+
     @Override
     public List<Location> findAllLocations() {
         return jdbcClient.sql(LOCATION_SELECT + ";")
@@ -37,10 +53,9 @@ public class LocationJdbcRepository implements LocationRepository {
 
     @Override
     public Location findLocationById(int locationId) {
-        Location location = jdbcClient.sql(LOCATION_SELECT + " where l.id = ?;")
-                .param(locationId)
-                .query(new LocationMapper())
-                .optional().orElse(null);
+        String sql = LOCATION_SELECT + " where l.id = ?;";
+
+        Location location = (Location) findById(sql, locationId, new LocationMapper()).get();
 
         if (location != null) {
             location.setCrags(findCragsByLocation(locationId));
@@ -51,18 +66,16 @@ public class LocationJdbcRepository implements LocationRepository {
 
     @Override
     public List<Crag> findCragsByLocation(int locationId) {
-        return jdbcClient.sql(CRAG_SELECT + " where c.location_id = ?;")
-                .param(locationId)
-                .query(new CragMapper())
-                .list();
+        String sql = CRAG_SELECT + " where c.location_id = ?;";
+
+        return findChildrenOfParentById(sql, locationId, new CragMapper());
     }
 
     @Override
     public Crag findCragById(int cragId) {
-        Crag crag = jdbcClient.sql(CRAG_SELECT + " where c.id = ?;")
-                .param(cragId)
-                .query(new CragMapper())
-                .optional().orElse(null);
+        String sql = CRAG_SELECT + " where c.id = ?;";
+
+        Crag crag = (Crag) findById(sql, cragId, new CragMapper()).get();
 
         if (crag != null) {
             crag.setAreas(findAreasByCrag(cragId));
@@ -73,26 +86,23 @@ public class LocationJdbcRepository implements LocationRepository {
 
     @Override
     public List<Area> findAreasByCrag(int cragId) {
-        return jdbcClient.sql(AREA_SELECT + " where a.crag_id = ?;")
-                .param(cragId)
-                .query(new AreaMapper())
-                .list();
+        String sql = AREA_SELECT + " where a.crag_id = ?;";
+
+        return findChildrenOfParentById(sql, cragId, new AreaMapper());
     }
 
     @Override
     public List<Area> findAreasBySuperArea(int superAreaId) {
-        return jdbcClient.sql(AREA_SELECT + " where a.super_area_id = ?;")
-                .param(superAreaId)
-                .query(new AreaMapper())
-                .list();
+        String sql = AREA_SELECT + " where a.super_area_id = ?;";
+
+        return findChildrenOfParentById(sql, superAreaId, new AreaMapper());
     }
 
     @Override
     public Area findAreaById(int areaId) {
-        Area area = jdbcClient.sql(AREA_SELECT + " where a.id = ?;")
-                .param(areaId)
-                .query(new AreaMapper())
-                .optional().orElse(null);
+        String sql = AREA_SELECT + " where a.id = ?;";
+
+        Area area = (Area) findById(sql, areaId, new AreaMapper()).get();
 
         if (area != null) {
             area.setSubareas(findAreasBySuperArea(areaId));
@@ -104,17 +114,15 @@ public class LocationJdbcRepository implements LocationRepository {
 
     @Override
     public List<Route> findRoutesByArea(int areaId) {
-        return jdbcClient.sql(ROUTE_SELECT + " where r.area_id = ?;")
-                .param(areaId)
-                .query(new RouteMapper())
-                .list();
+        String sql = ROUTE_SELECT + " where r.area_id = ?;";
+
+        return findChildrenOfParentById(sql, areaId, new RouteMapper());
     }
 
     @Override
     public Route findRouteById(int routeId) {
-        return jdbcClient.sql(ROUTE_SELECT + " where r.id = ?;")
-                .param(routeId)
-                .query(new RouteMapper())
-                .optional().orElse(null);
+        String sql = ROUTE_SELECT + " where r.id = ?;";
+
+        return (Route) findById(sql, routeId, new RouteMapper()).get();
     }
 }

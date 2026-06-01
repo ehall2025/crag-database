@@ -78,8 +78,6 @@ public class UserLoginJdbcRepository implements UserLoginRepository {
         return listIds;
     }
 
-
-
     @Override
     public User createUser(User user) {
         String sql = """

@@ -3,42 +3,20 @@ package org.cragdatabase.models;
 import java.util.List;
 import java.util.Objects;
 
-public class Location {
+public class Location extends GeographicLayer {
 
-    private int id;
     private String country;
     private String region;
-    private String description;
     private List<Crag> crags;
 
     public Location() {
+        super();
     }
 
     public Location(int id, String country, String region, String description) {
-        this.id = id;
+        super(id, region, description);
         this.country = country;
         this.region = region;
-        this.description = description;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Location location = (Location) o;
-        return Objects.equals(country, location.country) && Objects.equals(region, location.region) && Objects.equals(description, location.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(country, region, description);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getCountry() {
@@ -57,14 +35,6 @@ public class Location {
         this.region = region;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public List<Crag> getCrags() {
         return crags;
     }
@@ -74,11 +44,23 @@ public class Location {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Location location = (Location) o;
+        return Objects.equals(country, location.country) && Objects.equals(region, location.region) && Objects.equals(crags, location.crags);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), country, region, crags);
+    }
+
+    @Override
     public String toString() {
         return "Location{" +
                 "country='" + country + '\'' +
                 ", region='" + region + '\'' +
-                ", description='" + description + '\'' +
                 '}';
     }
 }
