@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
+import LocationPage from "./generic-location-components/LocationPage";
+import LocationGrid from "./generic-location-components/LocationGrid";
+import "./location-style/LocationDetails.css";
 
 function LocationBio() {
 
     const { id } = useParams();
     const [location, setLocation] = useState({
-        id:0,
+        id: 0,
         region: "",
         country: "",
         description: "",
@@ -15,38 +17,31 @@ function LocationBio() {
 
     useEffect(() => {
         fetch("http://localhost:8080/api/locations/" + id)
-        .then(response => response.json())
-        .then(payload => setLocation(payload))
+            .then(response => response.json())
+            .then(payload => setLocation(payload))
     }, [])
 
     return (
-        <>
-            <div className="card">
-                <div className="card-header">
-                    <div className="d-inline-flex align-items-baseline">
-                        <h2>{location.region}</h2>
-                        <h6>, {location.country}</h6>
-                    </div>
-                </div>
-                <div className="card-body">
-                        <h5>Description</h5>
-                    
-                    <p>{location.description}</p>
-                    <h5>Crags</h5>
-                    <div className="card col-3">
-                        <ul className="list-group list-group-flush">
-                            {location.crags.map((crag) => {
-                                return (
-                                    <li key={crag.id} className="list-group-item">
-                                            <Link to={"/locations/crag/" + crag.id}>{crag.name}</Link>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </div>
-                </div>
+        <LocationPage>
+            <div className="location-title">
+                <h1>{location.region}</h1>
+                <span>{location.country}</span>
             </div>
-        </>
+
+            <h4 className="location-section-title">Description</h4>
+            <p className="location-description">{location.description}</p>
+
+            {location.crags?.length > 0 && (
+                <div className="location-content-section">
+                    <h4 className="location-section-title">Crags</h4>
+
+                    <LocationGrid
+                        items={location.crags}
+                        getPath={(crag) => "/locations/crag/" + crag.id}
+                    />
+                </div>
+            )}
+        </LocationPage>
     );
 }
 

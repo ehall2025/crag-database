@@ -89,7 +89,8 @@ CREATE TABLE List (
 
 CREATE TABLE List_Route (
 	list_id int NOT NULL,
-	route_id int NOT NULL
+	route_id int NOT NULL,
+	CONSTRAINT list_route UNIQUE (list_id, route_id)
 );
 
 ALTER TABLE User ADD CONSTRAINT User_fk5 FOREIGN KEY (location_id) REFERENCES Location(id);

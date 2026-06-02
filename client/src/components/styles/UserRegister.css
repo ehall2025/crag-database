@@ -1,0 +1,118 @@
+.register-page {
+    min-height: 100vh;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    background-image: url("../../images/login-background.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    position: relative;
+
+    animation: backgroundZoom 18s ease-in-out infinite alternate;
+}
+
+.register-card {
+    width: 450px;
+
+    padding: 45px;
+
+    background-color: rgba(20,20,20,0.78);
+
+    backdrop-filter: blur(8px);
+
+    border-radius: 18px;
+
+    box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+
+    color: white;
+
+    animation: slideFade 0.8s ease;
+}
+
+.register-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+.register-subtitle {
+    color: #c7c7c7;
+
+    margin-bottom: 30px;
+
+    line-height: 1.5;
+}
+
+.register-btn {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: #355e3b;
+
+    color: white;
+
+    font-size: 1rem;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.register-btn {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: #355e3b;
+
+    color: white;
+
+    font-size: 1rem;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.register-btn:hover {
+    background-color: #3f7046;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(53,94,59,0.35);
+}
+
+.error-list {
+    list-style: none;
+
+    padding: 12px;
+
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+
+    background-color: rgba(180,40,40,0.2);
+
+    border: 1px solid rgba(255,80,80,0.3);
+
+    color: #ffb4b4;
+}

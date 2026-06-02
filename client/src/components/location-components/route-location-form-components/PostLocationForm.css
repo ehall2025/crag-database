@@ -1,0 +1,135 @@
+.post-route-page {
+    min-height: 100vh;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    background-image: url("../../../images/LandingPage.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.post-route-card {
+    width: min(750px, 90%);
+    margin: 3rem auto;
+    background-color: #f8f4ed;
+
+    border-radius: 24px;
+
+    padding: 2.5rem;
+
+    box-shadow:
+        0 8px 28px rgba(0,0,0,0.08);
+
+    border:
+        1px solid rgba(47, 58, 50, 0.08);
+}
+
+.post-route-title {
+    margin-top: 0;
+    margin-bottom: 2rem;
+
+    color: #2f3a32;
+
+    font-size: 2.4rem;
+    font-weight: 700;
+}
+
+.route-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.route-input,
+.route-select,
+.route-textarea {
+    width: 100%;
+
+    padding: 1rem 1.1rem;
+
+    border: 1px solid #d8cfbf;
+    border-radius: 14px;
+
+    background-color: #fffdf9;
+
+    font-family: inherit;
+    font-size: 1rem;
+
+    color: #2f3a32;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.route-input:focus,
+.route-select:focus,
+.route-textarea:focus {
+    outline: none;
+
+    border-color: #6f7f4f;
+
+    box-shadow:
+        0 0 0 4px rgba(111,127,79,0.12);
+}
+
+.route-textarea {
+    min-height: 140px;
+
+    resize: vertical;
+}
+
+.submit-route-button {
+    margin-top: 1rem;
+
+    border: none;
+    border-radius: 14px;
+
+    padding: 1rem 1.25rem;
+
+    background-color: #8a4f2b;
+
+    color: white;
+
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.submit-route-button:hover {
+    background-color: #6f7f4f;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 14px rgba(0,0,0,0.12);
+}
+
+.error-list {
+    background-color: #f8dddd;
+
+    color: #7a1f1f;
+
+    padding: 1rem 1.25rem;
+
+    border-radius: 14px;
+
+    margin: 0;
+
+    list-style-position: inside;
+}

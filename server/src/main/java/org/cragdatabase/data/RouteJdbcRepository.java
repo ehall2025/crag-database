@@ -21,28 +21,11 @@ public class RouteJdbcRepository implements RouteRepository {
     }
 
     @Override
-    public boolean userPostRoute(Route route) {
-        String sql = """
-                insert into Route_Staging (name, area_id, description, start_position) values
-                    (:name, :area_id, :description, :start_position);
-                """;
-
-        KeyHolder keyHolder = new GeneratedKeyHolder();
-
-        return jdbcClient.sql(sql)
-                .param("name", route.getName())
-                .param("area_id", route.getAreaId())
-                .param("description", route.getDescription())
-                .param("start_position", route.getStartPosition())
-                .update(keyHolder, "id") > 0;
-    }
-
-    @Override
-    public boolean adminPostRoute(Route route) {
-        String sql = """
-                insert into Route (name, area_id, description, start_position) values
-                    (:name, :area_id, :description, :start_position);
-                """;
+    public boolean postRoute(Route route, String table) {
+        String sql = String.format("""
+                                insert into %s (name, area_id, description, start_position) values
+                                    (:name, :area_id, :description, :start_position);
+                                """, table);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 

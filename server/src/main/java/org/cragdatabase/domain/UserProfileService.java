@@ -20,11 +20,27 @@ public class UserProfileService {
     }
 
     public Result<List<Route>> addListEntry (int listId, int routeId) {
+        return modifyListEntry(listId, routeId, "add");
+    }
+
+    public Result<List<Route>> removeListEntry (int listId, int routeId) {
+        return modifyListEntry(listId, routeId, "remove");
+    }
+
+    private Result<List<Route>> modifyListEntry (int listId, int routeId, String action) {
         Result<List<Route>> result = new Result<>();
 
         if (listId <= 0 || routeId <= 0) {
             result.addErrorMessage("ids must be greater than or equal to 1", ResultType.INVALID);
             return result;
+        }
+
+        List<Route> existingRoutes = userProfileRepository.findRouteList(listId);
+        for (Route existingRoute : existingRoutes) {
+            if (existingRoute.getId() == routeId) {
+                result.addErrorMessage("route is already in the list", ResultType.INVALID);
+                return result;
+            }
         }
 
         result.setpayload(userProfileRepository.addListEntry(listId, routeId));
@@ -36,7 +52,7 @@ public class UserProfileService {
         return result;
     }
 
-    public Result<List<Route>> removeListEntry (int listId, int routeId) {
+    public Result<List<Route>> removeListEntry(int listId, int routeId) {
         Result<List<Route>> result = new Result<>();
 
         if (listId <= 0 || routeId <= 0) {

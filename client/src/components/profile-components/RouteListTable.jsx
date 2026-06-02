@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import "../styles/RouteListTable.css";
 
 
 function RouteListTable ({ routeList , loggedInUser , setLoggedInUser }) {
@@ -40,17 +40,32 @@ function RouteListTable ({ routeList , loggedInUser , setLoggedInUser }) {
     }
 
     return (
-        <>
-        <ul className="list-group">
-            {routeList.routes.map(route => (
-                <li key={route.id} className="list-group-item d-inline-flex gap-1">
-                    <Link to={"/locations/route/" + route.id}>{route.name}</Link>
-                    <button className="btn btn-danger" routeId={route.id} onClick={handleDelete}>remove from list</button>
-                </li>
-            ))}
-        </ul>
-        </>
-    );
+    <ul className="route-list">
+
+        {routeList.routes.map(route => (
+
+            <li key={route.id} className="route-item">
+
+                <Link
+                    className="route-link"
+                    to={"/locations/route/" + route.id}
+                >
+                    {route.name}
+                </Link>
+
+                <button
+                    className="route-remove-btn"
+                    routeId={route.id}
+                    onClick={handleDelete}
+                >
+                    Remove
+                </button>
+
+            </li>
+        ))}
+
+    </ul>
+)
 }
 
 export default RouteListTable
