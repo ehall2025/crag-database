@@ -145,14 +145,16 @@ public class Route extends GeographicLayer {
 
     @Override
     public boolean equals(Object o) {
+
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Route route = (Route) o;
-        return id == route.id && areaId == route.areaId && quality == route.quality && height == route.height && Objects.equals(name, route.name) && grade == route.grade && danger == route.danger && Objects.equals(isClassic, route.isClassic) && discipline == route.discipline && Objects.equals(faName, route.faName) && Objects.equals(faDate, route.faDate) && Objects.equals(description, route.description) && Objects.equals(startPosition, route.startPosition) && Objects.equals(protection, route.protection) && Objects.equals(directions, route.directions);
+        return areaId == route.areaId && quality == route.quality && height == route.height && grade == route.grade && danger == route.danger && Objects.equals(isClassic, route.isClassic) && discipline == route.discipline && Objects.equals(faName, route.faName) && Objects.equals(faDate, route.faDate) && Objects.equals(startPosition, route.startPosition) && Objects.equals(protection, route.protection) && Objects.equals(directions, route.directions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, areaId, grade, danger, quality, isClassic, height, discipline, faName, faDate, description, startPosition, protection, directions);
+        return Objects.hash(super.hashCode(), areaId, grade, danger, quality, isClassic, height, discipline, faName, faDate, startPosition, protection, directions);
     }
 
     @Override
