@@ -1,0 +1,67 @@
+.profile-page {
+    width: min(1200px, 92%);
+    margin: 3rem auto;
+}
+
+.profile-header {
+    margin-bottom: 2rem;
+}
+
+.profile-header h1 {
+    margin: 0;
+    color: #2f3a32;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.profile-header p {
+    margin-top: 0.5rem;
+    color: #6b756d;
+}
+
+.profile-card {
+    background-color: #f8f4ed;
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+    border: 1px solid rgba(47,58,50,0.08);
+}
+
+.profile-user-header {
+    margin-bottom: 2rem;
+}
+
+.profile-user-header h2 {
+    margin: 0;
+    color: #2f3a32;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.profile-lists {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5rem;
+}
+
+.profile-list-card {
+    background-color: #fffdf9;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(47,58,50,0.08);
+}
+
+.profile-list-header {
+    background-color: #e8dfd1;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(47,58,50,0.08);
+}
+
+.profile-list-header h3 {
+    margin: 0;
+    color: #8a4f2b;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}

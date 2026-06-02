@@ -1,0 +1,83 @@
+.location-section-title {
+    color: #8a4f2b;
+
+    font-size: 1rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+
+    margin-bottom: 0.75rem;
+}
+
+.location-description {
+    color: #3d463f;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+}
+
+.location-description.compact {
+    margin: 0;
+}
+
+.location-button {
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem 1.2rem;
+
+    font-size: 0.85rem;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.location-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+.location-button.primary {
+    background-color: #8a4f2b;
+    color: white;
+}
+
+.location-button.secondary {
+    background-color: #d9a441;
+    color: #2f3a32;
+}
+
+.location-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+
+    margin-bottom: 2rem;
+}
+
+.location-title h1 {
+    margin: 0;
+
+    color: #2f3a32;
+
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.location-title span {
+    color: #6f7f4f;
+
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.location-content-section {
+    margin-top: 2rem;
+}

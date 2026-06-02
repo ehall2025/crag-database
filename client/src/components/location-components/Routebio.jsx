@@ -1,28 +1,29 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import "./RouteBio.css";
 
-
-function RouteBio({ loggedInUser , setLoggedInUser }) {
+function RouteBio({ loggedInUser, setLoggedInUser }) {
 
     const [addSuccess, setAddSuccess] = useState()
     const { id } = useParams();
+    const [errors, setErrors] = useState([]);
     const [route, setRoute] = useState({
-        id:0,
+        id: 0,
         name: "",
         areaId: 0,
         description: "",
         startPosition: ""
     })
 
-    async function handleAdd (event) {
+    async function handleAdd(event) {
 
         const response = await fetch("http://localhost:8080/api/profile", {
             "method": "POST",
             "headers": {
                 "Authorization": "Bearer " + loggedInUser.jwt,
-                "Content-Type": "application/json" ,
+                "Content-Type": "application/json",
             },
-            "body" : JSON.stringify({
+            "body": JSON.stringify({
                 "listId": loggedInUser.user.tickList.id,
                 "routeId": id
             })
@@ -38,15 +39,15 @@ function RouteBio({ loggedInUser , setLoggedInUser }) {
         }
     }
 
-    async function handleAddTodo (event) {
+    async function handleAddTodo(event) {
 
         const response = await fetch("http://localhost:8080/api/profile", {
             "method": "POST",
             "headers": {
                 "Authorization": "Bearer " + loggedInUser.jwt,
-                "Content-Type": "application/json" ,
+                "Content-Type": "application/json",
             },
-            "body" : JSON.stringify({
+            "body": JSON.stringify({
                 "listId": loggedInUser.user.todoList.id,
                 "routeId": id
             })
@@ -62,8 +63,8 @@ function RouteBio({ loggedInUser , setLoggedInUser }) {
         }
     }
 
-    function updateUser (oldUser , newRouteList) {
-        let newUser = {...oldUser}
+    function updateUser(oldUser, newRouteList) {
+        let newUser = { ...oldUser }
 
         newUser.user.tickList.routes = newRouteList
 
@@ -72,31 +73,56 @@ function RouteBio({ loggedInUser , setLoggedInUser }) {
 
     useEffect(() => {
         fetch("http://localhost:8080/api/locations/route/" + id)
-        .then(response => response.json())
-        .then(payload => setRoute(payload))
+            .then(response => response.json())
+            .then(payload => setRoute(payload))
     }, [])
 
     return (
-        <>
-            <div className="card">
-                <div className="card-header">
-                    <h2>{route.name}</h2>
+        <div className="route-bio-page">
+            <div className="route-bio-card">
+
+                <div className="route-header">
+                    <h1>{route.name}</h1>
                 </div>
-                <div className="card-body">
-                    <h5>Description</h5>
-                    <p>{route.description}</p>
-                    <h5>Start Position</h5>
-                    <p>{route.startPosition}</p>
+
+                <div className="route-bio-section">
+                    <h4 className="section-title">Description</h4>
+                    <p className="route-description">{route.description}</p>
                 </div>
-                <div className="card-footer">
-                    <div className="d-inline-flex gap-1">
-                        {loggedInUser && <button className="btn btn-primary" onClick={handleAdd}>Log Ascent</button>}
-                        {loggedInUser && <button className="btn btn-primary" onClick={handleAddTodo}>Add to Todo</button>}
+
+                <div className="route-bio-section">
+                    <h4 className="section-title">Start Position</h4>
+                    <p className="route-start">{route.startPosition}</p>
+                </div>
+
+                {loggedInUser && (
+                    <div className="route-actions">
+                        <button className="route-button primary" onClick={handleAdd}>
+                            Log Ascent
+                        </button>
+
+                        <button className="route-button secondary" onClick={handleAddTodo}>
+                            Add to Todo
+                        </button>
                     </div>
-                    {addSuccess && <p>{addSuccess}</p>}
-                </div>
+                )}
+
+                {addSuccess && (
+                    <p className="route-success">
+                        {addSuccess}
+                    </p>
+                )}
+
+                {errors.length > 0 && (
+                    <div className="route-errors">
+                        {errors.map((error) => (
+                            <p key={error}>{error}</p>
+                        ))}
+                    </div>
+                )}
+
             </div>
-        </>
+        </div>
     );
 }
 

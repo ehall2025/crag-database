@@ -1,23 +1,26 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
-function HomeNotLoggedIn () {
+function HomeNotLoggedIn() {
+
     return (
-        <>
-        <div className="container inline-flex">
-            <div className="row">
-                <div className="col-1">
-                    <h2><Link className="btn btn-primary">Log in</Link></h2>
-                </div>
-                <div className="col-1">
-                    <p>or</p>
-                </div>
-                <div className="col-1">
-                    <h2><Link className="btn btn-primary">Sign up</Link></h2>
-                </div>
-            </div>
+        <div className="home-buttons">
+
+            <Link
+                className="hero-button primary"
+                to="/users/login"
+            >
+                Log In
+            </Link>
+
+            <Link
+                className="hero-button secondary"
+                to="/users/register"
+            >
+                Sign Up
+            </Link>
+
         </div>
-        </>
-    )
+    );
 }
 
-export default HomeNotLoggedIn
+export default HomeNotLoggedIn;
