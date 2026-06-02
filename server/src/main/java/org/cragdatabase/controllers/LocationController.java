@@ -2,11 +2,9 @@ package org.cragdatabase.controllers;
 
 import org.cragdatabase.domain.LocationService;
 import org.cragdatabase.domain.results.Result;
-import org.cragdatabase.models.Area;
-import org.cragdatabase.models.Crag;
+import org.cragdatabase.models.GeographicLayer;
 import org.cragdatabase.models.Location;
-import org.cragdatabase.models.Route;
-import org.springframework.http.HttpHeaders;
+import org.cragdatabase.models.enums.Layers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +29,7 @@ public class LocationController {
 
     @GetMapping("/{locationId}")
     public ResponseEntity findLocation (@PathVariable int locationId) {
-        Result<Object> result = locationService.findById(locationId, "location");
+        Result<GeographicLayer> result = locationService.findById(locationId, Layers.LOCATION);
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.NOT_FOUND);
@@ -42,7 +40,7 @@ public class LocationController {
 
     @GetMapping("/crag/{cragId}")
     public ResponseEntity findCrag (@PathVariable int cragId) {
-        Result<Object> result = locationService.findById(cragId, "crag");
+        Result<GeographicLayer> result = locationService.findById(cragId, Layers.CRAG);
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.NOT_FOUND);
@@ -53,7 +51,7 @@ public class LocationController {
 
     @GetMapping("/area/{areaId}")
     public ResponseEntity findArea (@PathVariable int areaId) {
-        Result<Object> result = locationService.findById(areaId, "area");
+        Result<GeographicLayer> result = locationService.findById(areaId, Layers.AREA);
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.NOT_FOUND);
@@ -64,7 +62,7 @@ public class LocationController {
 
     @GetMapping("/route/{routeId}")
     public ResponseEntity findRoute (@PathVariable int routeId) {
-        Result<Object> result = locationService.findById(routeId, "route");
+        Result<GeographicLayer> result = locationService.findById(routeId, Layers.ROUTE);
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.NOT_FOUND);

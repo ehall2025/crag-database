@@ -3,10 +3,9 @@ package org.cragdatabase.domain;
 import org.cragdatabase.data.LocationRepository;
 import org.cragdatabase.domain.results.Result;
 import org.cragdatabase.domain.results.ResultType;
-import org.cragdatabase.models.Area;
-import org.cragdatabase.models.Crag;
+import org.cragdatabase.models.GeographicLayer;
 import org.cragdatabase.models.Location;
-import org.cragdatabase.models.Route;
+import org.cragdatabase.models.enums.Layers;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,14 +23,14 @@ public class LocationService {
         return locationRepository.findAllLocations();
     }
 
-    public Result<Object> findById(int id, String layer) {
-        Result<Object> result = new Result<>();
+    public Result<GeographicLayer> findById(int id, Layers layer) {
+        Result<GeographicLayer> result = new Result<>();
 
         switch (layer) {
-            case "location" -> result.setpayload(locationRepository.findLocationById(id));
-            case "crag" -> result.setpayload(locationRepository.findCragById(id));
-            case "area" -> result.setpayload(locationRepository.findAreaById(id));
-            case "route" -> result.setpayload(locationRepository.findRouteById(id));
+            case LOCATION -> result.setpayload(locationRepository.findLocationById(id));
+            case CRAG -> result.setpayload(locationRepository.findCragById(id));
+            case AREA -> result.setpayload(locationRepository.findAreaById(id));
+            case ROUTE -> result.setpayload(locationRepository.findRouteById(id));
         }
 
         if (result.getpayload() == null) {

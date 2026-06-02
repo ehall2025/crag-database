@@ -7,10 +7,8 @@ import org.cragdatabase.models.enums.Discipline;
 import java.util.Date;
 import java.util.Objects;
 
-public class Route {
+public class Route extends GeographicLayer {
 
-    private int id;
-    private String name;
     private int areaId;
     private BoulderGrades grade;
     private DangerLevel danger;
@@ -20,27 +18,22 @@ public class Route {
     private Discipline discipline;
     private String faName;
     private Date faDate;
-    private String description;
     private String startPosition;
     private String protection;
     private String directions;
 
     public Route() {
+        super();
     }
 
     public Route(int id, String name, int areaId, String description, String startPosition) {
-        this.id = id;
-        this.name = name;
+        super(id, name, description);
         this.areaId = areaId;
-        this.description = description;
         this.startPosition = startPosition;
     }
 
     public Route(int id, String name, int areaId, String description, String directions, String protection, String startPosition, Date faDate, String faName, int height, Discipline discipline, BoulderGrades grade, DangerLevel danger, int quality, Boolean isClassic) {
-        this.id = id;
-        this.name = name;
         this.areaId = areaId;
-        this.description = description;
         this.directions = directions;
         this.protection = protection;
         this.startPosition = startPosition;
@@ -52,22 +45,6 @@ public class Route {
         this.danger = danger;
         this.quality = quality;
         this.isClassic = isClassic;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getAreaId() {
@@ -142,14 +119,6 @@ public class Route {
         this.faDate = faDate;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getStartPosition() {
         return startPosition;
     }
@@ -189,8 +158,6 @@ public class Route {
     @Override
     public String toString() {
         return "Route{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
                 ", areaId=" + areaId +
                 ", grade=" + grade +
                 ", danger=" + danger +
@@ -200,7 +167,6 @@ public class Route {
                 ", discipline=" + discipline +
                 ", faName='" + faName + '\'' +
                 ", faDate=" + faDate +
-                ", description='" + description + '\'' +
                 ", startPosition='" + startPosition + '\'' +
                 ", protection='" + protection + '\'' +
                 ", directions='" + directions + '\'' +
