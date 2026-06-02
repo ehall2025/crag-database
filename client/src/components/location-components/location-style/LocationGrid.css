@@ -1,0 +1,52 @@
+.location-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 1rem;
+}
+
+.location-grid-card {
+    background-color: #e8dfd1;
+
+    padding: 1rem 1.25rem;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.location-grid-card:hover {
+    background-color: #d9a441;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
+.location-grid-card h5 {
+    margin: 0;
+
+    color: #2f3a32;
+
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.location-grid-card.route-card {
+    background-color: #dfe8d8;
+}
+
+.location-grid-card.route-card:hover {
+    background-color: #6f7f4f;
+}
+
+.location-grid-card.route-card:hover h5 {
+    color: white;
+}

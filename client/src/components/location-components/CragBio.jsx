@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
+import LocationPage from "./generic-location-components/LocationPage";
+import LocationGrid from "./generic-location-components/LocationGrid";
+import "./location-style/LocationDetails.css";
 
 function CragBio() {
 
     const { id } = useParams();
     const [crag, setCrag] = useState({
-        id:0,
+        id: 0,
         name: "",
         locationId: 0,
         description: "",
@@ -15,32 +17,30 @@ function CragBio() {
 
     useEffect(() => {
         fetch("http://localhost:8080/api/locations/crag/" + id)
-        .then(response => response.json())
-        .then(payload => setCrag(payload))
+            .then(response => response.json())
+            .then(payload => setCrag(payload))
     }, [])
 
     return (
-        <>
-            <div className="card">
-                <div className="card-header">
-                    <h2>{crag.name}</h2>
-                </div>
-                <div className="card-body">
-                    <h5>Description</h5>
-                    <p>{crag.description}</p>
-                    <h5>Areas</h5>
-                    <div className="card col-2">
-                        <ul className="list-group">
-                            {crag.areas.map((area) => (
-                                <li key={area.id} className="list-group-item">
-                                    <Link to={"/locations/area/" + area.id}>{area.name}</Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
+        <LocationPage>
+            <div className="location-title">
+                <h1>{crag.name}</h1>
             </div>
-        </>
+
+            <h4 className="location-section-title">Description</h4>
+            <p className="location-description">{crag.description}</p>
+
+            {crag.areas?.length > 0 && (
+                <div className="location-content-section">
+                    <h4 className="location-section-title">Areas</h4>
+
+                    <LocationGrid
+                        items={crag.areas}
+                        getPath={(area) => "/locations/area/" + area.id}
+                    />
+                </div>
+            )}
+        </LocationPage>
     );
 }
 
