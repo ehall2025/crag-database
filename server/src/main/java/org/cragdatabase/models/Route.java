@@ -33,6 +33,7 @@ public class Route extends GeographicLayer {
     }
 
     public Route(int id, String name, int areaId, String description, String directions, String protection, String startPosition, Date faDate, String faName, int height, Discipline discipline, BoulderGrades grade, DangerLevel danger, int quality, Boolean isClassic) {
+        super(id, name, description);
         this.areaId = areaId;
         this.directions = directions;
         this.protection = protection;
