@@ -1,0 +1,161 @@
+.profile-page {
+    min-height: 100vh;
+    width: 100vw;
+
+    margin-left: calc(50% - 50vw);
+
+    background-image: url("../../images/profilebg.avif");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+}
+
+.profile-hero {
+    height: 320px;
+
+    background-size: cover;
+    background-position: center;
+
+    position: relative;
+}
+
+.profile-overlay {
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(
+        rgba(0,0,0,0.25),
+        rgba(0,0,0,0.75)
+    );
+
+    display: flex;
+    align-items: flex-end;
+
+    padding: 40px;
+}
+
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background-color: #d97706;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+    font-weight: bold;
+
+    color: white;
+
+    margin-right: 25px;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+
+    color: white;
+}
+
+.profile-name {
+    font-size: 2.5rem;
+    margin-bottom: 8px;
+}
+
+.profile-subtitle {
+    color: #d0d0d0;
+}
+
+.profile-content {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 30px;
+
+    padding: 40px;
+
+    background-color: rgba(15,15,15,0.72);
+
+    backdrop-filter: blur(4px);
+}
+
+.route-section {
+    position: relative;
+
+    padding: 28px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(40,40,40,0.92),
+            rgba(20,20,20,0.88)
+        );
+
+    border: 1px solid rgba(255,255,255,0.06);
+
+    backdrop-filter: blur(10px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.route-section:hover {
+    transform: translateY(-6px);
+
+    border-color: rgba(217,119,6,0.35);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,0.55),
+        0 0 18px rgba(217,119,6,0.12);
+}
+
+.route-section::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    border-radius: 24px 24px 0 0;
+}
+
+.route-section h2 {
+    font-size: 1.5rem;
+
+    font-weight: 700;
+
+    margin-bottom: 24px;
+
+    color: white;
+
+    letter-spacing: 0.5px;
+}
+
+.route-section h2::before {
+
+    color: #d97706;
+
+    font-size: 0.8rem;
+
+    margin-right: 10px;
+}

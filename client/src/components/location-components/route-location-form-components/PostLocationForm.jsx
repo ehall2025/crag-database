@@ -1,74 +1,74 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "./PostLocationForm.css";
 
-
-function PostLocationForm ({ loggedInUser }) {
+function PostLocationForm({ loggedInUser }) {
 
     const navigate = useNavigate();
     const [errors, setErrors] = useState([])
-    const [areaForms, setAreaForms] = useState([{areaId: 0, subAreas: []}])
+    const [areaForms, setAreaForms] = useState([{ areaId: 0, subAreas: [] }])
     const [locations, setLocations] = useState([])
     const [route, setRoute] = useState({
-        "id":0,
+        "id": 0,
         "name": "",
         "areaId": 0,
         "description": "",
         "startPosition": ""
     })
 
-    function handleRouteChange (event) {
+    function handleRouteChange(event) {
         setRoute({ ...route, [event.target.name]: event.target.value })
     }
-    
+
     useEffect(() => {
         fetch("http://localhost:8080/api/locations")
-        .then(response => response.json())
-        .then(payload => setLocations(payload))
+            .then(response => response.json())
+            .then(payload => setLocations(payload))
     }, [])
 
-    async function handleLocationChange (event) {
+    async function handleLocationChange(event) {
         fetch("http://localhost:8080/api/locations/" + event.target.value)
-        .then(response => response.json())
-        .then(payload =>  setAreaForms([{
-            areaId: event.target.value,
-            subAreas: payload.crags
-        }]))
+            .then(response => response.json())
+            .then(payload => setAreaForms([{
+                areaId: event.target.value,
+                subAreas: payload.crags
+            }]))
     }
 
-    async function handleAreaSelectChange (event) {
+    async function handleAreaSelectChange(event) {
 
-         //take areaId of selected area and fetch subAreas
+        //take areaId of selected area and fetch subAreas
         let fetchUrl = "http://localhost:8080/api/locations/"
 
         if (areaForms.length == 1) {
             fetchUrl += "crag/"
             fetch(fetchUrl + event.target.value)
-            .then(response => response.json())
-            .then(payload => {
-                setAreaForms([...areaForms, {
-                    areaId: event.target.value,
-                    subAreas: payload.areas
-                }])
-            })
+                .then(response => response.json())
+                .then(payload => {
+                    setAreaForms([...areaForms, {
+                        areaId: event.target.value,
+                        subAreas: payload.areas
+                    }])
+                })
         } else {
             fetchUrl += "area/"
             fetch(fetchUrl + event.target.value)
-            .then(response => response.json())
-            .then(payload => {
-                if (payload.subareas.length !== null && payload.subareas.length > 0) {
-                    setAreaForms([...areaForms, {
-                        areaId: event.target.value,
-                        subAreas: payload.subareas
-                    }])
-                }
-            })
+                .then(response => response.json())
+                .then(payload => {
+                    if (payload.subareas.length !== null && payload.subareas.length > 0) {
+                        setAreaForms([...areaForms, {
+                            areaId: event.target.value,
+                            subAreas: payload.subareas
+                        }])
+                    }
+                })
         }
 
         setRoute({ ...route, ["areaId"]: parseInt(areaForms.at(-1).areaId) })
     }
 
-    async function handleSubmit (event) {
+    async function handleSubmit(event) {
         event.preventDefault()
 
         setRoute({ ...route, ["areaId"]: parseInt(areaForms.at(-1).areaId) })
@@ -92,45 +92,96 @@ function PostLocationForm ({ loggedInUser }) {
     }
 
     return (
-        <>
-            <h1>Post a Route</h1>
-            <div className="col-4">
-                <form className="form-control">
-                    {errors.length > 0 ?
-                        <ul>{errors.map(error => <li key={error}>{error}</li>)}</ul>
-                        : null
-                    }
-                    <div className="form-control">
-                        <input name="name" id="name" type="text" placeholder="Route Name" onChange={handleRouteChange}/>
-                    </div>
-                    <div className="form-control">
-                        <select id="locationId" onChange={handleLocationChange}>
-                            <option>select location</option>
-                            {locations.map((location) => (
-                                <option key={location.id} value={location.id}>{location.region}</option>
+        <div className="post-route-page">
+
+            <div className="post-route-card">
+
+                <h1 className="post-route-title">
+                    Post a Route
+                </h1>
+
+                <form className="route-form">
+
+                    {errors.length > 0 && (
+                        <ul className="error-list">
+                            {errors.map(error => (
+                                <li key={error}>{error}</li>
+                            ))}
+                        </ul>
+                    )}
+
+                    <input
+                        className="route-input"
+                        name="name"
+                        type="text"
+                        placeholder="Route Name"
+                        onChange={handleRouteChange}
+                    />
+
+                    <select
+                        className="route-select"
+                        id="locationId"
+                        onChange={handleLocationChange}
+                    >
+                        <option>Select Location</option>
+
+                        {locations.map((location) => (
+                            <option
+                                key={location.id}
+                                value={location.id}
+                            >
+                                {location.region}
+                            </option>
+                        ))}
+                    </select>
+
+                    {areaForms.map(({ areaId, subAreas }, index) => (
+                        <select
+                            key={index}
+                            className="route-select"
+                            id="areaId"
+                            onChange={handleAreaSelectChange}
+                        >
+                            <option>Select Area</option>
+
+                            {subAreas.map((subArea) => (
+                                <option
+                                    key={subArea.id}
+                                    value={subArea.id}
+                                >
+                                    {subArea.name}
+                                </option>
                             ))}
                         </select>
-                    </div>
-                    {areaForms.map(({areaId, subAreas}, index) => (
-                        <div key={index} className="form-control">
-                            <select id="areaId" onChange={handleAreaSelectChange}>
-                                <option>Select Area</option>
-                                {subAreas.map((subArea) => (
-                                    <option key={subArea.id} value={subArea.id}>{subArea.name}</option>
-                                ))}
-                            </select>
-                        </div>
                     ))}
-                    <div className="form-control">
-                        <textarea name="description" id="description" placeholder="Route Description" onChange={handleRouteChange}/>
-                    </div>
-                    <div className="form-control">
-                        <textarea name="startPosition" id="startPosition" placeholder="Start Position" onChange={handleRouteChange}/>
-                    </div>
-                    <button className="btn btn-primary" type="submit" onClick={handleSubmit}>Submit</button>
+
+                    <textarea
+                        className="route-textarea"
+                        name="description"
+                        placeholder="Route Description"
+                        onChange={handleRouteChange}
+                    />
+
+                    <textarea
+                        className="route-textarea"
+                        name="startPosition"
+                        placeholder="Start Position"
+                        onChange={handleRouteChange}
+                    />
+
+                    <button
+                        className="submit-route-button"
+                        type="submit"
+                        onClick={handleSubmit}
+                    >
+                        Submit Route
+                    </button>
+
                 </form>
+
             </div>
-        </>
+
+        </div>
     );
 }
 

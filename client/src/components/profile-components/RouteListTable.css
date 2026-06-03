@@ -1,0 +1,63 @@
+.route-list {
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+}
+
+.route-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 1rem;
+
+    padding: 1rem;
+
+    border-top:
+        1px solid rgba(47,58,50,0.08);
+}
+
+.route-link {
+    color: #2f3a32;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.route-link:hover {
+    color: #8a4f2b;
+}
+
+.remove-route-button {
+    border: none;
+
+    border-radius: 10px;
+
+    padding: 0.65rem 0.9rem;
+
+    background-color: #a44d3f;
+
+    color: white;
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.remove-route-button:hover {
+    background-color: #8c3d31;
+
+    transform: translateY(-1px);
+}

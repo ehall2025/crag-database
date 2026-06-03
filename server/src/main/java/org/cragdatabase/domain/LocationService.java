@@ -3,10 +3,9 @@ package org.cragdatabase.domain;
 import org.cragdatabase.data.LocationRepository;
 import org.cragdatabase.domain.results.Result;
 import org.cragdatabase.domain.results.ResultType;
-import org.cragdatabase.models.Area;
-import org.cragdatabase.models.Crag;
+import org.cragdatabase.models.GeographicLayer;
 import org.cragdatabase.models.Location;
-import org.cragdatabase.models.Route;
+import org.cragdatabase.models.enums.Layers;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,49 +23,18 @@ public class LocationService {
         return locationRepository.findAllLocations();
     }
 
-    public Result<Location> findLocationById(int id) {
-        Result<Location> result = new Result<>();
+    public Result<GeographicLayer> findById(int id, Layers layer) {
+        Result<GeographicLayer> result = new Result<>();
 
-        result.setpayload(locationRepository.findLocationById(id));
-
-        if (result.getpayload() == null) {
-            result.addErrorMessage("Could not find location", ResultType.NOT_FOUND);
+        switch (layer) {
+            case LOCATION -> result.setpayload(locationRepository.findLocationById(id));
+            case CRAG -> result.setpayload(locationRepository.findCragById(id));
+            case AREA -> result.setpayload(locationRepository.findAreaById(id));
+            case ROUTE -> result.setpayload(locationRepository.findRouteById(id));
         }
 
-        return result;
-    }
-
-    public Result<Crag> findCragById(int cragId) {
-        Result<Crag> result = new Result<>();
-
-        result.setpayload(locationRepository.findCragById(cragId));
-
         if (result.getpayload() == null) {
-            result.addErrorMessage("Could not find crag", ResultType.NOT_FOUND);
-        }
-
-        return result;
-    }
-
-    public Result<Area> findAreaById(int areaId) {
-        Result<Area> result = new Result<>();
-
-        result.setpayload(locationRepository.findAreaById(areaId));
-
-        if (result.getpayload() == null) {
-            result.addErrorMessage("Could not find area", ResultType.NOT_FOUND);
-        }
-
-        return result;
-    }
-
-    public Result<Route> findRouteById(int routeId) {
-        Result<Route> result = new Result<>();
-
-        result.setpayload(locationRepository.findRouteById(routeId));
-
-        if (result.getpayload() == null) {
-            result.addErrorMessage("Could not find route", ResultType.NOT_FOUND);
+            result.addErrorMessage("Could not find " + layer, ResultType.NOT_FOUND);
         }
 
         return result;
