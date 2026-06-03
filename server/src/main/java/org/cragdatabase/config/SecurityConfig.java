@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
 @Configuration
-@EnableWebSecurity//(debug = true //TODO remove when done with proj
+@EnableWebSecurity
 public class SecurityConfig {
 
     @Autowired

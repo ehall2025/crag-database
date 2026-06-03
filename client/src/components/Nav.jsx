@@ -1,13 +1,14 @@
 import { Link, NavLink } from 'react-router-dom';
+import "./Nav.css";
 
 function Nav({ loggedInUser, setLoggedInUser }) {
     return (
         <nav className='navbar navbar-expand'>
+
+            <h4><NavLink className="home-link" to='/'>Cragbase</NavLink></h4>
+
             <div className='d-flex'>
                 <ul className='navbar-nav'>
-                    <li className='nav-item'>
-                        <h4><NavLink className="nav-link" to='/'>Cragbase</NavLink></h4>
-                    </li>
                     <li className='nav-item'>
                         <NavLink id="link" className='nav-link ' to='/'>
                             Home
@@ -19,7 +20,7 @@ function Nav({ loggedInUser, setLoggedInUser }) {
                         </NavLink>
                     </li>
 
-                    { loggedInUser === null ?
+                    {loggedInUser === null ?
                         <>
                             {/* only available if logged out */}
                             <li className='nav-item'>
@@ -43,7 +44,7 @@ function Nav({ loggedInUser, setLoggedInUser }) {
                             </li>
                             {loggedInUser.user.role === "ROLE_ADMIN" &&
                                 <NavLink id="link" className='nav-link' to='admin/staged'>
-                                    Staged Routes     
+                                    Staged Routes
                                 </NavLink>}
                             <li>
                                 <NavLink id="link" className='nav-link' to='/users/profile'>

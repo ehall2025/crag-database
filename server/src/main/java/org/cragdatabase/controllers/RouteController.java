@@ -80,7 +80,7 @@ public class RouteController {
 
     @DeleteMapping("/admin/{routeId}")
     public ResponseEntity adminDelete (@PathVariable int routeId) {
-        Result<Route> result = routeService.adminDelete(routeId);
+        Result<Boolean> result = routeService.adminDelete(routeId);
 
         if (!result.isSuccess()) {
             return new ResponseEntity(result.getErrorMessages(), HttpStatus.NOT_FOUND);

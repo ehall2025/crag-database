@@ -25,7 +25,7 @@ public class RouteService {
 
         if (!result.isSuccess()) return result;
 
-        if (!routeRepository.userPostRoute(route)) {
+        if (!routeRepository.postRoute(route, "Route_Staging")) {
             result.addErrorMessage("unable to add route", ResultType.NOT_FOUND);
         }
 
@@ -37,7 +37,7 @@ public class RouteService {
 
         if (!result.isSuccess()) return result;
 
-        if (routeRepository.adminPostRoute(route)) {
+        if (routeRepository.postRoute(route, "Route")) {
             if(!routeRepository.adminDeleteStagedRoute(route.getId())) {
                 result.addErrorMessage("could not find staged route to delete", ResultType.NOT_FOUND);
             }
@@ -60,8 +60,8 @@ public class RouteService {
         return result;
     }
 
-    public Result adminDelete(int routeId) {
-        Result result = new Result();
+    public Result<Boolean> adminDelete(int routeId) {
+        Result<Boolean> result = new Result();
 
         if(!routeRepository.adminDeleteStagedRoute(routeId)) {
             result.addErrorMessage("could not find route to delete", ResultType.NOT_FOUND);

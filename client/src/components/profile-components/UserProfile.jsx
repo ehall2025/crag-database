@@ -1,5 +1,6 @@
 import { useState } from "react";
 import RouteListTable from "./RouteListTable";
+import "../styles/UserProfile.css";
 
 
 function UserProfile ({ loggedInUser , setLoggedInUser }) {
@@ -7,34 +8,61 @@ function UserProfile ({ loggedInUser , setLoggedInUser }) {
     const jwt = loggedInUser.jwt
 
     return (
-        <>
-            <h1>Profile</h1>
-            <div className="card">
-                <div className="card-header">
-                    <h2>{user.displayName || user.username}</h2>
-                </div>
+    <div className="profile-page">
 
-                <div className="card-body d-inline-flex gap-5">
-                    <div className="card">
-                        <div className="card-header">
-                            <h5>Ticks</h5>
-                        </div>
-                        <div className="card-body">
-                            <RouteListTable routeList={user.tickList} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
-                        </div>
+        <div className="profile-hero">
+
+            <div className="profile-overlay">
+
+                <div className="profile-info">
+
+                    <div className="profile-avatar">
+                        {user.username.charAt(0).toUpperCase()}
                     </div>
-                    <div className="card">
-                        <div className="card-header">
-                            <h5>To-dos</h5>
-                        </div>
-                        <div className="card-body">
-                            <RouteListTable routeList={user.todoList} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser}/>
-                        </div>
+
+                    <div>
+                        <h1 className="profile-name">
+                            {user.displayName || user.username}
+                        </h1>
+
+                        <p className="profile-subtitle">
+                            Tracking sends and projects
+                        </p>
                     </div>
+
                 </div>
             </div>
-        </>
-    );
+        </div>
+
+        <div className="profile-content">
+
+            <div className="route-section">
+
+                <h2>Ticks</h2>
+
+                <RouteListTable
+                    routeList={user.tickList}
+                    loggedInUser={loggedInUser}
+                    setLoggedInUser={setLoggedInUser}
+                />
+
+            </div>
+
+            <div className="route-section">
+
+                <h2>Projects</h2>
+
+                <RouteListTable
+                    routeList={user.todoList}
+                    loggedInUser={loggedInUser}
+                    setLoggedInUser={setLoggedInUser}
+                />
+
+            </div>
+
+        </div>
+    </div>
+)
 }
 
 export default UserProfile
