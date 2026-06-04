@@ -54,6 +54,10 @@ public class RouteSummaryService {
     }
 
     public boolean deleteById(int routeId) {
+        if (routeId <= 0) {
+            return false;
+        }
+
         return routeSummaryRepository.deleteById(routeId);
     }
 
@@ -69,11 +73,11 @@ public class RouteSummaryService {
         }
 
         if (summary.getQualityRating() < 0) {
-            result.addErrorMessage("Difficulty can not be negative", ResultType.INVALID);
+            result.addErrorMessage("Quality can not be negative", ResultType.INVALID);
         }
 
         if (summary.getDangerRating() < 0) {
-            result.addErrorMessage("Difficulty can not be negative", ResultType.INVALID);
+            result.addErrorMessage("Danger Rating can not be negative", ResultType.INVALID);
         }
 
         return result;
