@@ -54,6 +54,10 @@ public class RouteSummaryService {
     }
 
     public boolean deleteById(int routeId) {
+        if (routeId <= 0) {
+            return false;
+        }
+
         return routeSummaryRepository.deleteById(routeId);
     }
 
@@ -69,11 +73,11 @@ public class RouteSummaryService {
         }
 
         if (summary.getQualityRating() < 0) {
-            result.addErrorMessage("Difficulty can not be negative", ResultType.INVALID);
+            result.addErrorMessage("Quality can not be negative", ResultType.INVALID);
         }
 
         if (summary.getDangerRating() < 0) {
-            result.addErrorMessage("Difficulty can not be negative", ResultType.INVALID);
+            result.addErrorMessage("Danger Rating can not be negative", ResultType.INVALID);
         }
 
         return result;
@@ -84,16 +88,28 @@ public class RouteSummaryService {
         int difficultyTotal = 0;
         int qualityTotal = 0;
         int dangerTotal = 0;
+        int numDifficultySuggestions = summaries.size();
+        int numQualitySuggestions = summaries.size();
 
         for (RouteSummary summary: summaries) {
-            difficultyTotal += summary.getDifficultyRating();
-            qualityTotal += summary.getQualityRating();
+            if (summary.getDifficultyRating() == 0) {
+                numDifficultySuggestions--;
+            } else {
+                difficultyTotal += summary.getDifficultyRating();
+            }
+
+            if (summary.getQualityRating() == 0) {
+                numQualitySuggestions--;
+            } else {
+                qualityTotal += summary.getQualityRating();
+            }
+
             dangerTotal = Integer.max(dangerTotal, summary.getDangerRating());
         }
 
         RouteSummary combinedSummary = summaries.get(0);
-        combinedSummary.setDifficultyRating(difficultyTotal / summaries.size());
-        combinedSummary.setQualityRating(qualityTotal / summaries.size());
+        combinedSummary.setDifficultyRating(difficultyTotal / numDifficultySuggestions);
+        combinedSummary.setQualityRating(qualityTotal / numQualitySuggestions);
         combinedSummary.setDangerRating(dangerTotal);
 
         return combinedSummary;

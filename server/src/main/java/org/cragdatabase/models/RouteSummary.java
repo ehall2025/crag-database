@@ -1,5 +1,7 @@
 package org.cragdatabase.models;
 
+import java.util.Objects;
+
 public class RouteSummary {
 
     private int routeSummaryId;
@@ -67,5 +69,17 @@ public class RouteSummary {
 
     public void setDangerRating(int dangerRating) {
         this.dangerRating = dangerRating;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        RouteSummary summary = (RouteSummary) o;
+        return routeSummaryId == summary.routeSummaryId && routeId == summary.routeId && userId == summary.userId && difficultyRating == summary.difficultyRating && qualityRating == summary.qualityRating && dangerRating == summary.dangerRating;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(routeSummaryId, routeId, userId, difficultyRating, qualityRating, dangerRating);
     }
 }
