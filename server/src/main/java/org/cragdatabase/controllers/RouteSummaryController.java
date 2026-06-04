@@ -23,7 +23,7 @@ public class RouteSummaryController {
 
     @GetMapping("/{routeId}")
     public ResponseEntity getByRouteId(@PathVariable int routeId) {
-        Result<List<RouteSummary>> result = routeSummaryService.findByRouteId(routeId);
+        Result<RouteSummary> result = routeSummaryService.findByRouteId(routeId);
 
         if (!result.isSuccess()) {
             return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.NOT_FOUND);
