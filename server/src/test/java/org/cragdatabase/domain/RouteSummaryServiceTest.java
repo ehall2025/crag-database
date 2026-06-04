@@ -2,11 +2,14 @@ package org.cragdatabase.domain;
 
 import org.cragdatabase.data.RouteSummaryRepository;
 import org.cragdatabase.domain.results.Result;
+import org.cragdatabase.models.Route;
 import org.cragdatabase.models.RouteSummary;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -24,7 +27,20 @@ class RouteSummaryServiceTest {
 
     @Test
     void shouldFindByRouteId() {
+        List<RouteSummary> returnedSummaries = List.of(
+                new RouteSummary(1, 1, 1, 5, 5, 1),
+                new RouteSummary(2, 1, 2, 6, 4, 0),
+                new RouteSummary(3, 1, 3, 4, 3, 3)
+        );
 
+        RouteSummary expected = new RouteSummary(1, 1, 1, 5, 4, 3);
+
+        when(repository.findByRouteId(anyInt())).thenReturn(returnedSummaries);
+
+        Result<RouteSummary> actual = service.findByRouteId(1);
+
+        assertTrue(actual.isSuccess());
+        assertEquals(expected, actual.getpayload());
     }
 
     @Test
