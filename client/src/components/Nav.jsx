@@ -1,11 +1,16 @@
 import { Link, NavLink } from 'react-router-dom';
+import logo from "../images/logo.jpg";
 import "./Nav.css";
 
 function Nav({ loggedInUser, setLoggedInUser }) {
     return (
         <nav className='navbar navbar-expand'>
 
-            <h4><NavLink className="home-link" to='/'>Cragbase</NavLink></h4>
+            <NavLink className="brand-link" to='/'>
+                <img src={logo} alt="CragBase Logo" className="brand-logo" />
+
+                <span className="brand-text">CRAGBASE</span>
+            </NavLink>
 
             <div className='d-flex'>
                 <ul className='navbar-nav'>
