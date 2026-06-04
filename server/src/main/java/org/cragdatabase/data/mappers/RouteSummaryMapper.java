@@ -14,9 +14,9 @@ public class RouteSummaryMapper implements RowMapper<RouteSummary> {
                 rs.getInt("id"),
                 rs.getInt("route_id"),
                 rs.getInt("user_id"),
-                rs.getInt("difficulty_rating"),
-                rs.getInt("quality_rating"),
-                rs.getInt("danger_rating")
+                rs.getInt("difficulty"),
+                rs.getInt("quality"),
+                rs.getInt("danger_level")
         );
     }
 }
