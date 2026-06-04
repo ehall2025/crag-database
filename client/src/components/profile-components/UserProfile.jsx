@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RouteListTable from "./RouteListTable";
 import "../styles/UserProfile.css";
 
@@ -7,62 +7,100 @@ function UserProfile ({ loggedInUser , setLoggedInUser }) {
     const [user, setUser] = useState(loggedInUser.user)
     const jwt = loggedInUser.jwt
 
+    const [profileImage, setProfileImage] = useState(null);
+
+    useEffect(() => {
+        const savedImage = localStorage.getItem(`profileImage_${user.username}`);
+
+        if (savedImage) {
+            setProfileImage(savedImage);
+        }
+    }, [user.username]);
+
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+
+        if (!file) {
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            const imageData = reader.result;
+
+            localStorage.setItem(`profileImage_${user.username}`, imageData);
+
+            setProfileImage(imageData);
+        };
+        reader.readAsDataURL(file);
+    }
+
     return (
-    <div className="profile-page">
+        <div className="profile-page">
 
-        <div className="profile-hero">
+            <div className="profile-hero">
 
-            <div className="profile-overlay">
+                <div className="profile-overlay">
 
-                <div className="profile-info">
+                    <div className="profile-info">
 
-                    <div className="profile-avatar">
-                        {user.username.charAt(0).toUpperCase()}
+                        <div className="profile-avatar">
+                            {profileImage ? (
+                                <img src={profileImage} alt="Profile" className="profile-avatar-image" />
+                            ) : (
+                                user.username.charAt(0).toUpperCase()
+                            )}
+                        </div>
+
+                        <div>
+                            <h1 className="profile-name">
+                                {user.displayName || user.username}
+                            </h1>
+
+                            <p className="profile-subtitle">
+                                Tracking sends and projects
+                            </p>
+
+                            <label className="upload-avatar-btn">
+                                Change Photo
+                                <input type="file" accept="image/*" onChange={handleImageUpload} hidden />
+                            </label>
+                        </div>
+
                     </div>
-
-                    <div>
-                        <h1 className="profile-name">
-                            {user.displayName || user.username}
-                        </h1>
-
-                        <p className="profile-subtitle">
-                            Tracking sends and projects
-                        </p>
-                    </div>
-
                 </div>
             </div>
-        </div>
 
-        <div className="profile-content">
+            <div className="profile-content">
 
-            <div className="route-section">
+                <div className="route-section">
 
-                <h2>Ticks</h2>
+                    <h2>Ticks</h2>
 
-                <RouteListTable
-                    routeList={user.tickList}
-                    loggedInUser={loggedInUser}
-                    setLoggedInUser={setLoggedInUser}
-                />
+                    <RouteListTable
+                        routeList={user.tickList}
+                        loggedInUser={loggedInUser}
+                        setLoggedInUser={setLoggedInUser}
+                    />
+
+                </div>
+
+                <div className="route-section">
+
+                    <h2>Projects</h2>
+
+                    <RouteListTable
+                        routeList={user.todoList}
+                        loggedInUser={loggedInUser}
+                        setLoggedInUser={setLoggedInUser}
+                    />
+
+                </div>
 
             </div>
-
-            <div className="route-section">
-
-                <h2>Projects</h2>
-
-                <RouteListTable
-                    routeList={user.todoList}
-                    loggedInUser={loggedInUser}
-                    setLoggedInUser={setLoggedInUser}
-                />
-
-            </div>
-
         </div>
-    </div>
-)
+    )
 }
 
 export default UserProfile
