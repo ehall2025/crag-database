@@ -69,25 +69,30 @@ class RouteSummaryServiceTest {
     }
 
     @Test
-    void shouldNotAddNegativeRatings() {
+    void shouldNotAddNegativeDifficulty() {
         //Test negative difficulty
         RouteSummary toAdd = new RouteSummary(0, 1, 1, -1, 5, 1);
 
         Result<RouteSummary> actual = service.add(toAdd);
 
         assertFalse(actual.isSuccess());
+    }
 
-        //Test negative quality
-        toAdd = new RouteSummary(0, 1, 1, 5, -1, 1);
+    @Test
+    void shouldNotAddNegativeQuality() {//Test negative quality
+        RouteSummary toAdd = new RouteSummary(0, 1, 1, 5, -1, 1);
 
-        actual = service.add(toAdd);
+        Result<RouteSummary> actual = service.add(toAdd);
 
         assertFalse(actual.isSuccess());
+    }
 
+    @Test
+    void shouldNotAddNegativeDanger() {
         //Test negative danger
-        toAdd = new RouteSummary(0, 1, 1, 5, 5, -1);
+        RouteSummary toAdd = new RouteSummary(0, 1, 1, 5, 5, -1);
 
-        actual = service.add(toAdd);
+        Result<RouteSummary> actual = service.add(toAdd);
 
         assertFalse(actual.isSuccess());
     }
@@ -119,25 +124,31 @@ class RouteSummaryServiceTest {
     }
 
     @Test
-    void shouldNotUpdateNegativeRatings() {
+    void shouldNotUpdateNegativeDifficulty() {
         //Test negative difficulty
         RouteSummary toUpdate = new RouteSummary(0, 1, 1, -1, 5, 1);
 
         Result<RouteSummary> actual = service.update(toUpdate);
 
         assertFalse(actual.isSuccess());
+    }
 
+    @Test
+    void shouldNotUpdateNegativeQuality() {
         //Test negative quality
-        toUpdate = new RouteSummary(0, 1, 1, 5, -1, 1);
+        RouteSummary toUpdate = new RouteSummary(0, 1, 1, 5, -1, 1);
 
-        actual = service.update(toUpdate);
+        Result<RouteSummary> actual = service.update(toUpdate);
 
         assertFalse(actual.isSuccess());
+    }
 
+    @Test
+    void shouldNotUpdateNegativeDanger() {
         //Test negative danger
-        toUpdate = new RouteSummary(0, 1, 1, 5, 5, -1);
+        RouteSummary toUpdate = new RouteSummary(0, 1, 1, 5, 5, -1);
 
-        actual = service.update(toUpdate);
+        Result<RouteSummary> actual = service.update(toUpdate);
 
         assertFalse(actual.isSuccess());
     }
