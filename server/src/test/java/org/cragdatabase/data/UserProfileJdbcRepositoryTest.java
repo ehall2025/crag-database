@@ -18,17 +18,11 @@ class UserProfileJdbcRepositoryTest {
     UserProfileRepository repository;
 
     @Autowired
-    KnownGoodState knownGoodState;
-
-    @Autowired
     JdbcClient jdbcClient;
 
     @BeforeEach
     void setup() {
-        boolean bool = jdbcClient.sql("call set_known_good_state();").update() > 0;
-        if (bool) {
-            System.out.println("ran set known");
-        }
+        jdbcClient.sql("call set_known_good_state();").update();
     }
 
     @Test
