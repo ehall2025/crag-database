@@ -25,12 +25,15 @@ class UserProfileJdbcRepositoryTest {
 
     @BeforeEach
     void setup() {
-        jdbcClient.sql("call set_known_good_state();").update();
+        boolean bool = jdbcClient.sql("call set_known_good_state();").update() > 0;
+        if (bool) {
+            System.out.println("ran set known");
+        }
     }
 
     @Test
     void addListEntryShouldReturnUpdatedListWhenSuccessful() {
-        List<Route> result = repository.addListEntry(1, 1);
+        List<Route> result = repository.addListEntry(2, 1);
 
         assertNotNull(result);
         assertFalse(result.isEmpty());
