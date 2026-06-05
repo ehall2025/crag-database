@@ -2,7 +2,6 @@ package org.cragdatabase.domain;
 
 import org.cragdatabase.data.RouteSummaryRepository;
 import org.cragdatabase.domain.results.Result;
-import org.cragdatabase.models.Route;
 import org.cragdatabase.models.RouteSummary;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,14 +45,12 @@ class RouteSummaryServiceTest {
     @Test
     void shouldAddSummary() {
         RouteSummary toAdd = new RouteSummary(0, 1, 1, 5, 5, 1);
-        RouteSummary expected = new RouteSummary(1, 1, 1, 5, 5, 1);
 
-        when(repository.add(any())).thenReturn(expected);
+        when(repository.add(any())).thenReturn(true);
 
         Result<RouteSummary> actual = service.add(toAdd);
 
         assertTrue(actual.isSuccess());
-        assertEquals(expected, actual.getpayload());
     }
 
     @Test
@@ -101,7 +98,7 @@ class RouteSummaryServiceTest {
 
         when(repository.update(any())).thenReturn(true);
 
-        Result<RouteSummary> actual = service.add(toUpdate);
+        Result<RouteSummary> actual = service.update(toUpdate);
 
         assertTrue(actual.isSuccess());
     }
