@@ -26,13 +26,17 @@ class RouteSummaryServiceTest {
 
     @Test
     void shouldFindByRouteId() {
-        List<RouteSummary> returnedSummaries = List.of(
-                new RouteSummary(1, 1, 1, 5, 5, 1),
-                new RouteSummary(2, 1, 2, 6, 4, 0),
-                new RouteSummary(3, 1, 3, 4, 3, 3)
-        );
+        RouteSummary r1 = new RouteSummary(1, 1, 1, 5, 5, 1);
+        RouteSummary r2 = new RouteSummary(2, 1, 2, 6, 4, 0);
+        RouteSummary r3 = new RouteSummary(3, 1, 3, 4, 3, 3);
 
-        RouteSummary expected = new RouteSummary(1, 1, 1, 5, 4, 3);
+        List<RouteSummary> returnedSummaries = List.of(r1, r2, r3);
+
+        int expectedDifficulty = (r1.getDifficultyRating() + r2.getDifficultyRating() + r3.getDifficultyRating()) / returnedSummaries.size();
+        int expectedQuality = (r1.getQualityRating() + r2.getQualityRating() + r3.getQualityRating()) / returnedSummaries.size();
+        int expectedDanger = Math.max(Math.max(r1.getDangerRating(), r2.getDangerRating()), r3.getDangerRating());
+
+        RouteSummary expected = new RouteSummary(1, 1, 1, expectedDifficulty, expectedQuality, expectedDanger);
 
         when(repository.findByRouteId(anyInt())).thenReturn(returnedSummaries);
 
