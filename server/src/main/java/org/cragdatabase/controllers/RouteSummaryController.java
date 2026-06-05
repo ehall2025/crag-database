@@ -64,10 +64,8 @@ public class RouteSummaryController {
 
     @DeleteMapping("/{routeSummaryId}")
     public ResponseEntity delete(@PathVariable int routeSummaryId) {
-        Result<RouteSummary> result = routeSummaryService.deleteById(routeSummaryId);
-
-        if (!result.isSuccess()) {
-            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.NOT_FOUND);
+        if (!routeSummaryService.deleteById(routeSummaryId)) {
+            return new ResponseEntity<>("Route summary not found.", HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
