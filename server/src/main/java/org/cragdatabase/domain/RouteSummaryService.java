@@ -111,7 +111,9 @@ public class RouteSummaryService {
             dangerTotal = Integer.max(dangerTotal, summary.getDangerRating());
         }
 
-        RouteSummary combinedSummary = summaries.get(0);
+        RouteSummary combinedSummary = new RouteSummary();
+        combinedSummary.setRouteId(summaries.get(0).getRouteId());
+        combinedSummary.setUserId(summaries.get(0).getUserId());
         combinedSummary.setDifficultyRating(difficultyTotal / numDifficultySuggestions);
         combinedSummary.setQualityRating(qualityTotal / numQualitySuggestions);
         combinedSummary.setDangerRating(dangerTotal);
