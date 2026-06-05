@@ -1,21 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import RouteListTable from "./RouteListTable";
 import "../styles/UserProfile.css";
 
+function UserProfile({ loggedInUser, setLoggedInUser }) {
 
-function UserProfile ({ loggedInUser , setLoggedInUser }) {
-    const [user, setUser] = useState(loggedInUser.user)
-    const jwt = loggedInUser.jwt
+    const [user, setUser] = useState(loggedInUser.user);
+    const jwt = loggedInUser.jwt;
 
-    const [profileImage, setProfileImage] = useState(null);
-
-    useEffect(() => {
-        const savedImage = localStorage.getItem(`profileImage_${user.username}`);
-
-        if (savedImage) {
-            setProfileImage(savedImage);
-        }
-    }, [user.username]);
+    const [profileImage, setProfileImage] = useState(
+        loggedInUser.user.profileImage || null
+    );
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
@@ -29,12 +23,26 @@ function UserProfile ({ loggedInUser , setLoggedInUser }) {
         reader.onloadend = () => {
             const imageData = reader.result;
 
-            localStorage.setItem(`profileImage_${user.username}`, imageData);
+            const updatedLoggedInUser = {
+                ...loggedInUser,
+                user: {
+                    ...loggedInUser.user,
+                    profileImage: imageData
+                }
+            };
 
+            localStorage.setItem(
+                "loggedInUser",
+                JSON.stringify(updatedLoggedInUser)
+            );
+
+            setLoggedInUser(updatedLoggedInUser);
+            setUser(updatedLoggedInUser.user);
             setProfileImage(imageData);
         };
+
         reader.readAsDataURL(file);
-    }
+    };
 
     return (
         <div className="profile-page">
@@ -47,7 +55,11 @@ function UserProfile ({ loggedInUser , setLoggedInUser }) {
 
                         <div className="profile-avatar">
                             {profileImage ? (
-                                <img src={profileImage} alt="Profile" className="profile-avatar-image" />
+                                <img
+                                    src={profileImage}
+                                    alt="Profile"
+                                    className="profile-avatar-image"
+                                />
                             ) : (
                                 user.username.charAt(0).toUpperCase()
                             )}
@@ -64,12 +76,19 @@ function UserProfile ({ loggedInUser , setLoggedInUser }) {
 
                             <label className="upload-avatar-btn">
                                 Change Photo
-                                <input type="file" accept="image/*" onChange={handleImageUpload} hidden />
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleImageUpload}
+                                    hidden
+                                />
                             </label>
                         </div>
 
                     </div>
+
                 </div>
+
             </div>
 
             <div className="profile-content">
@@ -99,8 +118,9 @@ function UserProfile ({ loggedInUser , setLoggedInUser }) {
                 </div>
 
             </div>
+
         </div>
-    )
+    );
 }
 
-export default UserProfile
+export default UserProfile;
