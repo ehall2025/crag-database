@@ -33,12 +33,34 @@ function UserLoginForm({ setLoggedInUser }) {
         })
 
         if (response.status >= 200 && response.status < 300) {
-            setLoggedInUser(await response.json())
-            resetForm()
-            navigate("/")
+
+            const loginData = await response.json();
+
+            const existingLoggedInUser =
+                JSON.parse(localStorage.getItem("loggedInUser"));
+
+            const updatedLoggedInUser = {
+                ...loginData,
+                user: {
+                    ...loginData.user,
+                    profileImage:
+                        existingLoggedInUser?.user?.profileImage || null
+                }
+            };
+
+            localStorage.setItem(
+                "loggedInUser",
+                JSON.stringify(updatedLoggedInUser)
+            );
+
+            setLoggedInUser(updatedLoggedInUser);
+
+            resetForm();
+            navigate("/");
+
         } else {
-            const payload = await response.json()
-            setErrors(payload)
+            const payload = await response.json();
+            setErrors(payload);
         }
     }
 
