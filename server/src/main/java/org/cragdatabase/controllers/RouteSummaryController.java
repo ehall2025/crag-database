@@ -36,13 +36,14 @@ public class RouteSummaryController {
     public ResponseEntity add(@RequestBody RouteSummary routeSummary) {
         Result<RouteSummary> result = routeSummaryService.add(routeSummary);
 
-        if (!result.isSuccess() && result.getResultType() == ResultType.INVALID) {
-            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.BAD_REQUEST);
-        } else if (!result.isSuccess()) {
-            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.NOT_FOUND);
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(result.getpayload(), HttpStatus.CREATED);
         }
 
-        return new ResponseEntity<>(result.getpayload(), HttpStatus.CREATED);
+        return switch (result.getResultType()) {
+            case INVALID -> new ResponseEntity<>(result.getErrorMessages(), HttpStatus.BAD_REQUEST);
+            default -> new ResponseEntity<>(result.getErrorMessages(), HttpStatus.NOT_FOUND);
+        };
     }
 
     @PutMapping("/{routeSummaryId}")
@@ -53,13 +54,14 @@ public class RouteSummaryController {
 
         Result<RouteSummary> result = routeSummaryService.update(routeSummary);
 
-        if (!result.isSuccess() && result.getResultType() == ResultType.INVALID) {
-            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.BAD_REQUEST);
-        } else if (!result.isSuccess()) {
-            return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.NOT_FOUND);
+        if (result.isSuccess()) {
+            return new ResponseEntity<>(HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return switch (result.getResultType()) {
+            case INVALID -> new ResponseEntity<>(result.getErrorMessages(), HttpStatus.BAD_REQUEST);
+            default -> new ResponseEntity<>(result.getErrorMessages(), HttpStatus.NOT_FOUND);
+        };
     }
 
     @DeleteMapping("/{routeSummaryId}")

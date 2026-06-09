@@ -33,8 +33,9 @@ public class RouteSummaryService {
         Result<RouteSummary> result = validateSummary(summary);
 
         if (result.isSuccess()) {
-            if (routeSummaryRepository.add(summary)) {
-                result.setpayload(summary);
+            RouteSummary added = routeSummaryRepository.add(summary);
+            if (added != null) {
+                result.setpayload(added);
             } else {
                 result.addErrorMessage("failed to add route summary", ResultType.NOT_FOUND);
             }

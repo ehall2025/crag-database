@@ -46,7 +46,7 @@ public class RouteSummaryJdbcRepository implements RouteSummaryRepository {
     }
 
     @Override
-    public boolean add(RouteSummary routeSummary) {
+    public RouteSummary add(RouteSummary routeSummary) {
         String sql = """
                 INSERT INTO Route_Summary (route_id, user_id, difficulty, quality, danger_level)
                 VALUES (:route_id, :user_id, :difficulty, :quality, :danger_level);
@@ -64,9 +64,10 @@ public class RouteSummaryJdbcRepository implements RouteSummaryRepository {
 
         if (rowsAffected > 0) {
             routeSummary.setRouteSummaryId(keyHolder.getKey().intValue());
+            return routeSummary;
         }
 
-        return rowsAffected > 0;
+        return null;
     }
 
     @Override

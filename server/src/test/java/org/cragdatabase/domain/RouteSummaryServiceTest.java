@@ -49,12 +49,14 @@ class RouteSummaryServiceTest {
     @Test
     void shouldAddSummary() {
         RouteSummary toAdd = new RouteSummary(0, 1, 1, 5, 5, 1);
+        RouteSummary expected = new RouteSummary(1, 1, 1, 5, 5, 1);
 
-        when(repository.add(any())).thenReturn(true);
+        when(repository.add(any())).thenReturn(expected);
 
         Result<RouteSummary> actual = service.add(toAdd);
 
         assertTrue(actual.isSuccess());
+        assertEquals(expected, actual.getpayload());
     }
 
     @Test

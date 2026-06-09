@@ -10,7 +10,7 @@ public interface RouteSummaryRepository {
 
     RouteSummary findById(int routeSummaryId);
 
-    boolean add(RouteSummary routeSummary);
+    RouteSummary add(RouteSummary routeSummary);
 
     boolean update(RouteSummary routeSummary);
 
