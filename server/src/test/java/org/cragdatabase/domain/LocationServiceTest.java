@@ -7,6 +7,7 @@ import org.cragdatabase.models.Area;
 import org.cragdatabase.models.Crag;
 import org.cragdatabase.models.Location;
 import org.cragdatabase.models.Route;
+import org.cragdatabase.models.enums.Layers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,7 +46,7 @@ class LocationServiceTest {
     void shouldFindLocationById() {
         when(repository.findLocationById(anyInt())).thenReturn(new Location());
 
-        Result actual = service.findById(VALID_ID, "location");
+        Result actual = service.findById(VALID_ID, Layers.LOCATION);
 
         verify(repository).findLocationById(VALID_ID);
         assertNotNull(actual.getpayload());
@@ -55,7 +56,7 @@ class LocationServiceTest {
     void shouldFindCragById() {
         when(repository.findCragById(anyInt())).thenReturn(new Crag());
 
-        Result actual = service.findById(VALID_ID, "crag");
+        Result actual = service.findById(VALID_ID, Layers.CRAG);
 
         verify(repository).findCragById(VALID_ID);
         assertNotNull(actual.getpayload());
@@ -65,7 +66,7 @@ class LocationServiceTest {
     void shouldFindAreaById() {
         when(repository.findAreaById(anyInt())).thenReturn(new Area());
 
-        Result actual = service.findById(VALID_ID, "area");
+        Result actual = service.findById(VALID_ID, Layers.AREA);
 
         verify(repository).findAreaById(VALID_ID);
         assertNotNull(actual.getpayload());
@@ -75,7 +76,7 @@ class LocationServiceTest {
     void shouldFindRouteById() {
         when(repository.findRouteById(anyInt())).thenReturn(new Route());
 
-        Result actual = service.findById(VALID_ID, "route");
+        Result actual = service.findById(VALID_ID, Layers.ROUTE);
         
         verify(repository).findRouteById(VALID_ID);
         assertNotNull(actual.getpayload());

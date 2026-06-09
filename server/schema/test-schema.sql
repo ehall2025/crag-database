@@ -122,6 +122,7 @@ ALTER TABLE List_Route ADD CONSTRAINT List_Route_fk1 FOREIGN KEY (route_id) REFE
 delimiter //
 create procedure set_known_good_state()
 begin
+	
     delete from list_route;
     delete from list;
     alter table list auto_increment = 1;

@@ -43,7 +43,11 @@ public class UserProfileService {
             }
         }
 
-        result.setpayload(userProfileRepository.addListEntry(listId, routeId));
+        if (action.equals("add")) {
+            result.setpayload(userProfileRepository.addListEntry(listId, routeId));
+        } else {
+            result.setpayload(userProfileRepository.removeListEntry(listId, routeId));
+        }
 
         if (result.getpayload() == null) {
             result.addErrorMessage("unable to match an id to existing table row", ResultType.NOT_FOUND);

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.simple.JdbcClient;
 
 import java.util.List;
 
@@ -17,16 +18,16 @@ class UserProfileJdbcRepositoryTest {
     UserProfileRepository repository;
 
     @Autowired
-    KnownGoodState knownGoodState;
+    JdbcClient jdbcClient;
 
     @BeforeEach
     void setup() {
-        knownGoodState.set();
+        jdbcClient.sql("call set_known_good_state();").update();
     }
 
     @Test
     void addListEntryShouldReturnUpdatedListWhenSuccessful() {
-        List<Route> result = repository.addListEntry(3, 1);
+        List<Route> result = repository.addListEntry(2, 1);
 
         assertNotNull(result);
         assertFalse(result.isEmpty());
