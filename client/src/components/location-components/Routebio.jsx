@@ -2,6 +2,18 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./RouteBio.css";
 
+const INITIAL_RATING_FORM = {
+    difficulty: "",
+    quality: "",
+    danger: ""
+};
+
+const EMPTY_ROUTE_SUMMARY = {
+    difficultyRating: 0,
+    qualityRating: 0,
+    dangerRating: 0
+}
+
 function RouteBio({ loggedInUser, setLoggedInUser }) {
 
     const [addSuccess, setAddSuccess] = useState()
@@ -13,23 +25,15 @@ function RouteBio({ loggedInUser, setLoggedInUser }) {
         areaId: 0,
         description: "",
         startPosition: ""
-    })
+    });
 
     // =========================
     // Tracks the current user's rating inputs
     // =========================
-    const [ratingForm, setRatingForm] = useState({
-        difficulty: "",
-        quality: "",
-        danger: ""
-    });
+    const [ratingForm, setRatingForm] = useState(INITIAL_RATING_FORM);
 
 
-    const [routeSummary, setRouteSummary] = useState({
-        difficultyRating: 0,
-        qualityRating: 0,
-        dangerRating: 0
-    });
+    const [routeSummary, setRouteSummary] = useState(EMPTY_ROUTE_SUMMARY);
 
     const averageDifficulty = routeSummary.difficultyRating;
     const averageQuality = routeSummary.qualityRating;
@@ -45,12 +49,7 @@ function RouteBio({ loggedInUser, setLoggedInUser }) {
             });
 
             if (!response.ok) {
-                setRouteSummary({
-                    difficultyRating: 0,
-                    qualityRating: 0,
-                    dangerRating: 0
-                });
-
+                setRouteSummary(EMPTY_ROUTE_SUMMARY);
                 return;
             }
 
@@ -59,11 +58,7 @@ function RouteBio({ loggedInUser, setLoggedInUser }) {
             setRouteSummary(payload);
         
         } catch {
-            setRouteSummary({
-                difficultyRating: 0,
-                qualityRating: 0,
-                dangerRating: 0
-            });
+            setRouteSummary(EMPTY_ROUTE_SUMMARY);
         }
     }
 
@@ -105,11 +100,8 @@ function RouteBio({ loggedInUser, setLoggedInUser }) {
             
             await fetchRouteSummary();
 
-            setRatingForm({
-                difficulty: "",
-                quality: "",
-                danger: ""
-            });
+            setRatingForm(INITIAL_RATING_FORM);
+
          } else {
             const payload = await response.text();
             setErrors([payload]);
